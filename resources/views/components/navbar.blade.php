@@ -6,9 +6,21 @@
             <i class="bx bx-menu bx-sm"></i>
         </a>
     </div>
+
+    <!-- Search -->
+    <div class="col-md-4">
+        <form class="navbar-nav-left d-flex">
+            <div class="input-group">
+                <span class="input-group-text"><i class="tf-icons bx bx-search"></i></span>
+                <input type="text" class="form-control" placeholder="Search..." />
+            </div>
+        </form>
+    </div>
+    <!-- /Search -->
     
     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">            
         <ul class="navbar-nav flex-row align-items-center ms-auto">
+
             <!-- User -->
             <small class="text-muted pe-3">Welcome, administrator</small>
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
@@ -43,15 +55,6 @@
                             <i class="bx bx-user me-2"></i>
                             <span class="align-middle">My Profile</span>
                         </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="app/invoice/list.html">
-                            <i class="bx bx-credit-card me-2"></i>
-                            <span class="align-middle">Billing</span>
-                        </a>
-                    </li>
-                    <li>
-                        <div class="dropdown-divider"></div>
                     </li>
                     <li>
                         <a class="dropdown-item" href="javascript:void(0)">
