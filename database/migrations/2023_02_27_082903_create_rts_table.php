@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('rts', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('part_number');
             $table->integer('qty_input');
             $table->integer('qty_output');

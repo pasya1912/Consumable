@@ -21,23 +21,33 @@ use App\Http\Controllers\PartNumberMasterController;
 */
 
 Route::get('/', function () {
-    return view('layouts.fg-dashboard');
+    return view('layouts.login');
+})->middleware('guest');
+
+Route::middleware(['guest'])->group(function () {
+
+    Route::get('/login', [LoginController::class, 'index'])->name('login.index');
+    Route::post('/login-auth', [LoginController::class, 'authenticate'])->name('login.auth');
+    Route::get('/register', [RegisterController::class, 'index'])->name('register.index');
+    Route::post('/register-store', [RegisterController::class, 'store'])->name('register.store');
+    
 });
 
-Route::get('/login', [LoginController::class, 'index'])->name('login.index');
-Route::get('/register', [RegisterController::class, 'index'])->name('register.index');
-
-Route::prefix('/dashboard')->group(function () {
-
-    Route::get('/fg-dashboard', [FgController::class, 'index'])->name('fg.dashboard');
-    Route::get('/material-dashboard', [MaterialController::class, 'index'])->name('material.dashboard');
-    Route::get('/wip-dashboard', [WipController::class, 'index'])->name('wip.dashboard');
-
-});
-
-Route::prefix('/master')->group(function () {
-
-    Route::get('/material-master', [MaterialMasterController::class, 'index'])->name('material.master');
-    Route::get('/part-number-master', [PartNumberMasterController::class, 'index'])->name('part-number.master');
+Route::middleware(['auth'])->group(function () {
+    
+    Route::prefix('/dashboard')->group(function () {
+    
+        Route::get('/fg-dashboard', [FgController::class, 'index'])->name('fg.dashboard');
+        Route::get('/material-dashboard', [MaterialController::class, 'index'])->name('material.dashboard');
+        Route::get('/wip-dashboard', [WipController::class, 'index'])->name('wip.dashboard');
+    
+    });
+    
+    Route::prefix('/master')->group(function () {
+    
+        Route::get('/material-master', [MaterialMasterController::class, 'index'])->name('material.master');
+        Route::get('/part-number-master', [PartNumberMasterController::class, 'index'])->name('part-number.master');
+    
+    });
 
 });

@@ -17,7 +17,7 @@
         <div class="d-flex col-12 col-lg-5 col-xl-4 align-items-center authentication-bg p-sm-5 p-4" style="background-color: white;">
             <div class="w-px-400 mx-auto">
                 <!-- Logo -->
-                <div class="app-brand mb-5">
+                <div class="app-brand mb-3">
                     <a href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo-1" class="app-brand-link gap-2">
                         <span class="app-brand-logo demo">
                             <svg width="25" viewBox="0 0 25 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -53,13 +53,14 @@
                                 </g>
                             </svg>
                         </span>
-                        <h2><span class="demo text-body fw-bolder">Realtime Stock</span></h2>
+                        <h2><span class="demo text-body fw-bolder">Realstock</span></h2>
                     </a>
                 </div>
                 <!-- /Logo -->
                 <p class="mb-4">Let's make your account!</p>
                 
-                <form id="formAuthentication" class="mb-3" action="" method="GET">
+                <form id="formAuthentication" class="mb-3" action="{{ route('register.store') }}" method="POST">
+                    @csrf
                     <div class="mb-3">
                         <label for="username" class="form-label">Username</label>
                         <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username" autofocus>

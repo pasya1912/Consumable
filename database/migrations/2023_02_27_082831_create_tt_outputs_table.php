@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tt_outputs', function (Blueprint $table) {
-            $table->id();
-            $table->integer('bom_id');
+            $table->bigIncrements('id');
+            $table->bigInteger('bom_id')->references('id')->on('tt_boms');
             $table->date('date');
             $table->integer('qty');
             $table->timestamps();

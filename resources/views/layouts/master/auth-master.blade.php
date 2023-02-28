@@ -52,6 +52,8 @@
     <link rel="stylesheet" href={{ asset("vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css") }}/>
     <link rel="stylesheet" href={{ asset("vendor/libs/flatpickr/flatpickr.css") }} />
     <link rel="stylesheet" href={{ asset("vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css") }}/>
+    <link rel="stylesheet" href={{ asset("vendor/libs/toastr/toastr.css") }} />
+    <link rel="stylesheet" href={{ asset("vendor/libs/animate-css/animate.css") }} />
     
     <script src={{ asset("js/config.js") }}></script> 
     <!-- beautify ignore:end -->
@@ -96,6 +98,8 @@
     <!-- END: Pricing Modal JS-->
     <!-- BEGIN: Page JS-->
     <script src={{ asset("js/tables-datatables-basic.js") }}></script>
+    <script src={{ asset("vendor/libs/toastr/toastr.js") }}></script>
+    <script src={{ asset("js/ui-toasts.js") }}></script>
     
     <!-- END: Page JS-->
     

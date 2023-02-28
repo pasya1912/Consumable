@@ -14,9 +14,31 @@
             
             <!-- Login -->
             <div class="d-flex col-12 col-lg-5 col-xl-4 align-items-center authentication-bg p-sm-5 p-4" style="background-color: white">
+
                 <div class="w-px-400 mx-auto">
+
+                    {{-- alert when registered --}}
+                    @if (session()->has('registered'))
+                        <div class="alert alert-success alert-dismissible mb-5" role="alert">
+                            {{ session('registered') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                            </button>
+                        </div>
+                    @endif
+                    {{-- end of alert --}}
+
+                    {{-- alert when login error --}}
+                    @if (session()->has('error'))
+                        <div class="alert alert-danger alert-dismissible mb-5" role="alert">
+                            {{ session('error') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                            </button>
+                        </div>
+                    @endif
+                    {{-- end of alert --}}
+
                     <!-- Logo -->
-                    <div class="app-brand mb-5">
+                    <div class="app-brand mb-3">
                         <a href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo-1" class="app-brand-link gap-2">
                             <span class="app-brand-logo demo">
                                 <svg width="25" viewBox="0 0 20 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -52,23 +74,24 @@
                                     </g>
                                 </svg>
                             </span>
-                            <h2><span class="demo text-body fw-bolder mt-2">Realtime Stock</span></h2>
+                            <h2><span class="demo text-body fw-bolder mt-2">Realstock</span></h2>
                         </a>
                     </div>
                     <!-- /Logo -->
                     <p class="mb-4">Please sign-in to your account!</p>
                     
-                    <form id="formAuthentication" class="mb-3" action="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo-1" method="GET">
+                    <form id="formAuthentication" class="mb-3" action="{{ route('login.auth') }}" method="POST">
+                        @csrf
                         <div class="mb-3">
                             <label for="email" class="form-label">Email or Username</label>
-                            <input type="text" class="form-control" id="email" name="email-username" placeholder="Enter your email or username" autofocus autocomplete="off">
+                            <input type="text" class="form-control" id="email" name="email-username" placeholder="Enter your email or username" autofocus autocomplete="off" required>
                         </div>
                         <div class="mb-3 form-password-toggle mb-5">
                             <div class="d-flex justify-content-between">
                                 <label class="form-label" for="password">Password</label>
                             </div>
                             <div class="input-group input-group-merge">
-                                <input type="password" id="password" class="form-control" name="password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="password" autocomplete="off" />
+                                <input type="password" id="password" class="form-control" name="password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="password" autocomplete="off" required/>
                                 <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                             </div>
                         </div>
