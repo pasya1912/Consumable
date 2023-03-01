@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tt_inputs', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
+            $table->string('part_no');
             $table->date('date');
             $table->string('pic');
             $table->time('time');

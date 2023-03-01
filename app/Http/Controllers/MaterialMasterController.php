@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\ImportTtInput;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 
 class MaterialMasterController extends Controller
@@ -81,5 +83,16 @@ class MaterialMasterController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Import Function
+     * 
+     */
+    public function import(Request $request)
+    {
+        dd($request);
+        Excel::import(new ImportTtInput, $request->file('file')->store('files'));
+        return redirect()->back();
     }
 }
