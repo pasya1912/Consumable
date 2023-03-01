@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tm_part_numbers', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('part_name');
             $table->integer('qty_limit');
             $table->timestamps();

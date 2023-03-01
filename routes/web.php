@@ -38,6 +38,7 @@ Route::prefix('/dashboard')->group(function () {
 Route::prefix('/master')->group(function () {
 
     Route::get('/material-master', [MaterialMasterController::class, 'index'])->name('material.master');
+    Route::post('/material-master/import', [MaterialMasterController::class, 'import'])->name('material.master.import');
     Route::get('/part-number-master', [PartNumberMasterController::class, 'index'])->name('part-number.master');
 
 });
