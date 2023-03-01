@@ -19,13 +19,15 @@
             </div>
 
             <div class="card-datatable table-responsive">
-                <table class="datatables-basic table border-top">
+                <table class="datatables-basics table border-top material-datatable">
                     <thead>
                         <tr>
                             <th>Part No</th>
                             <th>Part Name</th>
-                            <th>Source</th>
                             <th>Supplier</th>
+                            <th>Source</th>
+                            <th>PIC</th>
+                            <th>Date</th>
                             <th>Qty</th>
                         </tr>
                     </thead>
@@ -50,7 +52,7 @@
       <div class="modal-body">
         <div class="row">
           <div class="col mb-3">
-            <input type="file" id="file" class="form-control">
+            <input type="file" id="file" name="file" class="form-control">
           </div>
         </div>
       </div>
@@ -62,4 +64,25 @@
     </div>
   </div>
 </div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script>
+
+$(document).ready(function () {
+    $('.material-datatable').DataTable({
+        ajax: `{{ route('material.master.getData') }}`,
+        columns: [
+            { data: 'part_no' },
+            { data: 'name' },
+            { data: 'supplier' },
+            { data: 'source' },
+            { data: 'pic' },
+            { data: 'date' },
+            { data: 'qty' },
+        ],
+    });
+});
+</script>
+
 @endsection

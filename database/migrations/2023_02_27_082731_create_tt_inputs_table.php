@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('pic');
             $table->time('time');
             $table->string('name');
+            $table->string('supplier');
+            $table->string('source');
             $table->integer('qty_stock');
             $table->integer('qty');
             $table->timestamps();

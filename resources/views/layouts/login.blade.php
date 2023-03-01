@@ -13,7 +13,7 @@
             <!-- /Left Text -->
             
             <!-- Login -->
-            <div class="d-flex col-12 col-lg-5 col-xl-4 align-items-center authentication-bg p-sm-5 p-4" style="background-color: white">
+            <div class="d-flex col-12 col-lg-5 col-xl-4 align-items-center authentication-bg p-sm-5 p-4" style="background-color: white; max-height: 100%;">
 
                 <div class="w-px-400 mx-auto">
 

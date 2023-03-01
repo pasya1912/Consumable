@@ -53,6 +53,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/material-master', [MaterialMasterController::class, 'index'])->name('material.master');
         Route::get('/part-number-master', [PartNumberMasterController::class, 'index'])->name('part-number.master');
         Route::post('/material-master/import', [MaterialMasterController::class, 'import'])->name('material.master.import');
+        Route::get('/material-master/getData', [MaterialMasterController::class, 'getData'])->name('material.master.getData');
     
     });
     

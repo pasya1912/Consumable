@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Imports\ImportTtInput;
+use App\Models\TtInput;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
+use DataTables;
 
 class MaterialMasterController extends Controller
 {
@@ -91,8 +93,18 @@ class MaterialMasterController extends Controller
      */
     public function import(Request $request)
     {
-        dd($request);
         Excel::import(new ImportTtInput, $request->file('file')->store('files'));
         return redirect()->back();
+    }
+
+    /**
+     * getData Function
+     * 
+     */
+    public function getData()
+    {
+        $input = TtInput::all();
+        return DataTables::of($input)
+                ->toJson();
     }
 }

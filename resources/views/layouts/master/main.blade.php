@@ -141,7 +141,6 @@
 <!-- Pricing Modal JS-->
 <!-- END: Pricing Modal JS-->
 <!-- BEGIN: Page JS-->
-<script src={{ asset("js/tables-datatables-basic.js") }}></script>
 <script src={{ asset("js/dashboards-analytics.js") }}></script>
 <script src={{ asset("vendor/libs/toastr/toastr.js") }}></script>
 <script src={{ asset("js/ui-toasts.js") }}></script>
