@@ -81,10 +81,11 @@
                     <p class="mb-4">Please sign-in to your account!</p>
                     
                     <form id="formAuthentication" class="mb-3" action="{{ route('login.auth') }}" method="POST">
+                        @method('POST')
                         @csrf
                         <div class="mb-3">
                             <label for="email" class="form-label">Email or Username</label>
-                            <input type="text" class="form-control" id="email" name="email-username" placeholder="Enter your email or username" autofocus autocomplete="off" required>
+                            <input type="text" class="form-control" id="email" name="email" placeholder="Enter your email or username" autofocus autocomplete="off" required>
                         </div>
                         <div class="mb-3 form-password-toggle mb-5">
                             <div class="d-flex justify-content-between">

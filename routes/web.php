@@ -8,6 +8,7 @@ use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\MaterialMasterController;
 use App\Http\Controllers\PartNumberMasterController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,13 +35,16 @@ Route::middleware(['guest'])->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
+
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout.auth');
     
     Route::prefix('/dashboard')->group(function () {
     
         Route::get('/fg-dashboard', [FgController::class, 'index'])->name('fg.dashboard');
         Route::get('/material-dashboard', [MaterialController::class, 'index'])->name('material.dashboard');
         Route::get('/wip-dashboard', [WipController::class, 'index'])->name('wip.dashboard');
-    
+        
+        Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     });
     
     Route::prefix('/master')->group(function () {

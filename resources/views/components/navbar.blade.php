@@ -22,7 +22,7 @@
         <ul class="navbar-nav flex-row align-items-center ms-auto">
 
             <!-- User -->
-            <small class="text-muted pe-3">Welcome, administrator</small>
+            <small class="text-muted pe-3">Welcome, {{ auth()->user()->username }}</small>
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="flex-grow-1">
                                     <span class="fw-semibold d-block">
-                                        John Doe
+                                        {{ auth()->user()->username }}
                                     </span>
                                     <small class="text-muted">Admin</small>
                                 </div>
@@ -51,16 +51,19 @@
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="pages/profile-user.html">
+                        <a class="dropdown-item" href="{{ route('profile.index') }}">
                             <i class="bx bx-user me-2"></i>
                             <span class="align-middle">My Profile</span>
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="javascript:void(0)">
-                            <i class='bx bx-log-in me-2'></i>
-                            <span class="align-middle">Log Out</span>
-                        </a>
+                        <form action="{{ route('logout.auth') }}" method="post">
+                            @csrf
+                            <button class="dropdown-item" type="submit">
+                                <i class='bx bx-log-in me-2'></i>
+                                <span class="align-middle">Log Out</span>
+                            </button>
+                        </form>
                     </li>
                 </ul>
             </li>
