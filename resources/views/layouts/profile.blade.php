@@ -13,9 +13,9 @@
             <div class="card-body">
                 <div class="user-avatar-section">
                     <div class=" d-flex align-items-center flex-column">
-                        <img class="img-fluid rounded my-4" src="../../../../demo/assets/img/avatars/10.png" height="110" width="110" alt="User avatar" />
+                        <img class="img-fluid rounded my-4" src={{ asset("img/avatars/10.png" ) }} height="110" width="110" alt="User avatar" />
                         <div class="user-info text-center">
-                            <h4 class="mb-2">Chang Lily</h4>
+                            <h4 class="mb-2">{{ auth()->user()->username }}</h4>
                             <span class="badge bg-label-secondary">Trainee</span>
                         </div>
                     </div>
@@ -26,11 +26,11 @@
                     <ul class="list-unstyled">
                         <li class="mb-3">
                             <span class="fw-bold me-2">Username:</span>
-                            <span>meichanly</span>
+                            <span>{{ auth()->user()->username }}</span>
                         </li>
                         <li class="mb-3">
                             <span class="fw-bold me-2">Email:</span>
-                            <span>changlily@aiia.co.id</span>
+                            <span>{{ auth()->user()->email }}</span>
                         </li>
                         <li class="mb-3">
                             <span class="fw-bold me-2">Status:</span>
@@ -45,6 +45,7 @@
     <!--/ User Sidebar -->
     <!-- User Content -->
     <div class="col-xl-8 col-lg-7 col-md-7 order-0 order-md-1">
+
         <!-- Content wrapper -->
         <div class="content-wrapper">
             
@@ -52,8 +53,18 @@
             <div class="card mb-4">
                 <h5 class="card-header">Change Password</h5>
                 <div class="card-body">
-                    <form id="formAccountSettings" method="POST" onsubmit="return false">
-                        
+                    {{-- alert when registered --}}
+                    @if (session()->has('updated'))
+                    <div class="alert alert-success alert-dismissible mb-5" role="alert">
+                        {{ session('updated') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        </button>
+                    </div>
+                @endif
+                {{-- end of alert --}}
+                    <form id="formAccountSettings" method="POST" action="{{ route('profile.update') }}" >
+                        @method('POST')
+                        @csrf    
                         <div class="row">
                             <div class="mb-3 col-md-6 form-password-toggle">
                                 <label class="form-label" for="email">Email or Username</label>
@@ -64,18 +75,18 @@
                             </div>
                             
                             <div class="mb-3 col-md-6 form-password-toggle">
-                                <label class="form-label" for="newPassword">New Password</label>
+                                <label class="form-label" for="confirmPassword">Current Password</label>
                                 <div class="input-group input-group-merge">
-                                    <input class="form-control" type="password" id="newPassword" name="newPassword" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
+                                    <input class="form-control" type="password" name="current-password" id="current-password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
                                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                                 </div>
                             </div>
                             <div class="col-12 mb-1">
                                 <div class="row">
                                     <div class="mb-3 col-md-6 form-password-toggle">
-                                        <label class="form-label" for="confirmPassword">Current Password</label>
+                                        <label class="form-label" for="newPassword">New Password</label>
                                         <div class="input-group input-group-merge">
-                                            <input class="form-control" type="password" name="confirmPassword" id="confirmPassword" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
+                                            <input class="form-control" type="password" id="new-password" name="new-password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
                                             <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                                         </div>
                                         
@@ -84,7 +95,7 @@
                                     <div class="mb-3 col-md-6 form-password-toggle">
                                         <label class="form-label" for="confirmPassword">Confirm New Password</label>
                                         <div class="input-group input-group-merge">
-                                            <input class="form-control" type="password" name="confirmPassword" id="confirmPassword" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
+                                            <input class="form-control" type="password" name="new-password_confirmation" id="confirmPassword" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
                                             <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                                         </div>
                                     </div>
@@ -94,7 +105,7 @@
                                                 <p class="fw-semibold mt-2">Password Requirements:</p>
                                                 <ul class="ps-3 mb-0">
                                                     <li class="mb-1">
-                                                        Minimum 8 characters long - the more, the better
+                                                        Minimum 6 characters long - the more, the better
                                                     </li>
                                                     <li class="mb-1">At least one lowercase character</li>
                                                     <li>At least one number, symbol, or whitespace character</li>

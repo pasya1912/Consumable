@@ -45,6 +45,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/wip-dashboard', [WipController::class, 'index'])->name('wip.dashboard');
         
         Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+        Route::post('/profile-update', [ProfileController::class, 'update'])->name('profile.update');
     });
     
     Route::prefix('/master')->group(function () {

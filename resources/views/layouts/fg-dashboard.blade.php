@@ -5,16 +5,12 @@
     <h2><strong>F/G Stock Dashboard</strong></h2>
 </div>        
 <div class="row">
-    <div class="col-4 mb-4">
+    <div class="col-lg-4 mb-4">
         <div class="card">
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="card-title d-flex align-items-start justify-content-between">
-                            <div class="avatar flex-shrink-0">
-                                <button type="button" class="btn btn-lg btn-label-warning px-5 py-4">TCC</button>
-                            </div>
-                        </div>
+                        <button type="button" class="btn btn-lg btn-label-warning px-5 py-4">TCC</button>
                     </div>
                     <div class="col-md-6 text-end mt-2">
                         <span class="mb-1">Total F/G</span>
@@ -29,16 +25,12 @@
             </div>
         </div>
     </div>
-    <div class="col-4 mb-4">
+    <div class="col-lg-4 mb-4">
         <div class="card">
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="card-title d-flex align-items-start justify-content-between">
-                            <div class="avatar flex-shrink-0">
-                                <button type="button" class="btn btn-lg btn-label-danger px-5 py-4">OPN</button>
-                            </div>
-                        </div>
+                        <button type="button" class="btn btn-lg btn-label-danger px-5 py-4">OPN</button>
                     </div>
                     <div class="col-md-6 text-end mt-2">
                         <span class="mb-1">Total F/G</span>
@@ -53,16 +45,12 @@
             </div>
         </div>
     </div>
-    <div class="col-4 mb-4">
+    <div class="col-lg-4 mb-4">
         <div class="card">
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="card-title d-flex align-items-start justify-content-between">
-                            <div class="avatar flex-shrink-0">
-                                <button type="button" class="btn btn-lg btn-label-info px-5 py-4">CSH</button>
-                            </div>
-                        </div>
+                        <button type="button" class="btn btn-lg btn-label-info px-5 py-4">CSH</button>
                     </div>
                     <div class="col-md-6 text-end mt-2">
                         <span class="mb-1">Total F/G</span>
