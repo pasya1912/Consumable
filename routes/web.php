@@ -50,8 +50,13 @@ Route::middleware(['auth'])->group(function () {
     
     Route::prefix('/master')->group(function () {
     
-        Route::get('/material-master', [MaterialMasterController::class, 'index'])->name('material.master');
+        // Part Number Master
         Route::get('/part-number-master', [PartNumberMasterController::class, 'index'])->name('part-number.master');
+        Route::post('/part-number-master/insertData', [PartNumberMasterController::class, 'store'])->name('part-number.master.insertData');
+        Route::get('/part-number-master/getData', [PartNumberMasterController::class, 'getData'])->name('part-number.master.getData');
+
+        // Material Master
+        Route::get('/material-master', [MaterialMasterController::class, 'index'])->name('material.master');
         Route::post('/material-master/import', [MaterialMasterController::class, 'import'])->name('material.master.import');
         Route::get('/material-master/getData', [MaterialMasterController::class, 'getData'])->name('material.master.getData');
     

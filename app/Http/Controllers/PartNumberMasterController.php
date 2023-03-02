@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TmPartNumber;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class PartNumberMasterController extends Controller
 {
@@ -35,7 +37,21 @@ class PartNumberMasterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+            'part_name' => 'required',
+            'part_number' => 'required|unique:tm_part_numbers|min:11|max:11',
+            'qty_limit' => 'required'
+        ]);
+
+        TmPartNumber::create([
+            'part_name' => $request->part_name,
+            'part_number' => $request->part_number,
+            'qty_limit' => $request->qty_limit,
+        ]);
+        
+
+        return redirect()->back()->with('success', 'Part Number created successfully.');
     }
 
     /**
@@ -81,5 +97,12 @@ class PartNumberMasterController extends Controller
     public function destroy($id)
     {
         //
+    }
+    
+    public function getData()
+    {
+        $input = TmPartNumber::all();
+        return DataTables::of($input)
+                ->toJson();
     }
 }

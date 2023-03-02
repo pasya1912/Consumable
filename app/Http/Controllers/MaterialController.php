@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TtInput;
 use Illuminate\Http\Request;
 
 class MaterialController extends Controller
@@ -13,7 +14,15 @@ class MaterialController extends Controller
      */
     public function index()
     {
-        return view('layouts.material-dashboard');
+        $ckd = TtInput::where('source', 'like', '%CKD%')->sum('qty');
+        $import = TtInput::where('source', 'like', '%IMPORT%')->sum('qty');
+        $local = TtInput::where('source', 'like', '%LOCAL%')->sum('qty');
+
+        return view('layouts.material-dashboard',[
+            'ckd' => $ckd,
+            'import' => $import,
+            'local' => $local,
+        ]);
     }
 
     /**

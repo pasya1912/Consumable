@@ -5,73 +5,91 @@
     <h2><strong>WIP Stock Dashboard</strong></h2>
 </div>        
 <div class="row">
-    <div class="col-4 mb-4">
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
+    <div class="col-lg-4 mb-4">
+        <div class="accordion mt-1 accordion-without-arrow" id="accordionWithIcon">
+            <div class="card accordion-item active p-3">
+                <div class="accordion-header d-flex align-items-center row">
                     <div class="col-md-6">
-                        <div class="card-title d-flex align-items-start justify-content-between">
-                            <div class="avatar flex-shrink-0">
-                                <button type="button" class="btn btn-lg btn-label-warning px-5 py-4">TCC</button>
-                            </div>
-                        </div>
+                        <button type="button" class="btn btn-lg btn-label-warning px-5 py-4" data-bs-toggle="collapse" data-bs-target="#accordionIcon-1" aria-controls="accordionIcon-1"">TCC</button>
                     </div>
+                    
                     <div class="col-md-6 text-end mt-2">
                         <span class="mb-1">Total F/G</span>
                         <h3 class="card-title text-nowrap mt-2"><strong>12.000 PCS</strong></h3>
                     </div>
                 </div>
-                <div class="row mt-2">
+                <div class="row mt-3">
                     <div class="col-md-12">
-                        <small class="text-muted">Today, 16 Februari 2023 (10:11 am)</small>
+                        <small class="text-muted">{{ Carbon\Carbon::now()->toDayDateTimeString() }}</small>
+                    </div>
+                </div>
+                
+                <div id="accordionIcon-1" class="accordion-collapse collapse" data-bs-parent="#accordionIcon">
+                    <hr>
+                    <div class="accordion-body">
+                        Lemon drops chocolate cake gummies carrot cake chupa chups muffin topping. Sesame snaps icing marzipan gummi
+                        bears macaroon dragée danish caramels powder. Bear claw dragée pastry topping soufflé. Wafer gummi bears
+                        marshmallow pastry pie.
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-4 mb-4">
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
+    <div class="col-lg-4 mb-4">
+        <div class="accordion mt-1 accordion-without-arrow" id="accordionWithIcon">
+            <div class="card accordion-item active p-3">
+                <div class="accordion-header d-flex align-items-center row">
                     <div class="col-md-6">
-                        <div class="card-title d-flex align-items-start justify-content-between">
-                            <div class="avatar flex-shrink-0">
-                                <button type="button" class="btn btn-lg btn-label-danger px-5 py-4">OPN</button>
-                            </div>
-                        </div>
+                        <button type="button" class="btn btn-lg btn-label-danger px-5 py-4" data-bs-toggle="collapse" data-bs-target="#accordionIcon-2" aria-controls="accordionIcon-2"">OPN</button>
                     </div>
+                    
                     <div class="col-md-6 text-end mt-2">
                         <span class="mb-1">Total F/G</span>
-                        <h3 class="card-title text-nowrap mt-2"><strong>11.231 PCS</strong></h3>
+                        <h3 class="card-title text-nowrap mt-2"><strong>11.021 PCS</strong></h3>
                     </div>
                 </div>
-                <div class="row mt-2">
+                <div class="row mt-3">
                     <div class="col-md-12">
-                        <small class="text-muted">Today, 16 Februari 2023 (10:11 am)</small>
+                        <small class="text-muted">{{ Carbon\Carbon::now()->toDayDateTimeString() }}</small>
+                    </div>
+                </div>
+                
+                <div id="accordionIcon-2" class="accordion-collapse collapse" data-bs-parent="#accordionIcon">
+                    <hr>
+                    <div class="accordion-body">
+                        Lemon drops chocolate cake gummies carrot cake chupa chups muffin topping. Sesame snaps icing marzipan gummi
+                        bears macaroon dragée danish caramels powder. Bear claw dragée pastry topping soufflé. Wafer gummi bears
+                        marshmallow pastry pie.
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-4 mb-4">
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
+    <div class="col-lg-4 mb-4">
+        <div class="accordion mt-1 accordion-without-arrow" id="accordionWithIcon">
+            <div class="card accordion-item active p-3">
+                <div class="accordion-header d-flex align-items-center row">
                     <div class="col-md-6">
-                        <div class="card-title d-flex align-items-start justify-content-between">
-                            <div class="avatar flex-shrink-0">
-                                <button type="button" class="btn btn-lg btn-label-info px-5 py-4">CSH</button>
-                            </div>
-                        </div>
+                        <button type="button" class="btn btn-lg btn-label-info px-5 py-4" data-bs-toggle="collapse" data-bs-target="#accordionIcon-3" aria-controls="accordionIcon-3"">CSH</button>
                     </div>
+                    
                     <div class="col-md-6 text-end mt-2">
                         <span class="mb-1">Total F/G</span>
-                        <h3 class="card-title text-nowrap mt-2"><strong>10.561 PCS</strong></h3>
+                        <h3 class="card-title text-nowrap mt-2"><strong>12.000 PCS</strong></h3>
                     </div>
                 </div>
-                <div class="row mt-2">
+                <div class="row mt-3">
                     <div class="col-md-12">
-                        <small class="text-muted">Today, 16 Februari 2023 (10:11 am)</small>
+                        <small class="text-muted">{{ Carbon\Carbon::now()->toDayDateTimeString() }}</small>
+                    </div>
+                </div>
+                
+                <div id="accordionIcon-3" class="accordion-collapse collapse" data-bs-parent="#accordionIcon">
+                    <hr>
+                    <div class="accordion-body">
+                        Lemon drops chocolate cake gummies carrot cake chupa chups muffin topping. Sesame snaps icing marzipan gummi
+                        bears macaroon dragée danish caramels powder. Bear claw dragée pastry topping soufflé. Wafer gummi bears
+                        marshmallow pastry pie.
                     </div>
                 </div>
             </div>

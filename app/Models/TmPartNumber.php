@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class TmPartNumber extends Model
 {
     use HasFactory;
+
+    protected $table = 'tm_part_numbers';
+
+    protected $guarded = ['id'];
 }

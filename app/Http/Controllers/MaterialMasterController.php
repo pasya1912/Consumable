@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Imports\ImportTtInput;
 use App\Models\TtInput;
-use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
-use DataTables;
+use App\Imports\ImportTtInput;
+use Maatwebsite\Excel\Facades\Excel;
+use Yajra\DataTables\Facades\DataTables;
 
 class MaterialMasterController extends Controller
 {

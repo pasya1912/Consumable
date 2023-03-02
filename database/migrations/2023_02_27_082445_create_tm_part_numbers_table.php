@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('tm_part_numbers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('part_name');
+            $table->string('part_number');
             $table->integer('qty_limit');
             $table->timestamps();
         });

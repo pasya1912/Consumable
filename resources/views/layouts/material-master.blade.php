@@ -14,7 +14,7 @@
             <div class="row">
                 <div class="col-md-10"></div>
                 <div class="col-md-2 text-end">
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#basicModal"><i class="bx bx-plus me-sm-1"></i> <span class="d-none d-sm-inline-block">Import</span></button>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#basicModal"><i class="bx bx-import me-sm-2"></i> <span class="d-none d-sm-inline-block">Import</span></button>
                 </div>
             </div>
 
