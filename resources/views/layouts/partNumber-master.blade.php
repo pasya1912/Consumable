@@ -64,15 +64,33 @@
                     @csrf
                     <div class="col-12 col-md-12">
                         <label class="form-label" for="part_name">Part Name</label>
-                        <input type="text" id="part_name" name="part_name" class="form-control" placeholder="Oil Pan" required/>
+                        <input type="text" id="part_name" name="part_name" class="form-control @error('part_name') is-invalid @enderror" placeholder="Oil Pan" required/>
+
+                        @error('part_name')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="col-12 col-md-6">
                         <label class="form-label" for="part_number">Part Number</label>
-                        <input type="text" id="part_number" name="part_number" class="form-control" placeholder="212130-21250" required/>
+                        <input type="text" id="part_number" name="part_number" class="form-control @error('part_number') is-invalid @enderror" placeholder="212130-21250" required/>
+
+                        @error('part_number')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="col-6">
                         <label class="form-label" for="qty_limit">Quantity Limit</label>
-                        <input type="number" id="qty_limit" name="qty_limit" class="form-control" placeholder="1920" required/>
+                        <input type="number" id="qty_limit" name="qty_limit" class="form-control @error('qty_limit') is-invalid @enderror" placeholder="1920" required/>
+
+                        @error('qty_limit')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
 
                     <div class="col-12 text-end mt-3">

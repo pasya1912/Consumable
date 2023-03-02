@@ -53,32 +53,56 @@
             <div class="card mb-4">
                 <h5 class="card-header">Change Password</h5>
                 <div class="card-body">
+
                     {{-- alert when registered --}}
                     @if (session()->has('updated'))
-                    <div class="alert alert-success alert-dismissible mb-5" role="alert">
-                        {{ session('updated') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                        </button>
-                    </div>
-                @endif
-                {{-- end of alert --}}
+                        <div class="alert alert-success alert-dismissible mb-3" role="alert">
+                            {{ session('updated') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                            </button>
+                        </div>
+                    @endif
+                    {{-- end of alert --}}
+
+                    {{-- alert when error --}}
+                    @if (session()->has('error'))
+                        <div class="alert alert-danger alert-dismissible mb-3" role="alert">
+                            {{ session('error') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                            </button>
+                        </div>
+                    @endif
+                    {{-- end of alert --}}
+
                     <form id="formAccountSettings" method="POST" action="{{ route('profile.update') }}" >
                         @method('POST')
                         @csrf    
                         <div class="row">
                             <div class="mb-3 col-md-6 form-password-toggle">
-                                <label class="form-label" for="email">Email or Username</label>
+                                <label class="form-label" for="email">Email</label>
                                 <div class="input-group input-group-merge">
-                                    <input class="form-control" type="email" id="email" name="email" placeholder="Enter your email or username" value="{{ auth()->user()->email }}" autofocus>
+                                    <input class="form-control @error('email') is-invalid @enderror" type="email" id="email" name="email" placeholder="Enter your email or username" value="{{ auth()->user()->email }}" autofocus>
                                     <span class="input-group-text cursor-pointer"></span>
+
+                                    @error('email')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                             </div>
                             
                             <div class="mb-3 col-md-6 form-password-toggle">
                                 <label class="form-label" for="confirmPassword">Current Password</label>
                                 <div class="input-group input-group-merge">
-                                    <input class="form-control" type="password" name="current-password" id="current-password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
+                                    <input class="form-control @error('current-password') is-invalid @enderror" type="password" name="current-password" id="current-password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" required/>
                                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+
+                                    @error('current-password')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-12 mb-1">
@@ -86,8 +110,14 @@
                                     <div class="mb-3 col-md-6 form-password-toggle">
                                         <label class="form-label" for="newPassword">New Password</label>
                                         <div class="input-group input-group-merge">
-                                            <input class="form-control" type="password" id="new-password" name="new-password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
+                                            <input class="form-control @error('new-password') is-invalid @enderror" type="password" id="new-password" name="new-password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" required/>
                                             <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+
+                                            @error('new-password')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
                                         
                                     </div>
@@ -95,8 +125,14 @@
                                     <div class="mb-3 col-md-6 form-password-toggle">
                                         <label class="form-label" for="confirmPassword">Confirm New Password</label>
                                         <div class="input-group input-group-merge">
-                                            <input class="form-control" type="password" name="new-password_confirmation" id="confirmPassword" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
+                                            <input class="form-control @error('new-password_confirmation') is-invalid @enderror" type="password" name="new-password_confirmation" id="confirmPassword" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" required />
                                             <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+
+                                            @error('password_confirmation')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-12">

@@ -18,7 +18,7 @@ class RegisterController extends Controller
         $validatedData = $request->validate([
             'username' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6',
+            'password' => 'required|min:6|string',
         ]);
 
         // hash password
