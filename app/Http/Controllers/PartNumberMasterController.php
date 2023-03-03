@@ -38,19 +38,14 @@ class PartNumberMasterController extends Controller
     public function store(Request $request)
     {
 
-        $request->validate([
+        $validatedData = $request->validate([
             'part_name' => 'required',
-            'part_number' => 'required|unique:tm_part_numbers|min:11|max:11',
+            'part_number' => 'required|unique:tm_part_numbers|min:12|max:12',
             'qty_limit' => 'required'
         ]);
 
-        TmPartNumber::create([
-            'part_name' => $request->part_name,
-            'part_number' => $request->part_number,
-            'qty_limit' => $request->qty_limit,
-        ]);
+        TmPartNumber::create($validatedData);
         
-
         return redirect()->back()->with('success', 'Part Number created successfully.');
     }
 

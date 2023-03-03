@@ -44,6 +44,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
     <form action="{{ route('material.master.import') }}" method="POST" enctype="multipart/form-data">
+        @method('POST')
         @csrf
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel1">Upload Materials</h5>

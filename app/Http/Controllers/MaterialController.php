@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\TtInput;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MaterialController extends Controller
 {
@@ -89,5 +90,22 @@ class MaterialController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * getMaterial Function
+     * 
+     */
+    public function getCkdMaterial()
+    {
+        $curent_date = date('Y-m-d');
+
+        $ckd = TtInput::select(DB::raw('SUM(qty) as quantity, time'))->where('source', 'like', '%CKD%')
+                ->where('date', $curent_date)
+                ->groupBy('time')
+                ->get();
+        
+        // dd($ckd);
+        return response()->json($ckd);
     }
 }

@@ -113,7 +113,7 @@
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="navs-pills-top-home" role="tabpanel">
                     <div class="card-body">
-                        <div id="incomeChart"></div>
+                        <div id="chart"></div>
                     </div>
                 </div>
                 <div class="tab-pane fade" id="navs-pills-top-profile" role="tabpanel">
@@ -132,8 +132,12 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script> 
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <script>
     $( document ).ready(function() {
+
+        getData();
+
         $('.quantity').each(function () {
             var $this = $(this);
             console.log($this.text());
@@ -145,6 +149,68 @@
                 }
             });
         });
+
+
+        var options = {
+            chart: {
+                height: 300,
+                type: 'bar',
+                animations: {
+                    enabled: true,
+                    easing: 'easeinout',
+                    speed: 800,
+                    animateGradually: {
+                        enabled: true,
+                        delay: 150
+                    },
+                    dynamicAnimation: {
+                        enabled: true,
+                        speed: 350
+                    }
+                }
+            },
+            series: [{
+                name: 'sales',
+                data: []
+            }],
+        }
+
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+
+        chart.render(); 
+
+        function getData(){
+                $.getJSON("/dashboard/getCkdMaterial" , function(response) {
+                console.log(response);
+                var res = [];
+                var times = [];
+
+                response.forEach(element => {
+                    res.push(element.quantity);   
+                });
+
+                response.forEach(element => {
+                    times.push(element.time.substr(0,2));     
+                });
+                
+                chart.updateSeries([{
+                    name: 'Total Material',
+                    data: res
+                }])
+                chart.updateOptions({
+                    xaxis: {
+                        categories : times,
+                        group: {
+                            style: {
+                                fontSize: '13px',
+                                fontWeight: 700
+                            }
+                        }
+                    }
+                    })
+                });
+            };
+
     });
 </script>
 @endsection

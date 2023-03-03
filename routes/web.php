@@ -42,6 +42,7 @@ Route::middleware(['auth'])->group(function () {
     
         Route::get('/fg-dashboard', [FgController::class, 'index'])->name('fg.dashboard');
         Route::get('/material-dashboard', [MaterialController::class, 'index'])->name('material.dashboard');
+        Route::get('/getCkdMaterial', [MaterialController::class, 'getCkdMaterial'])->name('material.getCkd');
         Route::get('/wip-dashboard', [WipController::class, 'index'])->name('wip.dashboard');
         
         Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
