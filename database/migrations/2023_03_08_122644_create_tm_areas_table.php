@@ -13,16 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tt_stock', function (Blueprint $table) {
+        Schema::create('tm_areas', function (Blueprint $table) {
             $table->id();
-            $table->string('part_no');
-            $table->date('date');
-            $table->string('pic');
-            $table->time('time');
             $table->string('name');
-            $table->string('supplier');
-            $table->string('source');
-            $table->integer('qty');
             $table->timestamps();
         });
     }
@@ -34,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tt_stock');
+        Schema::dropIfExists('tm_areas');
     }
 };
