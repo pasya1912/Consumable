@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TmPartNumber extends Model
+class TtAssy extends Model
 {
     use HasFactory;
 
-    protected $table = 'tm_part_numbers';
+    protected $table = 'tt_assy';
 
     protected $guarded = ['id'];
 }

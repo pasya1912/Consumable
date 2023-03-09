@@ -22,7 +22,6 @@
                 <table class="datatables-basics table border-top material-datatable">
                     <thead>
                         <tr>
-                            <th>Part No</th>
                             <th>Part Name</th>
                             <th>Supplier</th>
                             <th>Source</th>
@@ -74,7 +73,6 @@ $(document).ready(function () {
     $('.material-datatable').DataTable({
         ajax: `{{ route('material.master.getData') }}`,
         columns: [
-            { data: 'part_no' },
             { data: 'name' },
             { data: 'supplier' },
             { data: 'source' },

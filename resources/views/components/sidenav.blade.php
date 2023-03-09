@@ -128,7 +128,7 @@
                         <div>Import Material</div>
                     </a>
                 </li>
-                <li class="menu-item {{ (request()->is('master/part-number')) ? 'active' : '' }}">
+                <li class="menu-item {{ (request()->is('master/part-number-master')) ? 'active' : '' }}">
                     <a href="{{ route('part-number.master') }}" class="menu-link" >
                         <div>Import Part Number</div>
                     </a>

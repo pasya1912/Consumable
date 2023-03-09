@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\TtInput;
+use App\Models\TtStock;
 use Illuminate\Http\Request;
-use App\Imports\ImportTtInput;
+use App\Imports\ImportTtStock;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -94,7 +94,7 @@ class MaterialMasterController extends Controller
     public function import(Request $request)
     {
 
-        Excel::import(new ImportTtInput, $request->file('file')->store('files'));
+        Excel::import(new ImportTtStock, $request->file('file')->store('files'));
         return redirect()->back();
     }
 
@@ -104,7 +104,7 @@ class MaterialMasterController extends Controller
      */
     public function getData()
     {
-        $input = TtInput::all();
+        $input = TtStock::all();
         return DataTables::of($input)
                 ->toJson();
     }

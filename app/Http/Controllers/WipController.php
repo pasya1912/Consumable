@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TtDc;
+use App\Models\TtMa;
 use Illuminate\Http\Request;
 
 class WipController extends Controller
@@ -13,7 +15,15 @@ class WipController extends Controller
      */
     public function index()
     {
-        return view('layouts.wip-dashboard');
+        $wipDc = TtDc::sum('qty');
+        $wipMa = TtMa::sum('qty');
+        $wipAs = 90;
+
+        return view('layouts.wip-dashboard',[
+            'wipDc' => $wipDc,
+            'wipMa' => $wipMa,
+            'wipAs' => $wipAs
+        ]);
     }
 
     /**

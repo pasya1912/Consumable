@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\TtInput;
+use App\Models\TtStock;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -15,9 +15,9 @@ class MaterialController extends Controller
      */
     public function index()
     {
-        $ckd = TtInput::where('source', 'like', '%CKD%')->sum('qty');
-        $import = TtInput::where('source', 'like', '%IMPORT%')->sum('qty');
-        $local = TtInput::where('source', 'like', '%LOCAL%')->sum('qty');
+        $ckd = TtStock::where('source', 'like', '%CKD%')->sum('qty');
+        $import = TtStock::where('source', 'like', '%IMPORT%')->sum('qty');
+        $local = TtStock::where('source', 'like', '%LOCAL%')->sum('qty');
 
         return view('layouts.material-dashboard',[
             'ckd' => $ckd,
@@ -92,20 +92,4 @@ class MaterialController extends Controller
         //
     }
 
-    /**
-     * getMaterial Function
-     * 
-     */
-    public function getCkdMaterial()
-    {
-        $curent_date = date('Y-m-d');
-
-        $ckd = TtInput::select(DB::raw('SUM(qty) as quantity, time'))->where('source', 'like', '%CKD%')
-                ->where('date', $curent_date)
-                ->groupBy('time')
-                ->get();
-        
-        // dd($ckd);
-        return response()->json($ckd);
-    }
 }

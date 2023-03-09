@@ -2,12 +2,12 @@
 
 namespace App\Imports;
 
-use App\Models\TtInput;
+use App\Models\TtStock;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithStartRow;
 use Illuminate\Support\Facades\Auth;
 
-class ImportTtInput implements ToModel, WithStartRow
+class ImportTtStock implements ToModel, WithStartRow
 {
     /**
     * @param array $row
@@ -17,7 +17,7 @@ class ImportTtInput implements ToModel, WithStartRow
     public function model(array $row)
     {   
         $user = Auth::user();
-        return new TtInput([
+        return new TtStock([
             'part_no' => $row[0],
             'date' => date('Y-m-d'),
             'pic' => $user->id,
@@ -25,7 +25,6 @@ class ImportTtInput implements ToModel, WithStartRow
             'name' => $row[1],
             'supplier' => $row[3],
             'source' => $row[2],
-            'qty_stock' => $row[4] ? $row[4] : 0,
             'qty' => $row[4] ? $row[4] : 0,
 
         ]);

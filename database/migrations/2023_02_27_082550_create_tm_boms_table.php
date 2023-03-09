@@ -15,13 +15,12 @@ return new class extends Migration
     {
         Schema::create('tm_boms', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('id_parent')->unsigned();
-            $table->foreign('id_parent')->references('id')->on('tm_part_numbers');
-            $table->bigInteger('id_child')->unsigned();
-            $table->foreign('id_child')->references('id')->on('tm_part_numbers');
+            $table->bigInteger('id_part')->unsigned();
+            $table->bigInteger('id_partBom')->unsigned();
+            $table->foreign('id_part')->references('id')->on('tm_parts');
+            $table->foreign('id_partBom')->references('id')->on('tm_parts');
             $table->integer('qty_use');
             $table->string('uom');
-            $table->integer('process_id');
             $table->timestamps();
         });
     }

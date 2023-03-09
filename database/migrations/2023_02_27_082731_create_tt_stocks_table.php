@@ -13,9 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tm_areas', function (Blueprint $table) {
+        Schema::create('tt_stocks', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('id_part')->unsigned();
+            $table->foreign('id_part')->references('id')->on('tm_parts');
+            $table->date('date');
+            $table->string('pic');
+            $table->time('time');
             $table->string('name');
+            $table->string('supplier');
+            $table->string('source');
+            $table->integer('qty');
             $table->timestamps();
         });
     }
@@ -27,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tm_areas');
+        Schema::dropIfExists('tt_stock');
     }
 };

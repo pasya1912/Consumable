@@ -13,11 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('inventories', function (Blueprint $table) {
+        Schema::create('tt_mas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->date('date');
-            $table->string('part_name');
-            $table->integer('qty');
+            $table->string('part_number')->unique();
+            $table->bigInteger('qty');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('inventories');
+        Schema::dropIfExists('tm_mas');
     }
 };

@@ -13,13 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('rts', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('part_number');
-            $table->integer('qty_input');
-            $table->integer('qty_output');
-            $table->integer('total_qty');
-            $table->timestamps();
+        Schema::table('tm_boms', function (Blueprint $table) {
+            $table->unsignedBigInteger('id_area')->unsigned();
+            $table->foreign('id_area')->references('id')->on('tm_areas');
         });
     }
 
@@ -30,6 +26,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rts');
+        Schema::table('tm_boms', function (Blueprint $table) {
+            //
+        });
     }
 };

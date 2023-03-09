@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="row">
-    <h2><strong>F/G Stock Dashboard</strong></h2>
+    <h2><strong>WIP Stock Dashboard</strong></h2>
 </div>        
 <div class="row">
     <div class="col-lg-4 mb-4">
@@ -10,12 +10,12 @@
             <div class="card accordion-item active p-3">
                 <div class="accordion-header d-flex align-items-center row">
                     <div class="col-md-6">
-                        <button type="button" class="btn btn-lg btn-label-warning px-5 py-4" data-bs-toggle="collapse" data-bs-target="#accordionIcon-1" aria-controls="accordionIcon-1"">TCC</button>
+                        <button type="button" class="btn btn-lg btn-label-warning px-5 py-4" data-bs-toggle="collapse" data-bs-target="#accordionIcon-1" aria-controls="accordionIcon-1"">DC</button>
                     </div>
                     
                     <div class="col-md-6 text-end mt-2">
                         <span class="mb-1">Total F/G</span>
-                        <h3 class="card-title text-nowrap mt-2"><strong>12.000 PCS</strong></h3>
+                        <h3 class="card-title text-nowrap mt-2"><strong class="quantity">87</strong> Pcs</h3>
                     </div>
                 </div>
                 <div class="row mt-3">
@@ -40,12 +40,12 @@
             <div class="card accordion-item active p-3">
                 <div class="accordion-header d-flex align-items-center row">
                     <div class="col-md-6">
-                        <button type="button" class="btn btn-lg btn-label-danger px-5 py-4" data-bs-toggle="collapse" data-bs-target="#accordionIcon-2" aria-controls="accordionIcon-2"">OPN</button>
+                        <button type="button" class="btn btn-lg btn-label-danger px-5 py-4" data-bs-toggle="collapse" data-bs-target="#accordionIcon-2" aria-controls="accordionIcon-2"">MA</button>
                     </div>
                     
                     <div class="col-md-6 text-end mt-2">
                         <span class="mb-1">Total F/G</span>
-                        <h3 class="card-title text-nowrap mt-2"><strong>11.021 PCS</strong></h3>
+                        <h3 class="card-title text-nowrap mt-2"><strong class="quantity">76</strong> Pcs</h3>
                     </div>
                 </div>
                 <div class="row mt-3">
@@ -70,12 +70,12 @@
             <div class="card accordion-item active p-3">
                 <div class="accordion-header d-flex align-items-center row">
                     <div class="col-md-6">
-                        <button type="button" class="btn btn-lg btn-label-info px-5 py-4" data-bs-toggle="collapse" data-bs-target="#accordionIcon-3" aria-controls="accordionIcon-3"">CSH</button>
+                        <button type="button" class="btn btn-lg btn-label-info px-5 py-4" data-bs-toggle="collapse" data-bs-target="#accordionIcon-3" aria-controls="accordionIcon-3"">AS</button>
                     </div>
                     
                     <div class="col-md-6 text-end mt-2">
                         <span class="mb-1">Total F/G</span>
-                        <h3 class="card-title text-nowrap mt-2"><strong>12.000 PCS</strong></h3>
+                        <h3 class="card-title text-nowrap mt-2"><strong class="quantity">98</strong> Pcs</h3>
                     </div>
                 </div>
                 <div class="row mt-3">
@@ -130,4 +130,22 @@
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script> 
+<script>
+    $( document ).ready(function() {
+
+        $('.quantity').each(function () {
+            var $this = $(this);
+            console.log($this.text());
+            jQuery({ Counter: 0 }).animate({ Counter: $this.text() }, {
+                duration: 1500,
+                easing: 'swing',
+                step: function () {
+                $this.text(Math.ceil(this.Counter));
+                }
+            });
+        });
+
+    });
+</script>
 @endsection

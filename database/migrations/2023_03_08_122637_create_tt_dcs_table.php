@@ -13,11 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tm_part_numbers', function (Blueprint $table) {
+        Schema::create('tt_dcs', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('part_name');
-            $table->string('part_number');
-            $table->integer('qty_limit');
+            $table->string('part_number')->unique();
+            $table->bigInteger('qty');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tm_part_numbers');
+        Schema::dropIfExists('tm_dcs');
     }
 };
