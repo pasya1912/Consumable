@@ -16,7 +16,8 @@ class LoginController extends Controller
     {
 
         $credentials = $request->validate([
-            'email' => 'required|email',
+            'username' => 'required',
+
             'password' => 'required'
         ]);
 
@@ -24,7 +25,15 @@ class LoginController extends Controller
         {
             $request->session()->regenerate();
 
-            return redirect()->intended('/dashboard/fg-dashboard');
+            //check if user is admin
+            if(Auth::user()->role == 0)
+            {
+                return redirect()->route('admin.dashboard');
+            }
+            else
+            {
+                return redirect()->route('user.dashboard');
+            }
         }
 
         return redirect()->back()->with('error', 'Email or password do not match our records!');

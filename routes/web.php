@@ -1,14 +1,21 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\FgController;
-use App\Http\Controllers\WipController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\MaterialController;
+
 use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\MaterialMasterController;
-use App\Http\Controllers\PartNumberMasterController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\publicController;
+
+use App\Http\Controllers\User\dashboardController as userDashboardController;
+use App\Http\Controllers\User\requestController as userRequestController;
+use App\Http\Controllers\User\requestHistoryController as userRequestHistoryController;
+
+use App\Http\Controllers\Admin\dashboardController as adminDashboardController;
+use App\Http\Controllers\Admin\budgetController as adminBudgetController;
+use App\Http\Controllers\Admin\requestController as adminRequestController;
+use App\Http\Controllers\Admin\importController as adminImportController;
+use App\Http\Controllers\Admin\userController as adminUserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -31,36 +38,49 @@ Route::middleware(['guest'])->group(function () {
     Route::post('/login-auth', [LoginController::class, 'authenticate'])->name('login.auth');
     Route::get('/register', [RegisterController::class, 'index'])->name('register.index');
     Route::post('/register-store', [RegisterController::class, 'store'])->name('register.store');
-    
+
 });
+Route::get('/image/{url}', [publicController::class, 'getImage'])->where('url', '(.*)')->name('getImage');
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::post('/logout', [LoginController::class, 'logout'])->name('logout.auth');
-    
-    Route::prefix('/dashboard')->group(function () {
-    
-        Route::get('/fg-dashboard', [FgController::class, 'index'])->name('fg.dashboard');
-        Route::get('/material-dashboard', [MaterialController::class, 'index'])->name('material.dashboard');
-        Route::get('/getCkdMaterial', [MaterialController::class, 'getCkdMaterial'])->name('material.getCkd');
-        Route::get('/wip-dashboard', [WipController::class, 'index'])->name('wip.dashboard');
-        
-        Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
-        Route::post('/profile-update', [ProfileController::class, 'update'])->name('profile.update');
-    });
-    
-    Route::prefix('/master')->group(function () {
-    
-        // Part Number Master
-        Route::get('/part-number-master', [PartNumberMasterController::class, 'index'])->name('part-number.master');
-        Route::post('/part-number-master/insertData', [PartNumberMasterController::class, 'store'])->name('part-number.master.insertData');
-        Route::get('/part-number-master/getData', [PartNumberMasterController::class, 'getData'])->name('part-number.master.getData');
 
-        // Material Master
-        Route::get('/material-master', [MaterialMasterController::class, 'index'])->name('material.master');
-        Route::post('/material-master/import', [MaterialMasterController::class, 'import'])->name('material.master.import');
-        Route::get('/material-master/getData', [MaterialMasterController::class, 'getData'])->name('material.master.getData');
-    
-    });
-    
+        Route::middleware(['user'])->group(function () {
+            Route::get('/', [userDashboardController::class, 'index'])->name('user.dashboard');
+            Route::get('/request', [userRequestController::class, 'index'])->name('user.request');
+            Route::post('/request', [userRequestController::class, 'store'])->name('user.requestStore');            Route::post('/request/ubah-item/{index}', [userRequestController::class, 'ubahCart'])->name('user.requestUbahJumlah');
+            Route::post('/request/add-item', [userRequestController::class, 'addItem'])->name('user.requestAddItem');
+            Route::get('/request/history', [userRequestHistoryController::class, 'index'])->name('user.requestHistory');
+            //request history detail
+            Route::get('/request/history/{id}', [userRequestHistoryController::class, 'detail'])->name('user.historyDetail');
+            Route::post('/request/history/{id}/delete', [userRequestHistoryController::class, 'cancel'])->name('user.requestCancel');
+
+
+
+        });
+        Route::middleware(['admin'])->group(function () {
+            Route::prefix('admin')->group(function () {
+                Route::get('/', [adminDashboardController::class, 'index'])->name('admin.dashboard');
+
+                Route::get('/budget', [adminBudgetController::class, 'index'])->name('admin.budget');
+                Route::get('/request', [adminRequestController::class, 'history'])->name('admin.requestHistory');
+                Route::get('/request/{id}', [adminRequestController::class, 'detail'])->where('id', '[0-9]+')->name('admin.requestDetail');
+                Route::post('/request/{id}', [adminRequestController::class, 'update'])->where('id','[0-9]+')->name('admin.requestUpdate');
+                //import item
+                Route::post('/import', [adminImportController::class, 'item'])->name('admin.importItems');
+                Route::post('/budget/import', [adminImportController::class, 'budget'])->name('admin.importBudget');
+
+                //user listroute
+                Route::get('/user', [adminUserController::class, 'list'])->name('admin.userList');
+                Route::post('/user/{username}', [adminUserController::class, 'delete'])->name('admin.userDelete');
+        });
+
+        });
+
+        Route::get('/logout', [LoginController::class, 'logout'])->name('logout.auth');
+
+
+
+
+
 });

@@ -1,0 +1,2 @@
+1. Kenapa ada directory gambar di file ? tidak bisakaloupload nya csv
+2. User  gabisa relasi kalo ada spasi

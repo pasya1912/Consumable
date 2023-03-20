@@ -1,73 +1,74 @@
-<nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
-    
-    <!-- ! Not required for layout-without-menu -->
-    <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0  d-xl-none ">
-        <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
-            <i class="bx bx-menu bx-sm"></i>
-        </a>
-    </div>
+    <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
 
-    <!-- Search -->
-    <div class="col-md-4">
-        <form class="navbar-nav-left d-flex">
-            <div class="input-group">
-                <span class="input-group-text"><i class="tf-icons bx bx-search"></i></span>
-                <input type="text" class="form-control" placeholder="Search..." />
-            </div>
-        </form>
-    </div>
-    <!-- /Search -->
-    
-    <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">            
-        <ul class="navbar-nav flex-row align-items-center ms-auto">
+        <!-- ! Not required for layout-without-menu -->
+        <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0  d-xl-none ">
+            <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                <i class="bx bx-menu bx-sm"></i>
+            </a>
+        </div>
 
-            <!-- User -->
-            <small class="text-muted pe-3">Welcome, {{ auth()->user()->username }}</small>
-            <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                    <div class="avatar avatar-online">
-                        <img src={{ asset("img/avatars/1.png") }} class="w-px-40 h-auto rounded-circle">
-                    </div>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end">
-                    <li>
-                        <a class="dropdown-item" href="pages/profile-user.html">
-                            <div class="d-flex">
-                                <div class="flex-shrink-0 me-3">
-                                    <div class="avatar avatar-online">
-                                        <img src={{ asset("img/avatars/1.png") }} class="w-px-40 h-auto rounded-circle">
+        <!-- Search -->
+        <div class="col-md-4">
+            <form class="navbar-nav-left d-flex" action="" method="GET">
+                <div class="input-group">
+                    <span class="input-group-text"><i class="tf-icons bx bx-search"></i></span>
+                    <input id="inputSearch" type="text" name="search"class="form-control" placeholder="Search..." />
+                </div>
+            </form>
+        </div>
+        <!-- /Search -->
+
+        <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+            <ul class="navbar-nav flex-row align-items-center ms-auto">
+
+                <!-- User -->
+                <small class="text-muted pe-3">Welcome, {{ auth()->user()->username }}</small>
+                <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                    <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                        <div class="avatar avatar-online">
+                            <img src={{ asset("img/avatars/1.png") }} class="w-px-40 h-auto rounded-circle">
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                            <a class="dropdown-item" href="pages/profile-user.html">
+                                <div class="d-flex">
+                                    <div class="flex-shrink-0 me-3">
+                                        <div class="avatar avatar-online">
+                                            <img src={{ asset("img/avatars/1.png") }} class="w-px-40 h-auto rounded-circle">
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <span class="fw-semibold d-block">
+                                            {{ auth()->user()->username }}
+                                        </span>
+                                        <small class="text-muted">Admin</small>
                                     </div>
                                 </div>
-                                <div class="flex-grow-1">
-                                    <span class="fw-semibold d-block">
-                                        {{ auth()->user()->username }}
-                                    </span>
-                                    <small class="text-muted">Admin</small>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <div class="dropdown-divider"></div>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="{{ route('profile.index') }}">
-                            <i class="bx bx-user me-2"></i>
-                            <span class="align-middle">My Profile</span>
-                        </a>
-                    </li>
-                    <li>
-                        <form action="{{ route('logout.auth') }}" method="post">
-                            @csrf
-                            <button class="dropdown-item" type="submit">
-                                <i class='bx bx-log-in me-2'></i>
-                                <span class="align-middle">Log Out</span>
-                            </button>
-                        </form>
-                    </li>
-                </ul>
-            </li>
-            <!--/ User -->
-        </ul>
-    </div>
-</nav>
+                            </a>
+                        </li>
+                        <li>
+                            <div class="dropdown-divider"></div>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{ route($role.'.dashboard') }}">
+                                <i class="bx bx-user me-2"></i>
+                                <span class="align-middle">My Profile</span>
+                            </a>
+                        </li>
+                        <li>
+                            <form action="{{ route('logout.auth') }}" method="get">
+
+                                <button class="dropdown-item" type="submit">
+                                    <i class='bx bx-log-in me-2'></i>
+                                    <span class="align-middle">Log Out</span>
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+                <!--/ User -->
+            </ul>
+        </div>
+    </nav>
+

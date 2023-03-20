@@ -3,16 +3,16 @@
 @section('content')
 <div class="authentication-wrapper authentication-cover">
     <div class="authentication-inner row m-0">
-        
+
         <!-- /Left Text -->
         <div class="d-none d-lg-flex col-lg-7 col-xl-8 align-items-center p-5">
             <div class="w-100 d-flex justify-content-center">
                 <img src={{ asset("img/illustrations/boy-with-rocket-light.png") }} class="img-fluid" alt="Login image" width="700" data-app-dark-img="illustrations/girl-with-laptop-dark.png" data-app-light-img="illustrations/girl-with-laptop-light.html">
-                
+
             </div>
         </div>
         <!-- /Left Text -->
-        
+
         <!-- Register -->
         <div class="d-flex col-12 col-lg-5 col-xl-4 align-items-center authentication-bg p-sm-5 p-4" style="background-color: white;">
             <div class="w-px-400 mx-auto">
@@ -58,9 +58,20 @@
                 </div>
                 <!-- /Logo -->
                 <p class="mb-4">Let's make your account!</p>
-                
+
                 <form id="formAuthentication" class="mb-3" action="{{ route('register.store') }}" method="POST">
                     @csrf
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Nama</label>
+                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Enter your name" autofocus>
+
+                        @error('name')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+
+                    </div>
                     <div class="mb-3">
                         <label for="username" class="form-label">Username</label>
                         <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username" placeholder="Enter your username" autofocus>
@@ -96,12 +107,12 @@
                             @enderror
                         </div>
                     </div>
-                    
+
                     <button class="btn btn-primary d-grid w-100">
                         Sign up
                     </button>
                 </form>
-                
+
                 <p class="text-center">
                     <span>Already have an account?</span>
                     <a href="{{ route('login.index') }}">

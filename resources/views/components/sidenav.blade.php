@@ -1,5 +1,5 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
-    
+
     <!-- ! Hide app brand if navbar-full -->
     <div class="app-brand demo">
         <a href="#" class="app-brand-link">
@@ -89,9 +89,9 @@
           <i class="bx bx-chevron-left bx-sm align-middle"></i>
         </a>
       </div>
-    
+
     <div class="menu-inner-shadow"></div>
-    
+
     <ul class="menu-inner py-1 mt-3">
         <li class="menu-item {{ (request()->is('dashboard/*')) ? 'active' : '' }} {{ (request()->is('dashboard/*')) ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle" >
@@ -100,18 +100,19 @@
             </a>
             <ul class="menu-sub">
                 <li class="menu-item {{ (request()->is('dashboard/fg-dashboard')) ? 'active' : '' }}">
-                    <a href="{{ route('fg.dashboard') }}" class="menu-link " >
+                        <div>Material Stock</div>
+                    <a href="{{ route($role.'.dashboard') }}" class="menu-link " >
                         <div>F/G Stock</div>
                     </a>
                 </li>
                 <li class="menu-item {{ (request()->is('dashboard/wip-dashboard')) ? 'active' : '' }}">
-                    <a href="{{ route('wip.dashboard') }}" class="menu-link" >
+                    <a href="{{ route($role.'.dashboard') }}" class="menu-link" >
                         <div>WIP Stock</div>
                     </a>
-                    
+
                 </li>
                 <li class="menu-item {{ (request()->is('dashboard/material-dashboard')) ? 'active' : '' }}">
-                    <a href="{{ route('material.dashboard') }}" class="menu-link " >
+                    <a href="{{ route($role.'.dashboard') }}" class="menu-link " >
                         <div>Material Stock</div>
                     </a>
                 </li>
@@ -124,17 +125,17 @@
             </a>
             <ul class="menu-sub">
                 <li class="menu-item {{ (request()->is('master/material-master')) ? 'active' : '' }}">
-                    <a href="{{ route('material.master') }}" class="menu-link " >
+                    <a href="{{ route($role.'.dashboard') }}" class="menu-link " >
                         <div>Import Material</div>
                     </a>
                 </li>
                 <li class="menu-item {{ (request()->is('master/part-number-master')) ? 'active' : '' }}">
-                    <a href="{{ route('part-number.master') }}" class="menu-link" >
+                    <a href="{{ route($role.'.dashboard') }}" class="menu-link" >
                         <div>Import Part Number</div>
                     </a>
-                    
+
                 </li>
             </ul>
-        </li> 
-    </ul>  
+        </li>
+    </ul>
 </aside>

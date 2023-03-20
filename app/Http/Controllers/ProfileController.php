@@ -77,9 +77,9 @@ class ProfileController extends Controller
         ];
 
         if($request->email != auth()->user()->email){
-            $rules['email'] = 'required|email:dns|unique:users|max:255';    
+            $rules['email'] = 'required|email:dns|unique:users|max:255';
         }
-        
+
         if(!Hash::check($request->get('current-password'), Auth::user()->password)) {
             //if current pass doesnt match the record in database
             return redirect()->back()->with('error', 'Your current password does not match with our record');
@@ -102,7 +102,7 @@ class ProfileController extends Controller
                 'password' => Hash::make($validatedData['new-password']),
                 'email' => $request->get('email')
             ]);
-        
+
         return redirect()->back()->with("updated", "Your data has been updated!");
     }
 

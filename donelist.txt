@@ -1,0 +1,36 @@
+PPIC Backend DONE.
+user = departement / peminjam barang
+admin = ppic 
+
+Fitur:
+1. Stock list (admin & user):
+   - user dapat melihat sisa budget yang dimiliki bulan ini.
+   - admin dapat upload batch item / stock menggunakan excell
+2. Budget List (admin)
+   - admin dapat melihat list budget user serta sisa budget nya dibulan ini.
+   - admin dapat mengubah budget dengan cara mengupload excell yang sama dengandiubah budgetnya
+3. Request/OCA (admin & user)
+   - User dapat memilih barang apa saja yang ingin dipinjam / digunakan. dapat membatalkan jika salah.
+   - Admin dapat merubah status request menjadi "disetujui","ditolak","batal".
+   - Fitur ini hany untuk pendataan agar stock berubah jadi ppic harus merubah statusnya.
+   - admin dapat melihat semua request dari semua departement/user.
+   - setiap user/departement dapat melihat history request masing masing.
+
+4. List User ( admin )
+   - admin dapat melihat dan mencari semua user serta menghapus akun user tersebut.
+
+
+Penjelasan:
+1. Setiap departement memunyai akun
+
+nama = Nama Departement
+username = username dari departement tersebut ( ini dibuat untuk identifikasi user )
+email = email departement perwakilan.
+
+
+2. Setiap user hanya dapat melihat item yang tersedia budget nya ( admin wajib menambahkan budget ).
+
+3. Jika user lupa password maka admin akanmenghapus akun dan user dapat mendaftar kembali.
+Dengan Ketentuan username wajib sama seperti sebelumnya agar data  tidak hilang.
+
+

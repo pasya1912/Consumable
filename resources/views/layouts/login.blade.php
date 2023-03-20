@@ -11,7 +11,7 @@
                 </div>
             </div>
             <!-- /Left Text -->
-            
+
             <!-- Login -->
             <div class="d-flex col-12 col-lg-5 col-xl-4 align-items-center authentication-bg p-sm-5 p-4" style="background-color: white; max-height: 100%;">
 
@@ -79,15 +79,15 @@
                     </div>
                     <!-- /Logo -->
                     <p class="mb-4">Please sign-in to your account!</p>
-                    
+
                     <form id="formAuthentication" class="mb-3" action="{{ route('login.auth') }}" method="POST">
                         @method('POST')
                         @csrf
                         <div class="mb-3">
-                            <label for="email" class="form-label">Email or Username</label>
-                            <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Enter your email or username" autofocus autocomplete="off" required>
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control @error('username') is-invalid @enderror" id="email" name="username" placeholder="Enter your email or username" autofocus autocomplete="off" required>
 
-                            @error('email')
+                            @error('username')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
@@ -108,13 +108,13 @@
                                     {{ $message }}
                                 </div>
                             @enderror
-                            
+
                         </div>
                         <button class="btn btn-primary d-grid w-100 py-2">
                             Sign in
                         </button>
                     </form>
-                    
+
                     <p class="text-center">
                         <span>Don't have any account?</span>
                         <a href="{{ route('register.index') }}">
