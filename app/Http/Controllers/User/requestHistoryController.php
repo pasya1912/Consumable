@@ -56,7 +56,7 @@ class requestHistoryController extends Controller
         }
         try{
         $reqItem = DB::table('request_item')
-        ->select('request_item.code_item','request_item.jumlah','item_master.name_item','item_master.satuan','item_master.satuan_oca','item_master.convert')
+        ->select('request_item.code_item','request_item.admin_note','request_item.jumlah','item_master.name_item','item_master.satuan','item_master.satuan_oca','item_master.convert')
         ->leftJoin('item_master','request_item.code_item','=','item_master.code_item')
         ->where('request_item.id_request',$id)
         ->get();

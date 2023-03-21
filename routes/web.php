@@ -32,6 +32,7 @@ Route::get('/', function () {
     return view('layouts.login');
 })->middleware('guest');
 
+
 Route::middleware(['guest'])->group(function () {
 
     Route::get('/login', [LoginController::class, 'index'])->name('login.index');
@@ -65,10 +66,16 @@ Route::middleware(['auth'])->group(function () {
                 Route::get('/budget', [adminBudgetController::class, 'index'])->name('admin.budget');
                 Route::get('/request', [adminRequestController::class, 'history'])->name('admin.requestHistory');
                 Route::get('/request/{id}', [adminRequestController::class, 'detail'])->where('id', '[0-9]+')->name('admin.requestDetail');
-                Route::post('/request/{id}', [adminRequestController::class, 'update'])->where('id','[0-9]+')->name('admin.requestUpdate');
+                Route::post('/request/{id}/status', [adminRequestController::class, 'updateStatus'])->where('id','[0-9]+')->name('admin.requestUpdateStatus');
+                Route::get('/request/{id}/export', [adminRequestController::class,'export'])->name('admin.requestExport');
+
+                Route::post('/request_item/{id}/note', [adminRequestController::class, 'updateNote'])->where('id','[0-9]+')->name('admin.requestUpdateNote');
+
                 //import item
                 Route::post('/import', [adminImportController::class, 'item'])->name('admin.importItems');
                 Route::post('/budget/import', [adminImportController::class, 'budget'])->name('admin.importBudget');
+
+                Route::get('/request/{id}/export', [adminRequestController::class, 'export'])->where('id', '[0-9]+')->name('admin.requestExport');
 
                 //user listroute
                 Route::get('/user', [adminUserController::class, 'list'])->name('admin.userList');

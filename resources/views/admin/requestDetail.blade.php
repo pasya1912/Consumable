@@ -10,7 +10,7 @@ table, th, td {
 <h2 style="text-align: center;">Request Detail</h2>
 <h3 >Status: {{$reqDetail->status}}</h3>
 //form ubah status rejected approved canceled
-<form action="{{route('admin.requestUpdate',['id'=>$reqDetail->id])}}" method="POST">
+<form action="{{route('admin.requestUpdateStatus',['id'=>$reqDetail->id])}}" method="POST">
     @csrf
     <select name="status">
         <option value="rejected">Rejected</option>
@@ -24,6 +24,7 @@ table, th, td {
     <th>Code</th>
     <th>name</th>
     <th>Jumlah</th>
+    <th>Note</th>
   </tr>
 @foreach($reqDetail->items as $key =>$item)
   <tr>
@@ -31,6 +32,9 @@ table, th, td {
     <td>{{$item->name_item}}</td>
     <td>
         {{$item->jumlah}}
+    </td>
+    <td>
+        <textarea type="text" id="note{{$item->id}}" onchange="updateNote({{$item->id}})">{{$item->admin_note}}</textarea>
     </td>
 
   </tr>
@@ -55,6 +59,28 @@ table, th, td {
     @if ($message = Session::get('message'))
     <script>alert('{{ $message }}')</script>
 @endif
+<script>
+function updateNote(requestItemId)
+{
+    var note = document.getElementById('note'+requestItemId).value;
+    var url = "{{route('admin.requestUpdateNote',['id'=>':id'])}}";
+    url = url.replace(':id',requestItemId);
+    console.log(url);
+
+    //do postrequest to update note vanila
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            alert(this.responseText);
+        }
+    };
+    xhttp.open("POST", url, true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("_token={{ csrf_token() }}"+"&note="+note);
+
+}
+</script>
 </body>
+
 </html>
 

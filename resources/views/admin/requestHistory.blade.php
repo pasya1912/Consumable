@@ -56,6 +56,8 @@ table, th, td {
     <td>{{$req->status}}</td>
     <td>
         <button onclick="window.location.href='{{route('admin.requestDetail',['id'=>$req->id])}}'">Detail</button>
+        <a href="{{route('admin.requestExport',$req->id)}}" target="_blank">Export</button>
+
     </td>
 
   </tr>

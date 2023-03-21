@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+
+use Barryvdh\DomPDF\Facade\Pdf;
+
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 //import db
@@ -53,7 +57,7 @@ class requestController extends Controller
             }
             try{
             $reqItem = DB::table('request_item')
-            ->select('request_item.code_item','request_item.jumlah','item_master.name_item','item_master.satuan','item_master.satuan_oca','item_master.convert')
+            ->select('request_item.code_item','request_item.jumlah','request_item.id','request_item.admin_note','item_master.name_item','item_master.satuan','item_master.satuan_oca','item_master.convert')
             ->leftJoin('item_master','request_item.code_item','=','item_master.code_item')
             ->where('request_item.id_request',$id)
             ->get();
@@ -61,12 +65,13 @@ class requestController extends Controller
 
             }
             catch(\Exception $e){
+                dd($e);
                 $reqDetail->items = [];
             }
 
             return view('admin.requestDetail',compact('reqDetail'));
     }
-    function update($id,Request $request)
+    function updateStatus($id,Request $request)
     {
         //update request table from post data
         $status = $request->input('status');
@@ -87,14 +92,82 @@ class requestController extends Controller
         }
     }
 
-    function export(Request $request)
+    function updateNote($id,Request $request)
     {
-        //receive excell ( validate first )
-        $request->validate([
-            'file' => 'required|mimes:xls,xlsx'
-        ]);
+        //update request_item admin_note from post data
+        $note = $request->input('note');
+        //update note
+        $deb = DB::table('request_item')->where('id',$id);
+        if($deb)
+        {
+            if($deb->update(['admin_note'=>$note]))
+            {
+                return "success";
+            }
+            else{
+                return "failed";
+            }
 
-        $file = $request->file('file');
+
+
+        }
+
+
+    }
+
+    function export($id,Request $request)
+    {
+
+        //get request data
+        $reqDetail = DB::table('request')
+        ->select('users.name as department','request.user as username','request.tanggal','request.id','request.id_jam as shift',DB::raw('concat(jadwal.awal,":",jadwal.akhir) as jam_pengambilan'))
+        ->leftJoin('users','request.user','=','users.username')
+        ->leftJoin('jadwal','request.id_jam','=','jadwal.id')
+        ->where('request.id',$id)
+        ->first();
+        //get request_item data
+
+        $reqItem = DB::table('request_item')
+        ->select('request_item.code_item','request_item.jumlah','request_item.id','request_item.admin_note','item_master.name_item','item_master.satuan_oca','item_master.area','item_master.lemari','item_master.no2','budget.quota')
+        ->leftJoin('item_master','request_item.code_item','=','item_master.code_item')
+        ->leftJoin('budget','request_item.code_item','=','budget.code_item')
+        ->where('budget.user',$reqDetail->username)
+        ->where('id_request',$id)
+        ->orderBy('request_item.code_item','ASC')->get();
+        $used = $this->getReqItem($reqDetail->username,$id);
+        foreach($reqItem as $key => $item){
+
+            $reqItem[$key]->remaining_quota = $item->quota - $used[$key]->qty;
+        }
+
+        //if reqItem notfound then return []
+        if(!$reqItem){
+            $reqItem = [];
+        }
+        //append
+        $reqDetail->items = $reqItem;
+        //load view print with domPdf with size A4
+        $pdf = PDF::loadView('print',compact('reqDetail'))->setPaper('a4', 'potrait');
+
+        //download pdf
+        return $pdf->stream('request-'.$id.'.pdf');
+
+
+    }
+    function getReqItem($user,$reqid)
+    {
+
+        $req = DB::table('request_item')->selectRaw('request_item.code_item,sum(request_item.jumlah) as qty')
+        ->join('request','request_item.id_request','=','request.id')
+        ->where('request.user',$user)
+        ->where('request_item.id_request',$reqid)
+        //where tanggal bulan ini
+        ->whereMonth('request.tanggal',date('m'))
+            ->whereNotIn('request.status',['rejected','canceled'])
+        ->groupBy('request_item.code_item')
+        ->orderBy('request_item.code_item','ASC')
+        ->get()->toArray();
+        return $req;
 
 
     }

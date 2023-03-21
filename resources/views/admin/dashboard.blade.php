@@ -39,7 +39,7 @@ table, th, td {
     <input type="file" name="file" id="file">
     <input type="submit" value="Import">
 </form>
-<a href="{{asset('template/template_budget.xlsx')}}">Download Template</a>
+<a href="{{asset('template/template_item.xlsx')}}">Download Template</a>
 
 <table style="width:100%" id='table'>
   <tr>
@@ -93,8 +93,6 @@ table, th, td {
     var search = url.searchParams.get("search");
     //set search value to input
     document.getElementById("inputSearch").value = search;
-
-
 </script>
 </body>
 </html>

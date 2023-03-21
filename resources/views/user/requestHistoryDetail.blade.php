@@ -14,6 +14,7 @@ table, th, td {
     <th>Code</th>
     <th>name</th>
     <th>Jumlah</th>
+    <th>Admin Note</th>
   </tr>
 @foreach($reqDetail->items as $key =>$item)
   <tr>
@@ -21,6 +22,9 @@ table, th, td {
     <td>{{$item->name_item}}</td>
     <td>
         {{$item->jumlah}}
+    </td>
+    <td>
+        {{$item->admin_note}}
     </td>
 
   </tr>
