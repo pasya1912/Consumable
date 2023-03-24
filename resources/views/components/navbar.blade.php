@@ -7,16 +7,6 @@
             </a>
         </div>
 
-        <!-- Search -->
-        <div class="col-md-4">
-            <form class="navbar-nav-left d-flex" action="" method="GET">
-                <div class="input-group">
-                    <span class="input-group-text"><i class="tf-icons bx bx-search"></i></span>
-                    <input id="inputSearch" type="text" name="search"class="form-control" placeholder="Search..." />
-                </div>
-            </form>
-        </div>
-        <!-- /Search -->
 
         <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
             <ul class="navbar-nav flex-row align-items-center ms-auto">
@@ -26,7 +16,7 @@
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                     <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                         <div class="avatar avatar-online">
-                            <img src={{ asset("img/avatars/1.png") }} class="w-px-40 h-auto rounded-circle">
+                            <img src={{ asset("img/avatars/2.png") }} class="w-px-40 h-auto rounded-circle">
                         </div>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
@@ -51,7 +41,7 @@
                             <div class="dropdown-divider"></div>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="{{ route($role.'.dashboard') }}">
+                            <a class="dropdown-item">
                                 <i class="bx bx-user me-2"></i>
                                 <span class="align-middle">My Profile</span>
                             </a>
@@ -71,4 +61,5 @@
             </ul>
         </div>
     </nav>
+
 

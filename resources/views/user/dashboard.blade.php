@@ -1,5 +1,4 @@
-@extends('layouts.master.main',['title' => 'Dashboard'])
-
+@extends('layouts.master.main')
 <?php
 function checkPersen($quota,$remaining)
 {
@@ -17,9 +16,15 @@ function checkPersen($quota,$remaining)
 ?>
 
 @section('content')
-<h6 class="pb-1 mb-4 text-muted">Grid Card</h6>
+<div class="row">
+    <div class="col">
+        <div class="row">
+            <h2><strong>List Stock PPIC</strong></h2>
+        </div>
+    </div>
+</div>
     <div class="demo-inline-spacing mb-5 text-end">
-      <a href="{{route('user.request')}}" class="btn btn-info">
+      <a href="{{route('user.request')}}" class="btn btn-danger">
         Cart
       </a>
     </div>
@@ -45,10 +50,8 @@ function checkPersen($quota,$remaining)
                         <p class="card-text mt-2 mb-2">
                             <input type="number" id="inputadd{{$item->code_item}}" name="jml" placeholder="Jumlah {{$item->satuan_oca}}">
                             <br><small><span>1 {{$item->satuan}} = {{1.0 / $item->convert}} {{$item->satuan_oca}}</span></small>
-
                             <hr/>
                             <a  id="btnadd{{$item->code_item}}"href="javascript:addItem('{{$item->code_item}}')" class="btn btn-outline-primary">Add item</a>
-
                         </p>
                       </div>
                     </div>
@@ -64,7 +67,7 @@ function checkPersen($quota,$remaining)
     </div>
 @endforeach
 @endif
-
+<br>
 </div>
 <div class="pagination">
     @foreach($items['links'] as $key =>$item)

@@ -79,7 +79,7 @@
               </g>
             </svg>
           </span>
-          <span class="app-brand-text demo menu-text fw-bold ms-2">realstock</span>
+          <span class="app-brand-text demo menu-text fw-bold ms-2">consumable</span>
         </a>
 
         <a
@@ -99,41 +99,8 @@
                 <div>Dashboards</div>
             </a>
             <ul class="menu-sub">
-                <li class="menu-item {{ (request()->is('dashboard/fg-dashboard')) ? 'active' : '' }}">
-                        <div>Material Stock</div>
-                    <a href="{{ route($role.'.dashboard') }}" class="menu-link " >
                         <div>F/G Stock</div>
                     </a>
-                </li>
-                <li class="menu-item {{ (request()->is('dashboard/wip-dashboard')) ? 'active' : '' }}">
-                    <a href="{{ route($role.'.dashboard') }}" class="menu-link" >
-                        <div>WIP Stock</div>
-                    </a>
-
-                </li>
-                <li class="menu-item {{ (request()->is('dashboard/material-dashboard')) ? 'active' : '' }}">
-                    <a href="{{ route($role.'.dashboard') }}" class="menu-link " >
-                        <div>Material Stock</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
-        <li class="menu-item {{ (request()->is('master/*')) ? 'active' : '' }} {{ (request()->is('master/*')) ? 'open' : '' }}">
-            <a href="javascript:void(0);" class="menu-link menu-toggle" >
-                <i class="menu-icon tf-icons bx bxs-cube-alt"></i>
-                <div>Master</div>
-            </a>
-            <ul class="menu-sub">
-                <li class="menu-item {{ (request()->is('master/material-master')) ? 'active' : '' }}">
-                    <a href="{{ route($role.'.dashboard') }}" class="menu-link " >
-                        <div>Import Material</div>
-                    </a>
-                </li>
-                <li class="menu-item {{ (request()->is('master/part-number-master')) ? 'active' : '' }}">
-                    <a href="{{ route($role.'.dashboard') }}" class="menu-link" >
-                        <div>Import Part Number</div>
-                    </a>
-
                 </li>
             </ul>
         </li>

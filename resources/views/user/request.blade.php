@@ -1,54 +1,65 @@
-<!DOCTYPE html>
-<html>
-<style>
-table, th, td {
-  border:1px solid black;
-}
-</style>
-<body>
+@extends('layouts.master.main')
 
-<h2>Item to request</h2>
-<?php
-?>
-<table style="width:100%" id='table'>
-  <tr>
-    <th>Code</th>
-    <th>name</th>
-    <th>Jumlah</th>
-    <th>Aksi</th>
-  </tr>
-<?php
-?>
+@section('content')
+<div class="row">
+    <div class="col">
+        <div class="row">
+            <h2><strong>Cart Request</strong></h2>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card" style="padding: 2rem;">
+            <div class="row">
+                <div class="col-md-10"></div>
+            </div>
+<div class="table-responsive" >
+    <table class="table" cellpadding=10 cellspasing=15>
+        <thead>
+                <tr>
+                    <th style="text-align: center">Code</th>
+                    <th style="text-align: center">Name</th>
+                    <th style="text-align: center">Jumlah</th>
+                    <th style="text-align: center">Aksi</th>
+                </tr>
+         </thead>
+         <tbody>
 @foreach($arr['items'] as $key =>$item)
   <tr>
-    <td>{{$item->code_item}}</td>
-    <td>{{$item->name_item}}</td>
-    <td>
-        <input id="inputRequest{{$key}}" type="number" onchange="ubahJumlah({{$key}})" value="{{$arr['cart'][$key]['jumlah']}}"/> Max: {{$item->remaining_quota       }}   {{$item->satuan_oca}}
+    <td style="text-align: center">{{$item->code_item}}</td>
+    <td style="text-align: center">{{$item->name_item}}</td>
+    <td style="text-align: center">
+        <input class="form-control" id="inputRequest{{$key}}" type="number" onchange="ubahJumlah({{$key}})" value="{{$arr['cart'][$key]['jumlah']}}"/> Max: {{$item->remaining_quota       }}   {{$item->satuan_oca}}
     </td>
-    <td>
-        <button onclick="hapusItem({{$key}})">Hapus</button>
+    <td style="text-align: center">
+        <button class="btn rounded-pill me-2 btn-label-danger" onclick="hapusItem({{$key}})">Hapus</button>
     </td>
   </tr>
+         </tbody>
 @endforeach
-</table>
-
-<p>To understand the example better, we have added borders to the table.</p>
-
-<hr/>
-
-<form action="{{route('user.requestStore')}}" method="POST">
-    @csrf
-    <input type="text" name="nama_pj" placeholder="Pengambil barang"/>
-    <br>
-    <select name="jadwal">
-        @foreach($arr['jadwal'] as $shift)
-            <option value="{{$shift->id}}">Shift {{$shift->id}} ({{$shift->awal}} - {{$shift->akhir}})</option>
-        @endforeach
-    </select>
-    <br><button type="submit">Request</button>
-</form>
-
+<div class="col">
+    <form action="{{route('user.requestStore')}}" method="POST">
+        @csrf
+        <div class="mb-3">
+            <label for="defaultFormControlInput" class="form-label">Nama Pengambil Barang</label>
+            <input type="text" name="nama_pj" class="form-control" id="defaultFormControlInput" placeholder="Nama Pengambil Barang" aria-describedby="defaultFormControlHelp" required/>
+        </div>
+        <div class="mb-3">
+            <label for="defaultSelect" class="form-label">Jadwal Pengambilan</label>
+            <select name="jadwal" id="defaultSelect" class="form-select">
+            @foreach($arr['jadwal'] as $shift)
+                <option value="{{$shift->id}}">Shift {{$shift->id}} ({{$shift->awal}} - {{$shift->akhir}})</option>
+            @endforeach
+        </select>
+        <br><button type="submit" class="btn btn-warning">Request</button>
+    </form>
+    </div>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
 function  ubahJumlah(index)
 {
@@ -91,6 +102,5 @@ function hapusItem(index)
 @if ($message = Session::get('message'))
     <script>alert('{{ $message }}')</script>
 @endif
-</body>
-</html>
+@endsection
 

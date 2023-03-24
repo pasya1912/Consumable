@@ -7,7 +7,7 @@
         <!-- /Left Text -->
         <div class="d-none d-lg-flex col-lg-7 col-xl-8 align-items-center p-5">
             <div class="w-100 d-flex justify-content-center">
-                <img src={{ asset("img/illustrations/boy-with-rocket-light.png") }} class="img-fluid" alt="Login image" width="700" data-app-dark-img="illustrations/girl-with-laptop-dark.png" data-app-light-img="illustrations/girl-with-laptop-light.html">
+                <img src={{ asset("img/illustrations/girl-with-laptop-light.png") }} class="img-fluid" alt="Login image" width="700" data-app-dark-img="illustrations/girl-with-laptop-dark.png" data-app-light-img="illustrations/girl-with-laptop-light.html">
 
             </div>
         </div>
@@ -53,7 +53,7 @@
                                 </g>
                             </svg>
                         </span>
-                        <h2><span class="demo text-body fw-bolder">Realstock</span></h2>
+                        <h2><span class="demo text-body fw-bolder">Consumable</span></h2>
                     </a>
                 </div>
                 <!-- /Logo -->
@@ -108,15 +108,15 @@
                         </div>
                     </div>
 
-                    <button class="btn btn-primary d-grid w-100">
+                    <button class="btn btn-warning d-grid w-100">
                         Sign up
                     </button>
                 </form>
 
                 <p class="text-center">
-                    <span>Already have an account?</span>
+                    <span>Sudah punya akun?</span>
                     <a href="{{ route('login.index') }}">
-                        <span>Sign in instead</span>
+                        <span>Login di sini</span>
                     </a>
                 </p>
             </div>
