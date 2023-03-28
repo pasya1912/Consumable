@@ -34,7 +34,7 @@ function checkPersen($quota,$remaining)
 
     <div class="col">
         <div class="card h-100">
-            <img class="card-img-top" src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template-free/demo/assets/img/elements/2.jpg" alt="Card image cap" />
+            <img class="card-img-top" src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template-free/demo/assets/img/elements/2.jpg" alt="Card image cap"/>
             <div class="card-body">
                 <h5 class="card-title">{{$item->name_item}}</h5>
                 <p class="card-text">{{$item->note}}</p>
@@ -51,7 +51,7 @@ function checkPersen($quota,$remaining)
                             <input type="number" id="inputadd{{$item->code_item}}" name="jml" placeholder="Jumlah {{$item->satuan_oca}}">
                             <br><small><span>1 {{$item->satuan}} = {{1.0 / $item->convert}} {{$item->satuan_oca}}</span></small>
                             <hr/>
-                            <a  id="btnadd{{$item->code_item}}"href="javascript:addItem('{{$item->code_item}}')" class="btn btn-outline-primary">Add item</a>
+                            <a id="btnadd{{$item->code_item}}"href="javascript:addItem('{{$item->code_item}}')" class="btn btn-outline-warning">Add item</a>
                         </p>
                       </div>
                     </div>
