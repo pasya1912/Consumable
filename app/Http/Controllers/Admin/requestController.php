@@ -68,11 +68,14 @@ class requestController extends Controller
     }
     function update($id,Request $request)
     {
+        $request->validate([
+            'status'=>'required|in:approved,rejected,canceled'
+        ]);
         //update request table from post data
         $status = $request->input('status');
         //check if status wait then change to status from input
         $req = DB::table('request')->where('id',$id)->first();
-        if($req->status == 'wait'){
+
 
             if(DB::table('request')->where('id',$id)->update(['status'=>$status]))
             {
@@ -81,10 +84,7 @@ class requestController extends Controller
             else{
                 return redirect()->route('admin.requestDetail',['id'=>$id])->with('message','Request gagal diupdate');
             }
-        }
-        else{
-            return redirect()->route('admin.requestDetail',['id'=>$id])->with('message','Request gagal diupdate');
-        }
+
     }
 
     function export(Request $request)
