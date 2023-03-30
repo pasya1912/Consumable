@@ -79,7 +79,16 @@
             <a href="<?= Request::routeIs('admin.requestHistory') ? '#' : route('admin.requestHistory') ?>"
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-objects-vertical-bottom"></i>
-                <div>History</div>
+                <div>Request History</div>
+            </a>
+
+
+        </li>
+        <li class="menu-item <?= Request::routeIs('admin.userList') ? 'active' : '' ?>">
+            <a href="<?= Request::routeIs('admin.userList') ? '#' : route('admin.userList') ?>"
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bxs-contact"></i>
+                <div>User List</div>
             </a>
 
 

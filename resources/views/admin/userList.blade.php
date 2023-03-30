@@ -49,7 +49,6 @@
     <th style="width:10%">ID</th>
     <th style="width:20%">Departement</th>
     <th style="width:20%">Username/User</th>
-    <th style="width:30%">Email</th>
     <th style="width:20%">Aksi</th>
   </tr>
 
@@ -58,7 +57,6 @@
     <td style="text-align: center">{{$item['id']}}</td>
     <td style="text-align: center">{{$item['name']}}</td>
     <td style="text-align: center">{{$item['username']}}</td>
-    <td style="text-align: center">{{$item['email']}}</td>
     <td style="text-align: center">
         <form style="display:inline-flex" action="{{route('admin.userDelete',['username'=>$item['username']])}}" method="POST">
             <button type="submit" class="btn rounded-pill me-2 btn-label-danger">Hapus</button>

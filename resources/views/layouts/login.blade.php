@@ -42,7 +42,7 @@
                         @csrf
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control @error('username') is-invalid @enderror" id="email" name="username" placeholder="Enter your email or username" autofocus autocomplete="off" required>
+                            <input type="text" class="form-control @error('username') is-invalid @enderror" id="npk" name="username" placeholder="Enter your npk" autofocus autocomplete="off" required>
 
                             @error('username')
                                 <div class="invalid-feedback">

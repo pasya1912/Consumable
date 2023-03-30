@@ -29,8 +29,8 @@
                             <span>{{ auth()->user()->username }}</span>
                         </li>
                         <li class="mb-3">
-                            <span class="fw-bold me-2">Email:</span>
-                            <span>{{ auth()->user()->email }}</span>
+                            <span class="fw-bold me-2">NPK:</span>
+                            <span>{{ auth()->user()->npk }}</span>
                         </li>
                         <li class="mb-3">
                             <span class="fw-bold me-2">Status:</span>
@@ -79,12 +79,12 @@
                         @csrf
                         <div class="row">
                             <div class="mb-3 col-md-6 form-password-toggle">
-                                <label class="form-label" for="email">Email</label>
+                                <label class="form-label" for="npk">NPK</label>
                                 <div class="input-group input-group-merge">
-                                    <input class="form-control @error('email') is-invalid @enderror" type="email" id="email" name="email" placeholder="Enter your email or username" value="{{ auth()->user()->email }}" autofocus>
+                                    <input class="form-control @error('npk') is-invalid @enderror" type="npk" id="npk" name="npk" placeholder="Enter your npk or username" value="{{ auth()->user()->npk }}" autofocus>
                                     <span class="input-group-text cursor-pointer"></span>
 
-                                    @error('email')
+                                    @error('npk')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
