@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 //import db
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class requestController extends Controller
 {
@@ -87,16 +88,64 @@ class requestController extends Controller
 
     }
 
-    function export(Request $request)
+    function export($id,Request $request)
     {
-        //receive excell ( validate first )
-        $request->validate([
-            'file' => 'required|mimes:xls,xlsx'
-        ]);
 
-        $file = $request->file('file');
+        //get request data
+        $reqDetail = DB::table('request')
+        ->select('users.name as department','request.user as username','request.tanggal','request.id','request.id_jam as shift',DB::raw('concat(jadwal.awal,":",jadwal.akhir) as jam_pengambilan'))
+        ->leftJoin('users','request.user','=','users.username')
+        ->leftJoin('jadwal','request.id_jam','=','jadwal.id')
+        ->where('request.id',$id)
+        ->first();
+
+        //get request_item data
+
+        $reqItem = DB::table('request_item')
+        ->select('request_item.code_item','request_item.jumlah','request_item.id','request_item.admin_note','item_master.name_item','item_master.satuan_oca','item_master.area','item_master.lemari','item_master.no2','budget.quota')
+        ->leftJoin('item_master','request_item.code_item','=','item_master.code_item')
+        ->leftJoin('budget','request_item.code_item','=','budget.code_item')
+        ->where('budget.user',$reqDetail->username)
+        ->where('id_request',$id)
+        ->orderBy('request_item.code_item','ASC')->get();
+
+        $used = $this->getReqItem($reqDetail->username,$id);
+        foreach($reqItem as $key => $item){
+
+            $reqItem[$key]->remaining_quota = $item->quota - $used[$key]->qty;
+        }
+
+        //if reqItem notfound then return []
+        if(!$reqItem){
+            $reqItem = [];
+        }
+        //append
+        $reqDetail->items = $reqItem;
+        //load view print with domPdf with size A4
+        $pdf = PDF::loadView('print',compact('reqDetail'))->setPaper('a4', 'potrait');
+
+        //download pdf
+        return $pdf->stream('request-'.$id.'.pdf');
+
+;
+        }
+        function getReqItem($user,$reqid)
+        {
+
+            $req = DB::table('request_item')->selectRaw('request_item.code_item,sum(request_item.jumlah) as qty')
+            ->join('request','request_item.id_request','=','request.id')
+            ->where('request.user',$user)
+            ->where('request_item.id_request',$reqid)
+            //where tanggal bulan ini
+            ->whereMonth('request.tanggal',date('m'))
+            ->groupBy('request_item.code_item')
+            ->orderBy('request_item.code_item','ASC')
+            ->get()->toArray();
+
+            return $req;
 
 
-    }
+        }
+
 
 }

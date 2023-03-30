@@ -45,38 +45,41 @@ Route::get('/image/{url}', [publicController::class, 'getImage'])->where('url', 
 Route::middleware(['auth'])->group(function () {
 
 
-        Route::middleware(['user'])->group(function () {
-            Route::get('/', [userDashboardController::class, 'index'])->name('user.dashboard');
-            Route::get('/request', [userRequestController::class, 'index'])->name('user.request');
-            Route::post('/request', [userRequestController::class, 'store'])->name('user.requestStore');            Route::post('/request/ubah-item/{index}', [userRequestController::class, 'ubahCart'])->name('user.requestUbahJumlah');
-            Route::post('/request/add-item', [userRequestController::class, 'addItem'])->name('user.requestAddItem');
-            Route::get('/request/history', [userRequestHistoryController::class, 'index'])->name('user.requestHistory');
-            //request history detail
-            Route::get('/request/history/{id}', [userRequestHistoryController::class, 'detail'])->name('user.historyDetail');
-            Route::post('/request/history/{id}/delete', [userRequestHistoryController::class, 'cancel'])->name('user.requestCancel');
+    Route::middleware(['user'])->group(function () {
+        Route::get('/', [userDashboardController::class, 'index'])->name('user.dashboard');
+        Route::get('/request', [userRequestController::class, 'index'])->name('user.request');
+        Route::post('/request', [userRequestController::class, 'store'])->name('user.requestStore');
+        Route::post('/request/ubah-item/{index}', [userRequestController::class, 'ubahCart'])->name('user.requestUbahJumlah');
+        Route::post('/request/add-item', [userRequestController::class, 'addItem'])->name('user.requestAddItem');
+        Route::get('/request/history', [userRequestHistoryController::class, 'index'])->name('user.requestHistory');
+        //request history detail
+        Route::get('/request/history/{id}', [userRequestHistoryController::class, 'detail'])->name('user.historyDetail');
+        Route::post('/request/history/{id}/delete', [userRequestHistoryController::class, 'cancel'])->name('user.requestCancel');
+
+    });
+    Route::middleware(['admin'])->group(function () {
+        Route::prefix('admin')->group(function () {
+            Route::get('/request/{id}/export', [adminRequestController::class,'export'])->name('admin.requestExport');
+
+            Route::get('/', [adminDashboardController::class, 'index'])->name('admin.dashboard');
+
+            Route::get('/budget', [adminBudgetController::class, 'index'])->name('admin.budget');
+            Route::get('/request', [adminRequestController::class, 'history'])->name('admin.requestHistory');
+            Route::get('/request/{id}', [adminRequestController::class, 'detail'])->where('id', '[0-9]+')->name('admin.requestDetail');
+            Route::post('/request/{id}', [adminRequestController::class, 'update'])->where('id', '[0-9]+')->name('admin.requestUpdate');
+            //import item
+            Route::post('/import', [adminImportController::class, 'item'])->name('admin.importItems');
+            Route::post('/budget/import', [adminImportController::class, 'budget'])->name('admin.importBudget');
+
+            //user listroute
+            Route::get('/user', [adminUserController::class, 'list'])->name('admin.userList');
+            Route::post('/user/{username}', [adminUserController::class, 'delete'])->name('admin.userDelete');
 
         });
-        Route::middleware(['admin'])->group(function () {
-            Route::prefix('admin')->group(function () {
-                Route::get('/', [adminDashboardController::class, 'index'])->name('admin.dashboard');
 
-                Route::get('/budget', [adminBudgetController::class, 'index'])->name('admin.budget');
-                Route::get('/request', [adminRequestController::class, 'history'])->name('admin.requestHistory');
-                Route::get('/request/{id}', [adminRequestController::class, 'detail'])->where('id', '[0-9]+')->name('admin.requestDetail');
-                Route::post('/request/{id}', [adminRequestController::class, 'update'])->where('id','[0-9]+')->name('admin.requestUpdate');
-                //import item
-                Route::post('/import', [adminImportController::class, 'item'])->name('admin.importItems');
-                Route::post('/budget/import', [adminImportController::class, 'budget'])->name('admin.importBudget');
+    });
 
-                //user listroute
-                Route::get('/user', [adminUserController::class, 'list'])->name('admin.userList');
-                Route::post('/user/{username}', [adminUserController::class, 'delete'])->name('admin.userDelete');
-
-        });
-
-        });
-
-        Route::get('/logout', [LoginController::class, 'logout'])->name('logout.auth');
+    Route::get('/logout', [LoginController::class, 'logout'])->name('logout.auth');
 
 
 
