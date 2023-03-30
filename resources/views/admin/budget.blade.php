@@ -9,7 +9,7 @@
 <div class="row">
     <div class="col">
         <div class="row">
-            <h2><strong>Item Master</strong></h2>
+            <h2><strong>Budget</strong></h2>
         </div>
     </div>
 </div>

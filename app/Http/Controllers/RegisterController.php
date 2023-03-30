@@ -15,10 +15,10 @@ class RegisterController extends Controller
 
     public function store(Request $request)
     {
+        try{
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'username' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|min:6|string',
         ]);
 
@@ -28,5 +28,10 @@ class RegisterController extends Controller
         User::create($validatedData);
 
         return redirect('/login')->with('registered', 'Your account has been created!');
+        }
+        catch(\Exception $e)
+        {
+            return redirect()->back();
+        }
     }
 }

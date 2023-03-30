@@ -55,8 +55,6 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/request/history/{id}', [userRequestHistoryController::class, 'detail'])->name('user.historyDetail');
             Route::post('/request/history/{id}/delete', [userRequestHistoryController::class, 'cancel'])->name('user.requestCancel');
 
-
-
         });
         Route::middleware(['admin'])->group(function () {
             Route::prefix('admin')->group(function () {
@@ -73,6 +71,7 @@ Route::middleware(['auth'])->group(function () {
                 //user listroute
                 Route::get('/user', [adminUserController::class, 'list'])->name('admin.userList');
                 Route::post('/user/{username}', [adminUserController::class, 'delete'])->name('admin.userDelete');
+
         });
 
         });

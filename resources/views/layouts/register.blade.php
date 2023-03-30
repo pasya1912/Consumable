@@ -62,8 +62,8 @@
                 <form id="formAuthentication" class="mb-3" action="{{ route('register.store') }}" method="POST">
                     @csrf
                     <div class="mb-3">
-                        <label for="username" class="form-label">Nama</label>
-                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Enter your name" autofocus>
+                        <label for="username" class="form-label">Department</label>
+                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Enter your Department" autofocus>
 
                         @error('name')
                             <div class="invalid-feedback">
@@ -83,17 +83,7 @@
                         @enderror
 
                     </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Enter your email">
 
-                        @error('email')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-
-                    </div>
                     <div class="mb-3 form-password-toggle mb-4">
                         <label class="form-label" for="password">Password</label>
                         <div class="input-group input-group-merge">

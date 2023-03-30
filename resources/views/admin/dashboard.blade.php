@@ -20,7 +20,7 @@
                 <div class="col-md-10"></div>
                 <div class="row">
                 <div class="col">
-                    <a href="{{asset('template/template_budget.xlsx')}}" class="btn btn-success btn-lg">Download Template</a>
+                    <a href="{{asset('template/template_item.xlsx')}}" class="btn btn-success btn-lg">Download Template</a>
                     </div>
 
                 <div class="col text-end">
