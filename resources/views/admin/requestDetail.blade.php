@@ -1,86 +1,183 @@
-<!DOCTYPE html>
-<html>
-<style>
-table, th, td {
-  border:1px solid black;
-}
-</style>
-<body>
+@extends('layouts.master.main')
 
-<h2 style="text-align: center;">Request Detail</h2>
-<h3 >Status: {{$reqDetail->status}}</h3>
-//form ubah status rejected approved canceled
-<form action="{{route('admin.requestUpdateStatus',['id'=>$reqDetail->id])}}" method="POST">
-    @csrf
-    <select name="status">
-        <option value="rejected">Rejected</option>
-        <option value="approved">Approved</option>
-        <option value="canceled">Canceled</option>
-    </select>
-    <input type="submit" value="Update">
-</form>
-<table style="width:100%" id='table'>
-  <tr>
-    <th>Code</th>
-    <th>name</th>
-    <th>Jumlah</th>
-    <th>Note</th>
-  </tr>
-@foreach($reqDetail->items as $key =>$item)
-  <tr>
-    <td>{{$item->code_item}}</td>
-    <td>{{$item->name_item}}</td>
-    <td>
-        {{$item->jumlah}}
-    </td>
-    <td>
-        <textarea type="text" id="note{{$item->id}}" onchange="updateNote({{$item->id}})">{{$item->admin_note}}</textarea>
-    </td>
-
-  </tr>
-@endforeach
-</table>
-
-<p>To understand the example better, we have added borders to the table.</p>
-
-<hr/>
-
-
-    Nama Pengambil :<input type="text" name="nama_pj" placeholder="{{$reqDetail->nama}}" disabled/>
-    <br>
-    Jam Pengambilan :<input type="text" name="jadwal_pengambilan" placeholder="{{$reqDetail->jam_pengambilan}}" disabled/>
-    <br>
-    Tanggal Pengambilan :<input type="text" name="tanggal" placeholder="{{$reqDetail->tanggal}}" disabled/>
-    <br>
-
-
-
-
-    @if ($message = Session::get('message'))
-    <script>alert('{{ $message }}')</script>
-@endif
-<script>
-function updateNote(requestItemId)
-{
-    var note = document.getElementById('note'+requestItemId).value;
-    var url = "{{route('admin.requestUpdateNote',['id'=>':id'])}}";
-    url = url.replace(':id',requestItemId);
-    console.log(url);
-
-    //do postrequest to update note vanila
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            alert(this.responseText);
+@section('content')
+    <style>
+        th,
+        td {
+            border-bottom: 1px solid #ddd;
         }
-    };
-    xhttp.open("POST", url, true);
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("_token={{ csrf_token() }}"+"&note="+note);
 
-}
-</script>
-</body>
+        .export {
+            display: flex;
+            position: relative;
 
-</html>
+        }
 
+        .export>a {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+        }
+    </style>
+    <div class="row">
+        <div class="col">
+            <div class="row">
+                <h2><strong>Request Detail</strong></h2>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card" style="padding: 2rem;">
+                <div class="row">
+                    <p>
+                        Status:
+                        @if ($reqDetail->status == 'approved')
+                        <span class="badge bg-success text-dark ">{{ $reqDetail->status }}</span>
+                    @elseif($reqDetail->status == 'rejected')
+                        <span class="badge bg-danger text-dark ">{{ $reqDetail->status }}</span>
+                    @elseif($reqDetail->status == 'revised')
+                        <span class="badge bg-dark text-light ">{{ $reqDetail->status }}</span>
+                    @elseif($reqDetail->status == 'canceled')
+                        <span class="badge bg-warning text-dark ">{{ $reqDetail->status }}</span>
+                    @elseif($reqDetail->status == 'wait')
+                        <span class="badge bg-light text-dark ">{{ $reqDetail->status }}</span>
+                    @endif
+                    </p>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <form action="{{ route('admin.requestUpdate', ['id' => $reqDetail->id]) }}" method="POST"
+                            class="">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="defaultSelect" class="form-label">Update Status</label>
+                                <select id="defaultSelect" class="form-select" name="status">
+                                    <option>Pilih salah satu</option>
+                                    <option value="rejected">Rejected</option>
+                                    <option value="approved">Approved</option>
+                                    <option value="revised">Revised</option>
+                                    <option value="canceled">Canceled</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-warning">Update</button>
+                        </form>
+                    </div>
+                    <div class="col-md-6 export mr-2">
+                        <a href="{{ route('admin.requestExport', ['id' => $reqDetail->id]) }}"
+                            class="btn btn-warning ">Export</a>
+                    </div>
+                </div>
+                <br>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center">Code</th>
+                                <th style="text-align: center">Name</th>
+                                <th style="text-align: center">Jumlah</th>
+                                <th style="text-align: center">Note</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($reqDetail->items as $key => $item)
+                                <tr>
+                                    <td style="text-align: center">{{ $item->code_item }}</td>
+                                    <td style="text-align: center">
+                                        {{ $item->name_item }}
+                                    </td>
+                                    <td style="text-align: center">
+
+                                        <input type="number" oninput="updateJumlah({{ $item->id }})"
+                                        class="form-control" id="jumlah-{{ $item->id }}"
+                                        value="{{ $item->jumlah }}" aria-describedby="" min="1"     name="jumlah" />
+                                    </td>
+                                    <td style="text-align: center">
+
+                                            <input type="text" oninput="updateNote({{ $item->id }})"
+                                                class="form-control" id="note-{{ $item->id }}"
+                                                value="{{ $item->admin_note }}" aria-describedby="" name="admin_note" />
+
+
+                                    </td>
+
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+
+                <br>
+                <div class="mb-3 w-50">
+                    <label for="defaultFormControlInput" class="form-label">Nama Pengambil</label>
+                    <input type="text" class="form-control" id="defaultFormControlInput"
+                        placeholder="{{ $reqDetail->nama }}" aria-describedby="defaultFormControlHelp" disabled />
+                </div>
+                <div class="mb-3 w-50">
+                    <label for="defaultFormControlInput" class="form-label">Jam Pengambilan</label>
+                    <input type="text" class="form-control" id="defaultFormControlInput"
+                        placeholder="{{ $reqDetail->jam_pengambilan }}" aria-describedby="defaultFormControlHelp"
+                        disabled />
+                </div>
+                <div class="mb-3 w-50">
+                    <label for="defaultFormControlInput" class="form-label">Tanggal Pengambilan</label>
+                    <input type="text" class="form-control" id="defaultFormControlInput"
+                        placeholder="{{ $reqDetail->tanggal }}" aria-describedby="defaultFormControlHelp" disabled />
+                </div>
+
+            </div>
+        </div>
+    </div>
+@endsection
+@section('script')
+    <script>
+        function updateNote(id) {
+            var note = $('#note-' + id).val();
+            var data = {
+                        "_token": "{{ csrf_token() }}",
+                        "id": id,
+                        "data": {
+                            'admin_note': note
+                        }
+                    };
+            $.ajax({
+                url: "{{ url()->current() }}",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(data),
+                success: function(response) {
+                    let res = JSON.parse(response);
+                },
+                error: function(xhr) {
+                    console.log(xhr);
+                }
+            });
+
+
+        }
+        function updateJumlah(id) {
+            var note = $('#jumlah-' + id).val();
+            var data = {
+                        "_token": "{{ csrf_token() }}",
+                        "id": id,
+                        "data": {
+                            'jumlah': note
+                        }
+                    };
+            $.ajax({
+                url: "{{ url()->current() }}",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(data),
+                success: function(response) {
+                    let res = JSON.parse(response);
+                },
+                error: function(xhr) {
+                    console.log(xhr);
+                }
+            });
+
+
+        }
+    </script>
+@endsection

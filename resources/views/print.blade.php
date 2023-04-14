@@ -58,7 +58,7 @@
             position: relative;
             margin-top: 1rem;
             width: 100%;
-            height: 27rem;
+            height: 23rem;
 
             overflow: auto;
         }
@@ -162,7 +162,6 @@
                         <th rowspan="2">Satuan</th>
                         <th rowspan="2">Sisa Budget</th>
                         <th colspan="3">Location</th>
-                        <th rowspan="2">Note</th>
                     </tr>
                     <tr>
                         <th style="width:50%">Area</th>
@@ -180,7 +179,6 @@
                         <td>{{$item->area}}</td>
                         <td>{{$item->lemari}}</td>
                         <td>{{$item->no2}}</td>
-                        <td>{{$item->admin_note}}</td>
                     </tr>
                     @endforeach
                 </tbody>

@@ -15,12 +15,12 @@ class ItemsImport implements ToCollection, WithHeadingRow, WithValidation, WithU
 {
     public function collection(Collection $rows)
     {
+
+        Item::query()->delete();
         foreach ($rows as $row) {
-            Item::updateOrCreate(
+            Item::create(
             [
-                'code_item' => $row['code_item']
-            ],
-            [
+                'code_item' => $row['code_item'],
                 'name_item' => $row['nama_item'],
                 'area' => $row['area'],
                 'lemari' => $row['lemari'],
@@ -32,6 +32,7 @@ class ItemsImport implements ToCollection, WithHeadingRow, WithValidation, WithU
                 'kate' => $row['kate']
             ]);
         }
+
     }
     public function uniqueBy()
     {

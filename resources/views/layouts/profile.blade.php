@@ -1,10 +1,10 @@
 @extends('layouts.master.main')
 
 @section('content')
-<!-- Content -->    
+<!-- Content -->
 <div class="row">
     <h2><strong>Profile</strong></h2>
-</div>   
+</div>
 <div class="row">
     <!-- User Sidebar -->
     <div class="col-xl-4 col-lg-5 col-md-5 order-1 order-md-0">
@@ -48,7 +48,7 @@
 
         <!-- Content wrapper -->
         <div class="content-wrapper">
-            
+
             <!-- Change Password -->
             <div class="card mb-4">
                 <h5 class="card-header">Change Password</h5>
@@ -74,24 +74,24 @@
                     @endif
                     {{-- end of alert --}}
 
-                    <form id="formAccountSettings" method="POST" action="{{ route('profile.update') }}" >
+                    <form id="formAccountSettings" method="POST" action="#" >
                         @method('POST')
-                        @csrf    
+                        @csrf
                         <div class="row">
                             <div class="mb-3 col-md-6 form-password-toggle">
-                                <label class="form-label" for="email">Email</label>
+                                <label class="form-label" for="username">u</label>
                                 <div class="input-group input-group-merge">
-                                    <input class="form-control @error('email') is-invalid @enderror" type="email" id="email" name="email" placeholder="Enter your email or username" value="{{ auth()->user()->email }}" autofocus>
+                                    <input class="form-control @error('npk') is-invalid @enderror" type="npk" id="npk" name="npk" placeholder="Enter your npk or username" value="{{ auth()->user()->npk }}" autofocus>
                                     <span class="input-group-text cursor-pointer"></span>
 
-                                    @error('email')
+                                    @error('npk')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
                                     @enderror
                                 </div>
                             </div>
-                            
+
                             <div class="mb-3 col-md-6 form-password-toggle">
                                 <label class="form-label" for="confirmPassword">Current Password</label>
                                 <div class="input-group input-group-merge">
@@ -119,9 +119,9 @@
                                                 </div>
                                             @enderror
                                         </div>
-                                        
+
                                     </div>
-                                    
+
                                     <div class="mb-3 col-md-6 form-password-toggle">
                                         <label class="form-label" for="confirmPassword">Confirm New Password</label>
                                         <div class="input-group input-group-merge">

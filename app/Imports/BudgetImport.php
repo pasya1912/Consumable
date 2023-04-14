@@ -16,6 +16,7 @@ class BudgetImport implements ToCollection, WithHeadingRow, WithValidation, With
 {
     public function collection(Collection $rows)
     {
+
         foreach ($rows as $row) {
             try{
                 Budget::create(

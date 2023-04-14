@@ -15,7 +15,6 @@ class userController extends Controller
         $userList = User::where(function ($subQuery) use ($find){
             $subQuery = $subQuery->orWhere('username', 'LIKE', "%".$find."%");
             $subQuery = $subQuery->orWhere('name', 'LIKE', "%".$find."%");
-            $subQuery = $subQuery->orWhere('email', 'LIKE', "%".$find."%");
         })->where('role',1)->orderBy($sort,'asc')->paginate(10)->appends(request()->query())->toArray();
     return view('admin.userList',compact('userList'));
     }

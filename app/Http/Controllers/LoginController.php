@@ -4,12 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+//use db facade
+use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
     public function index()
     {
-        return view('layouts.login');
+        $users = DB::table('users')->select('username')->get()->toArray();
+        //users username to single array
+        $users = array_map(function($user){
+            return $user->username;
+        }, $users);
+        return view('layouts.login',[
+            'users' => $users
+        ]);
     }
 
     public function authenticate(Request $request)
@@ -36,7 +45,7 @@ class LoginController extends Controller
             }
         }
 
-        return redirect()->back()->with('error', 'Email or password do not match our records!');
+        return redirect()->back()->with('error', 'Username or password do not match our records!');
     }
 
     public function logout(Request $request)
