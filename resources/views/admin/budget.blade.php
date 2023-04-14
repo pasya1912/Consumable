@@ -143,7 +143,6 @@
 
 
                 <hr />
-
             @endsection
             @section('script')
                 <script>
@@ -153,4 +152,4 @@
                     //set search value to input
                     document.getElementById("inputSearch").value = search;
                 </script>
-                @section
+            @endsection
