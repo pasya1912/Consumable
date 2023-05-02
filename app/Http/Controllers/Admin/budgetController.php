@@ -21,19 +21,20 @@ class budgetController extends Controller
         $listCode = [];
         foreach ($budgets['data'] as $key => $value) {
             $budgets['data'][$key]['remaining_quota'] = $value['quota'];
-            $listUser[] = $value['user'];
-            $listCode[] = $value['code_item'];
         }
         //get total request item
-        $totem=$this->getTotalRequestItem($listUser,$listCode);
+
         //append to budgets array
         foreach ($budgets['data'] as $key => $value) {
+            $totem = $this->getTotalRequestItem($value['user'],$value['code_item']);
+            $budgets['data'][$key]['remaining_quota'] = $value['quota'];
             foreach ($totem as $key2 => $value2) {
                 if($value['code_item'] == $value2->code_item){
                     $budgets['data'][$key]['remaining_quota'] = $value['quota'] - $value2->qty;
                 }
             }
         }
+
         //get remaining quota by sum request_item.jumlah where request_item.code_item = budget.code_item for
         return view('admin.budget',compact('budgets'));
     }
@@ -60,14 +61,14 @@ class budgetController extends Controller
         //get the sql quer
         return $budgets;
     }
-    function getTotalRequestItem($listUser,$listCode)
+    function getTotalRequestItem($user,$code)
     {
 
                 //count request_item.jumlah where request_item.code_item = budget.code_item and request_item.user = budget.user
         $req = DB::table('request_item')->selectRaw('request_item.code_item,sum(request_item.jumlah) as qty')
         ->join('request','request_item.id_request','=','request.id')
-        ->whereIn('request.user',$listUser)
-        ->where('request_item.code_item',$listCode)
+        ->where('request.user',$user)
+        ->where('request_item.code_item',$code)
         //where tanggal bulan ini
         ->whereMonth('request.tanggal',date('m'))
             ->whereNotIn('request.status',['rejected','canceled'])
