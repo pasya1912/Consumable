@@ -255,9 +255,13 @@ class requestController extends Controller
             'status' => 'wait',
             'id_jam' => $jadwal,
             'user' => $request->user()->username,
-            'tanggal' => date('Y-m-d')
+            'tanggal' => date('Y-m-d'),
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+
 
         ]);
+
         DB::commit();
         }catch(\Exception $e){
             DB::rollback();

@@ -13,4 +13,6 @@ class Requests extends Model
     //no timestamps
     public $timestamps = false;
     //casts code_item = array
+    //hide id
+    protected $hidden = ['id'];
 }

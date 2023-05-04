@@ -54,10 +54,11 @@
                                 <label for="defaultSelect" class="form-label">Update Status</label>
                                 <select id="defaultSelect" class="form-select" name="status">
                                     <option>Pilih salah satu</option>
-                                    <option value="rejected">Rejected</option>
-                                    <option value="approved">Approved</option>
-                                    <option value="revised">Revised</option>
-                                    <option value="canceled">Canceled</option>
+
+                                    <option value="rejected" @if($reqDetail->status =='rejected') disabled @endif>Rejected</option>
+                                    <option value="approved" @if($reqDetail->status =='approved') disabled @endif>Approved</option>
+                                    <option value="revised" @if($reqDetail->status =='revised') disabled @endif>Revised</option>
+                                    <option value="canceled" @if($reqDetail->status =='canceled') disabled @endif>Canceled</option>
                                 </select>
                             </div>
                             <button type="submit" class="btn btn-warning">Update</button>

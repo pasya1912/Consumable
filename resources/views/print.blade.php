@@ -123,7 +123,7 @@
                     <tr >
                         <th>User/Department</th>
                         <th>:</th>
-                        <td   style="padding-right: 10rem;">{{$reqDetail->department}}</td>
+                        <td   style="padding-right: 10rem;">{{$reqDetail->user}}</td>
                     </tr>
                     <tr>
                         <th>Penanggung Jawab</th>
@@ -169,7 +169,7 @@
                         <th>No</th>
                 </thead>
                 <tbody>
-                    @foreach($reqDetail->items as $key =>$item)
+                    @foreach($reqDetail->data as $key =>$item)
                     <tr>
                         <td>{{$key+1}}</td>
                         <td>{{$item->name_item}}</td>

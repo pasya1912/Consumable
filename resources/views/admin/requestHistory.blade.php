@@ -1,5 +1,47 @@
 @extends('layouts.master.main')
+@section('style')
+    <style>
+        th,
+        td {
+            border-bottom: 1px solid #ddd;
+        }
 
+        .bg-success-light {
+            background-color: rgba(40, 167, 69, 0.5) !important;
+            /* Success color with opacity 0.5 */
+        }
+
+        .bg-warning-light {
+            background-color: rgba(255, 193, 7, 0.5) !important;
+            /* Success color with opacity 0.5 */
+        }
+
+        .bg-danger-light {
+            background-color: rgba(220, 53, 69, 0.5) !important;
+            /* Success color with opacity 0.5 */
+        }
+
+        .bg-info-light {
+            background-color: rgba(23, 162, 184, 0.5) !important;
+            /* Success color with opacity 0.5 */
+        }
+
+        .bg-primary-light {
+            background-color: rgba(0, 123, 255, 0.5) !important;
+            /* Success color with opacity 0.5 */
+        }
+
+        .bg-secondary-light {
+            background-color: rgba(108, 117, 125, 0.5) !important;
+            /* Success color with opacity 0.5 */
+        }
+
+        .bg-dark-light {
+            background-color: rgba(52, 58, 64, 0.5) !important;
+            /* Success color with opacity 0.5 */
+        }
+    </style>
+@endsection
 @section('content')
     <style>
         th,
@@ -17,24 +59,26 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card" style="padding: 2rem;">
-                <div class="row">
-                    <div class="col-md-10"></div>
-                </div>
-
                 <!-- Search -->
-                <div class="col-md-4">
-                    <form class="navbar-nav-left d-flex" action="{{ route('admin.requestHistory') }}" method="GET">
-                        <div class="input-group">
-                            <span class="input-group-text"><i class="tf-icons bx bx-search"></i></span>
-                            <input id="inputSearch" type="text" name="search" class="form-control"
-                                placeholder="Search..." value="" />
-                        </div>
-                    </form>
+                <div class="row">
+                    <div class="col-md-4">
+                        <form class="navbar-nav-left d-flex" action="{{ route('admin.requestHistory') }}" method="GET">
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="tf-icons bx bx-search"></i></span>
+                                <input id="inputSearch" type="text" name="search" class="form-control"
+                                    placeholder="Search..." value="" />
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col text-end">
+                        <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exportListModal"><i
+                                class="bx bx-export me-sm-2"></i> <span class="d-none d-sm-inline-block">Export</span></a>
+                    </div>
                 </div>
                 <!-- /Search -->
                 <br>
                 <!-- Dropdown -->
-                <div class="btn-group me-3">
+                <div class="btn-group ">
                     <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Sort By
@@ -45,45 +89,79 @@
                         </li>
                     </ul>
                 </div>
+                <!-- Modal -->
+                <div class="modal fade" id="exportListModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <form action="{{ route('admin.requestListExport') }}" method="POST">
+                                @csrf
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel1">Export List</h5>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col mb-3">
+                                            <div class="form-group">
+                                                <label for="from-date">From</label>
+                                                <input type="text" class="form-control datetimepicker-input"
+                                                    id="from-date" name="from" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="to-date">To</label>
+                                                <input type="text" class="form-control" name="to" id="to-date" />
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-label-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Export</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
                 <br>
                 <table style="width:100%" id='table' cellpadding=10 cellspasing=15>
-                    <t>
-                        <th style="width:10%">id</th>
-                        <th>User/Departement</th>
-                        <th style="width:20%">Pengambil</th>
-                        <th style="width:20%">Tanggal</th>
-                        <th style="width:20%">Jadwal Pengambilan</th>
-                        <th style="width:10%">Status</th>
-                        <th style="width:20%">Aksi</th>
+                    <tr>
+                        <th style="width:10%" class="w-10 text text-center">id</th>
+                        <th class="text text-center">User/Departement</th>
+                        <th style="width:20%" class="w-20 text text-center">Pengambil</th>
+                        <th style="width:20%" class="w-20 text text-center">Tanggal</th>
+                        <th style="width:20%" class="w-20 text text-center">Jadwal Pengambilan</th>
+                        <th style="width:10%" class="w-10 text text-center">Status</th>
+                        <th style="width:20%" class="w-20 text text-center">Aksi</th>
+
+                    </tr>
+                    @foreach ($reqList['data'] as $key => $req)
+                        <tr>
+                            <td style="text-align: center">{{ $req->id }}</td>
+                            <td style="text-align: center">{{ $req->user }}</td>
+                            <td style="text-align: center">{{ $req->nama }}</td>
+                            <td style="text-align: center">{{ $req->tanggal }}</td>
+                            <td style="text-align: center">{{ $req->jam_pengambilan }}</td>
+                            <td style="text-align: center">
+                                @if ($req->status == 'approved')
+                                    <span class="badge bg-success-light text-dark w-100 me-1">{{ $req->status }}</span>
+                                @elseif($req->status == 'rejected')
+                                    <span class="badge bg-danger-light text-dark w-100 me-1">{{ $req->status }}</span>
+                                @elseif($req->status == 'revised')
+                                    <span class="badge bg-dark-light text-dark w-100 me-1">{{ $req->status }}</span>
+                                @elseif($req->status == 'canceled')
+                                    <span class="badge bg-warning-light text-dark w-100 me-1">{{ $req->status }}</span>
+                                @elseif($req->status == 'wait')
+                                    <span class="badge bg-light text-dark w-100 me-1">{{ $req->status }}</span>
+                                @endif
+                            </td>
+                            <td style="text-align: center">
+                                <button class="btn rounded-pill me-2 btn-label-info"
+                                    onclick="window.location.href='{{ route('admin.requestDetail', ['id' => $req->id]) }}'">Detail</button>
+                            </td>
 
                         </tr>
-                        @foreach ($reqList['data'] as $key => $req)
-                            <tr>
-                                <td style="text-align: center">{{ $req->id }}</td>
-                                <td style="text-align: center">{{ $req->user }}</td>
-                                <td style="text-align: center">{{ $req->nama }}</td>
-                                <td style="text-align: center">{{ $req->tanggal }}</td>
-                                <td style="text-align: center">{{ $req->jam_pengambilan }}</td>
-                                <td style="text-align: center">
-                                    @if ($req->status == 'approved')
-                                        <span class="badge bg-success text-dark w-100 me-1">{{ $req->status }}</span>
-                                    @elseif($req->status == 'rejected')
-                                        <span class="badge bg-danger text-dark w-100 me-1">{{ $req->status }}</span>
-                                    @elseif($req->status == 'revised')
-                                        <span class="badge bg-dark text-light w-100 me-1">{{ $req->status }}</span>
-                                    @elseif($req->status == 'canceled')
-                                        <span class="badge bg-warning text-dark w-100 me-1">{{ $req->status }}</span>
-                                    @elseif($req->status == 'wait')
-                                        <span class="badge bg-light text-dark w-100 me-1">{{ $req->status }}</span>
-                                    @endif
-                                </td>
-                                <td style="text-align: center">
-                                    <button class="btn rounded-pill me-2 btn-label-info"
-                                        onclick="window.location.href='{{ route('admin.requestDetail', ['id' => $req->id]) }}'">Detail</button>
-                                </td>
-
-                            </tr>
-                        @endforeach
+                    @endforeach
                 </table>
                 <br>
                 <div class="pagination">
@@ -98,7 +176,8 @@
                     @endforeach
                 </div>
                 <hr />
-
+            @endsection
+            @section('script')
                 @if ($message = Session::get('message'))
                     <script>
                         alert('{{ $message }}')
@@ -110,5 +189,54 @@
                     var search = url.searchParams.get("search");
                     //set search value to input
                     document.getElementById("inputSearch").value = search;
+                    // Initialize the "from" date picker
+                    var $datepicker_start_input = jQuery("#from-date").pickadate({
+                            format: 'yyyy-mm-dd',
+
+                            hiddenSuffix: 'date_start_submit'
+                        }),
+                        $datepicker_end_input = jQuery("#to-date").pickadate({
+                            format: 'yyyy-mm-dd',
+                            hiddenSuffix: 'date_end_submit',
+                        }),
+                        datepicker_start = $datepicker_start_input.pickadate('picker'),
+                        datepicker_end = $datepicker_end_input.pickadate('picker');
+
+                    datepicker_start.on('close', function() {
+
+                        // get the selected start date and the end date
+                        var new_min = datepicker_start.get('select');
+
+                        // set the end date's min date to the currently selected start date
+                        datepicker_end.set('min', new_min);
+
+
+                    });
+                    datepicker_end.on('close',function(){
+                        var new_max = datepicker_end.get('select');
+                        datepicker_start.set('max',new_max);
+                    });
+                </script>
+                <script>
+                    $(document).ready(function() {
+                        $('#table').DataTable({
+                            "paging": false,
+                            "info": false,
+                            "searching": false,
+                            "lengthChange": false,
+                            "ordering": false,
+                            "bInfo": false,
+                            "bPaginate": false,
+                            "bLengthChange": false,
+                            "bFilter": false,
+                            "bAutoWidth": false,
+                            "responsive": true,
+                            "columnDefs": [{
+                                "targets": [0, 1, 2, 3, 4, 5, 6],
+                                "className": "text text-center"
+                            }]
+                        });
+
+                    });
                 </script>
             @endsection

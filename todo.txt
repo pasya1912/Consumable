@@ -1,11 +1,11 @@
 1. Show password login & register page error [DONE]
 2. Nambah sheet error template
-3. Ngebug sisa quota ga sesuai
+3. Ngebug sisa quota ga sesuai [done]
 4. Cart tambahin item apa aja yg ditambah
-5. Alert diubah 
-6. Realtime auto update / refesh
-7. Pake datatable / sort nya langsung ditable
-8. Search tambahin nama like nya	
+5. Alert diubah done
+6. Realtime auto update / refesh [done]
+7. Pake datatable / sort nya langsung ditable [todo]
+8. Search tambahin nama like nya
 
 
 
@@ -13,11 +13,11 @@
 
 1. Sekali import ilang semua timpa baru done [DONE]
 2. Option list login [DONE]
-3. admin bisa add import user
+3. admin bisa add import user[done]
 4. Buat table baru saat import agar datatidak berubah ( exportfix )
 5. Import user & edit user password
 6. Export tambah logo ppic dan aisin
-7. Export request list
+7. Export request list [todo]
 
 
 

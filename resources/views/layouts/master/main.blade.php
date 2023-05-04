@@ -33,36 +33,38 @@
   <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href={{ asset("vendor/fonts/boxiconsc4a7.css?id=87122b3a3900320673311cebdeb618da") }} />
-  <link rel="stylesheet" href={{ asset("vendor/fonts/fontawesome5cae.css?id=89157e39c524ff7f679d3aebf872b7b9") }} />
-  <link rel="stylesheet" href={{ asset("vendor/fonts/flag-icons5883.css?id=403b97c176f3cdf56a3cbf09107ee240") }} />
+  <link rel="stylesheet" href='{{ asset("vendor/fonts/boxiconsc4a7.css?id=87122b3a3900320673311cebdeb618da") }}' />
+  <link rel="stylesheet" href='{{ asset("vendor/fonts/fontawesome5cae.css?id=89157e39c524ff7f679d3aebf872b7b9") }}' />
+  <link rel="stylesheet" href='{{ asset("vendor/fonts/flag-icons5883.css?id=403b97c176f3cdf56a3cbf09107ee240") }}' />
 
   <!-- Core CSS -->
-  <link rel="stylesheet" href={{ asset("vendor/css/rtl/coref43c.css?id=f1cefeba0c68d327230d2f6538f276fa") }} class="template-customizer-core-css" />
-  <link rel="stylesheet" href={{ asset("vendor/css/rtl/theme-default56b8.css?id=cc3d4ef91c8c858754d8ed20c78a3a3c") }} class="template-customizer-theme-css" />
-  <link rel="stylesheet" href={{ asset("css/democb2e.css?id=24b55ca26d6f2bafc5a21ff5a4bcdfb3") }} />
+  <link rel="stylesheet" href='{{ asset("vendor/css/rtl/coref43c.css?id=f1cefeba0c68d327230d2f6538f276fa") }}' class="template-customizer-core-css" />
+  <link rel="stylesheet" href='{{ asset("vendor/css/rtl/theme-default56b8.css?id=cc3d4ef91c8c858754d8ed20c78a3a3c") }}' class="template-customizer-theme-css" />
+  <link rel="stylesheet" href='{{ asset("css/democb2e.css?id=24b55ca26d6f2bafc5a21ff5a4bcdfb3") }}' />
 
 
-  <link rel="stylesheet" href={{ asset("vendor/libs/perfect-scrollbar/perfect-scrollbarb440.css?id=d9fa6469688548dca3b7e6bd32cb0dc6") }} />
-  <link rel="stylesheet" href={{ asset("vendor/libs/typeahead-js/typeahead3881.css?id=8fc311b79b2aeabf94b343b6337656cf") }} />
+  <link rel="stylesheet" href='{{ asset("vendor/libs/perfect-scrollbar/perfect-scrollbarb440.css?id=d9fa6469688548dca3b7e6bd32cb0dc6") }}' />
+  <link rel="stylesheet" href='{{ asset("vendor/libs/typeahead-js/typeahead3881.css?id=8fc311b79b2aeabf94b343b6337656cf") }}' />
 
   <!-- Vendor Styles -->
-  <link rel="stylesheet" href={{ asset("vendor/libs/apex-charts/apex-charts.css") }}>
+  <link rel="stylesheet" href='{{ asset("vendor/libs/apex-charts/apex-charts.css") }}'>
   <!-- Page Styles -->
   <script src={{ asset("vendor/js/helpers.js") }}></script>
   <script src={{ asset("vendor/js/template-customizer.js") }}></script>
   <!-- Vendor Styles -->
-  <link rel="stylesheet" href={{ asset("vendor/libs/datatables-bs5/datatables.bootstrap5.css") }}/>
-  <link rel="stylesheet" href={{ asset("vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css") }}/>
-  <link rel="stylesheet" href={{ asset("vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css") }}/>
-  <link rel="stylesheet" href={{ asset("vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css") }}/>
-  <link rel="stylesheet" href={{ asset("vendor/libs/flatpickr/flatpickr.css") }} />
-  <link rel="stylesheet" href={{ asset("vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css") }}/>
-  <link rel="stylesheet" href={{ asset("vendor/libs/toastr/toastr.css") }} />
-  <link rel="stylesheet" href={{ asset("vendor/libs/animate-css/animate.css") }} />
+  <link rel="stylesheet" href='{{ asset("vendor/libs/datatables-bs5/datatables.bootstrap5.css") }}'/>
+  <link rel="stylesheet" href='{{ asset("vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css") }}'/>
+  <link rel="stylesheet" href='{{ asset("vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css") }}'/>
+  <link rel="stylesheet" href='{{ asset("vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css") }}'/>
+  <link rel="stylesheet" href='{{ asset("vendor/libs/flatpickr/flatpickr.css") }}' />
+  <link rel="stylesheet" href='{{ asset("vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css") }}'/>
+  <link rel="stylesheet" href='{{ asset("vendor/libs/toastr/toastr.css") }}' />
+  <link rel="stylesheet" href='{{ asset("vendor/libs/animate-css/animate.css") }}' />
 
   <script src={{ asset("js/config.js") }}></script>
-  <!-- beautify ignore:end -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/themes/default.css" integrity="sha512-iJB+UwjJEedAcKCnhuP0oujYC5VGDvp16/mA5ybt248doWzqL9cZ1YqCoSlvAQjVimKfpWtx0OXguo9goulxHw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/themes/default.date.css" integrity="sha512-i4RbX+TB7wxKhYjne9k+jSnNTtd0vTXhp213K/234DfzmMYXhdA71D+hRjto1QEFqZbaPqSL3gwyST5fGYMX9w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async="async" src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
@@ -77,6 +79,7 @@
 
   </script>
 <style>
+
     .pagination {
   display: inline-block;
 }
@@ -96,6 +99,7 @@
 .pagination a:hover:not(.active) {background-color: #ddd;}
 
 </style>
+@yield('style')
 </head>
 
 <body>
@@ -177,9 +181,14 @@
 <!-- END: Page JS-->
 
 <script src={{ asset("vendor/libs/toastr/toastr.js") }}></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/picker.js" integrity="sha512-f6WsaafWFia+glfiIH85UyfdCVDyJScsVDM70lJhKr2lt2cYyptkiqtVxcxPnh/CduM/FpfL0eC4liTwZMb58g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/compressed/picker.date.js" integrity="sha512-mL1dqulM7Q2Ks+ROKc0+8zFMcIM07nTK80O6uZdMEaVzN2Jy2tioSiraeOmkTPMW79klXdEKIfN1zDgljKKNwA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-@if ($message = Session::get('message'))
-    <script>alert('{{ $message }}')</script>
+//if there is validation error
+@if ($message = Session::get('message') || $errors->any())
+    <script>
+    toastr.info('{{ $message }}')
+    </script>
 @endif
 @yield('script')
 

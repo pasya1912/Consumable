@@ -61,7 +61,7 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['admin'])->group(function () {
         Route::prefix('admin')->group(function () {
             Route::get('/request/{id}/export', [adminRequestController::class,'export'])->name('admin.requestExport');
-
+            Route::post('/request/export', [adminRequestController::class,'exportList'])->name('admin.requestListExport');
             Route::get('/', [adminDashboardController::class, 'index'])->name('admin.dashboard');
 
             Route::get('/budget', [adminBudgetController::class, 'index'])->name('admin.budget');

@@ -25,7 +25,7 @@ class UserImport implements ToCollection, WithHeadingRow, WithValidation, WithUp
                     'username' => $row['username'],
                 ],
                 [
-                    'name' => $row['nama'],
+                    'nama' => $row['nama'],
                     'password' => Hash::make($row['password']),
                 ]
             );

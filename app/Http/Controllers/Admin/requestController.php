@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 
-
-
+use App\Exports\requestListExport;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Jobs\exportRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 //import db
@@ -86,7 +87,7 @@ class requestController extends Controller
             return redirect()->route('admin.requestDetail', ['id' => $id])->with('message', 'Request gagal diupdate');
         }
     }
-    public function update(Request $request)
+    public function update($id, Request $request)
     {
         //CHECK IF CONTENT TYPE JSON
         if ($request->header('Content-Type') == 'application/json') {
@@ -97,7 +98,7 @@ class requestController extends Controller
             }
 
 
-            $update = DB::table('request_item')->where('id', $request->id)->update($arr);
+            $update = DB::table('request_item')->where('id', $id)->update($arr);
             if ($update) {
                 return response()->json(['status' => true, 'message' => 'Berhasil update ']);
             } else {
@@ -110,17 +111,24 @@ class requestController extends Controller
                 ]);
                 //update request table from post data
                 $status = $request->input('status');
+
                 //check if status wait then change to status from input
-                $req = DB::table('request')->where('id', $request->id)->first();
+                $req = DB::table('request')->where('id', $id)->first();
                 if (!$req) {
                     return redirect()->route('admin.requestHistory')->with('message', 'Request tidak ditemukan');
                 }
 
+                if (DB::table('request')->where('id', $id)->update(['status' => $status])) {
 
-                if (DB::table('request')->where('id', $request->id)->update(['status' => $status])) {
-                    return redirect()->route('admin.requestDetail', ['id' =>  $request->id])->with('message', 'Request berhasil diupdate');
+
+
+                    if ($request->status == 'approved') {
+                        exportRequest::dispatch($id);
+                    }
+
+                    return redirect()->route('admin.requestDetail', ['id' => $id])->with('message', 'Request berhasil diupdate');
                 } else {
-                    return redirect()->route('admin.requestDetail', ['id' =>  $request->id])->with('message', 'Request gagal diupdate');
+                    return redirect()->route('admin.requestDetail', ['id' => $id])->with('message', 'Request gagal diupdate');
                 }
             }
         }
@@ -129,54 +137,37 @@ class requestController extends Controller
     function export($id, Request $request)
     {
 
-        //get request data
-        $reqDetail = DB::table('request')
-            ->select('users.name as department', 'request.user as username', 'request.tanggal', 'request.id', 'request.id_jam as shift', DB::raw('concat(jadwal.awal,":",jadwal.akhir) as jam_pengambilan'))
-            ->leftJoin('users', 'request.user', '=', 'users.username')
-            ->leftJoin('jadwal', 'request.id_jam', '=', 'jadwal.id')
-            ->where('request.id', $id)
-            ->first();
 
-        //get request_item data
 
-        $reqItem = DB::table('request_item')
-            ->select('request_item.code_item', 'request_item.jumlah', 'request_item.id', 'request_item.admin_note', 'item_master.name_item', 'item_master.satuan_oca', 'item_master.area', 'item_master.lemari', 'item_master.no2', 'budget.quota')
-            ->leftJoin('item_master', 'request_item.code_item', '=', 'item_master.code_item')
-            ->leftJoin('budget', 'request_item.code_item', '=', 'budget.code_item')
-            ->where('budget.user', $reqDetail->username)
-            ->where('id_request', $id)
-            ->orderBy('request_item.code_item', 'ASC')->get();
-
-        $used = $this->getReqItem($reqDetail->username, $id);
-
-        foreach ($reqItem as $key => $item) {
-
-            $reqItem[$key]->remaining_quota = $item->quota - $used[$key]->qty;
-        }
-
-        //if reqItem notfound then return []
-        if (!$reqItem) {
-            $reqItem = [];
-        }
-        //append
-        $reqDetail->items = $reqItem;
+        $reqDetail = DB::table('export')->where('id_request', $id)->first();
         //load view print with domPdf with size A4
+        if (!$reqDetail) {
+            return redirect()->route('admin.requestHistory')->with('message', 'Tidak dapat mengexport request');
+        }
+        $reqDetail->data = json_decode($reqDetail->data);
+
         $pdf = PDF::loadView('print', compact('reqDetail'))->setPaper('a4', 'potrait');
 
         //download pdf
-        return $pdf->stream('request-' . $id . '.pdf');;
+        return $pdf->stream('request-' . $id . '.pdf');
+        ;
     }
-    function getReqItem($user, $reqid)
+    public function exportList(Request $request)
     {
+        //if not null it must date
 
-        $req = DB::table('request_item')->selectRaw('request_item.code_item,sum(request_item.jumlah) as qty')
-            ->join('request', 'request_item.id_request', '=', 'request.id')
-            ->where('request.user', $user)
-            ->where('request_item.id_request', $reqid)
-            //where tanggal bulan ini
-            ->groupBy('request_item.code_item')
-            ->orderBy('request_item.code_item', 'ASC')
-            ->get()->toArray();
-        return $req;
+        if($request->from != null || $request->from != ''){
+            $request->validate([
+                'from' => 'required|date'
+            ]);
+        }
+        if($request->to != null || $request->to != ''){
+            $request->validate([
+                'to' => 'required|date'
+            ]);
+        }
+
+        return Excel::download(new requestListExport($request->from, $request->to), 'request.xlsx');
     }
+
 }
