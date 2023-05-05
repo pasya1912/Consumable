@@ -11,11 +11,11 @@ use Maatwebsite\Excel\Concerns\RegistersEventListeners;
 use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Style\Font;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use Maatwebsite\Excel\Concerns\WithColumnWidths;
 
 
 
-
-class requestListExport implements WithHeadings, WithStyles
+class requestListExport implements WithHeadings, WithStyles, FromCollection,WithColumnWidths
 {
     use RegistersEventListeners;
 
@@ -31,8 +31,9 @@ class requestListExport implements WithHeadings, WithStyles
      */
     public function collection()
     {
-        $query = Request::join('jadwal', 'request.id_jam', 'jadwal.id')->join('users', 'request.user', 'users.username')
-        ->select('users.nama as nama_department', 'request.nama as nama_pengambil','request.tanggal', DB::raw('concat(jadwal.awal,"-",jadwal.akhir) as jam_pengambilan'), 'request.status', 'request.admin_note');
+        $query = Request::select('users.nama as department','request.nama', 'request.tanggal', DB::raw('concat(jadwal.awal,":",jadwal.akhir) as jam_pengambilan'), 'request.status', 'request.admin_note')
+            ->leftJoin('jadwal', 'request.id_jam', '=', 'jadwal.id')
+            ->leftJoin('users', 'request.user', '=', 'users.username');
         if ($this->from != null) {
             $query = $query->whereDate('request.tanggal', '>=', $this->from);
         }
@@ -58,6 +59,17 @@ class requestListExport implements WithHeadings, WithStyles
     {
         // Apply bold font to the first row
         $sheet->getStyle('1')->getFont()->setBold(true);
+    }
+    public function columnWidths(): array
+    {
+        return [
+            'A' => 40,
+            'B' => 40,
+            'C' => 30,
+            'D' => 30,
+            'E' => 30,
+            'F' => 50,
+        ];
     }
     public static function afterSheet(AfterSheet $event)
     {

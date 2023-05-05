@@ -103,12 +103,12 @@
                                         <div class="col mb-3">
                                             <div class="form-group">
                                                 <label for="from-date">From</label>
-                                                <input type="text" class="form-control datetimepicker-input"
+                                                <input type="date" class="form-control datetimepicker-input"
                                                     id="from-date" name="from" />
                                             </div>
                                             <div class="form-group">
                                                 <label for="to-date">To</label>
-                                                <input type="text" class="form-control" name="to" id="to-date" />
+                                                <input type="date" class="form-control" name="to" id="to-date" />
                                             </div>
 
                                         </div>
@@ -190,31 +190,18 @@
                     //set search value to input
                     document.getElementById("inputSearch").value = search;
                     // Initialize the "from" date picker
-                    var $datepicker_start_input = jQuery("#from-date").pickadate({
-                            format: 'yyyy-mm-dd',
 
-                            hiddenSuffix: 'date_start_submit'
-                        }),
-                        $datepicker_end_input = jQuery("#to-date").pickadate({
-                            format: 'yyyy-mm-dd',
-                            hiddenSuffix: 'date_end_submit',
-                        }),
-                        datepicker_start = $datepicker_start_input.pickadate('picker'),
-                        datepicker_end = $datepicker_end_input.pickadate('picker');
+                    var from_date = document.getElementById("from-date");
+                    var to_date = document.getElementById("to-date");
 
-                    datepicker_start.on('close', function() {
-
-                        // get the selected start date and the end date
-                        var new_min = datepicker_start.get('select');
-
-                        // set the end date's min date to the currently selected start date
-                        datepicker_end.set('min', new_min);
-
-
+                    //set maxon from close
+                    from_date.addEventListener("change", function() {
+                        to_date.setAttribute("min", this.value);
                     });
-                    datepicker_end.on('close',function(){
-                        var new_max = datepicker_end.get('select');
-                        datepicker_start.set('max',new_max);
+
+                    //set min on to close
+                    to_date.addEventListener("change", function() {
+                        from_date.setAttribute("max", this.value);
                     });
                 </script>
                 <script>

@@ -62,9 +62,6 @@
   <link rel="stylesheet" href='{{ asset("vendor/libs/animate-css/animate.css") }}' />
 
   <script src={{ asset("js/config.js") }}></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/themes/default.css" integrity="sha512-iJB+UwjJEedAcKCnhuP0oujYC5VGDvp16/mA5ybt248doWzqL9cZ1YqCoSlvAQjVimKfpWtx0OXguo9goulxHw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/themes/default.date.css" integrity="sha512-i4RbX+TB7wxKhYjne9k+jSnNTtd0vTXhp213K/234DfzmMYXhdA71D+hRjto1QEFqZbaPqSL3gwyST5fGYMX9w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async="async" src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
@@ -171,7 +168,7 @@
 <!-- END: Pricing Modal JS-->
 <!-- BEGIN: Page JS-->
 <script src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo//assets/js/dashboards-analytics.js"></script>
-
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js" integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
 <!-- END: Theme JS-->
 <!-- Pricing Modal JS-->
 <!-- END: Pricing Modal JS-->
@@ -181,10 +178,6 @@
 <!-- END: Page JS-->
 
 <script src={{ asset("vendor/libs/toastr/toastr.js") }}></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/picker.js" integrity="sha512-f6WsaafWFia+glfiIH85UyfdCVDyJScsVDM70lJhKr2lt2cYyptkiqtVxcxPnh/CduM/FpfL0eC4liTwZMb58g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/compressed/picker.date.js" integrity="sha512-mL1dqulM7Q2Ks+ROKc0+8zFMcIM07nTK80O6uZdMEaVzN2Jy2tioSiraeOmkTPMW79klXdEKIfN1zDgljKKNwA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-//if there is validation error
 @if ($message = Session::get('message') || $errors->any())
     <script>
     toastr.info('{{ $message }}')
