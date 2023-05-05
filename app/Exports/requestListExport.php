@@ -63,11 +63,11 @@ class requestListExport implements WithHeadings, WithStyles, FromCollection,With
     public function columnWidths(): array
     {
         return [
-            'A' => 40,
-            'B' => 40,
-            'C' => 30,
-            'D' => 30,
-            'E' => 30,
+            'A' => 35,
+            'B' => 35,
+            'C' => 20,
+            'D' => 20,
+            'E' => 20,
             'F' => 50,
         ];
     }
