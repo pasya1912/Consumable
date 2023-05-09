@@ -45,7 +45,7 @@ function checkPersen($quota, $remaining)
                                     <p class="card-text">
                                         <span class="badge bg-label-success">Sisa budget &nbsp<span
                                                 class="{{ checkPersen($item->quota, $item->remaining_quota) }}"
-                                                class="badge bg-label-success" id="remainingQuota">{{ $item->remaining_quota }}</span> {{$item->satuan}}
+                                                class="badge bg-label-success" id="remainingQuota{{$item->code_item}}">{{ $item->remaining_quota }}</span> {{$item->satuan}}
                                     </p>
                                 </div>
                             </div>
@@ -118,7 +118,7 @@ function checkPersen($quota, $remaining)
                     document.getElementById("btnadd" + code).classList.remove("btn-outline-primary");
                     document.getElementById("btnadd" + code).classList.add("btn-outline-success");
                     document.getElementById("btnadd" + code).innerHTML = "Added";
-                    document.getElementById("remainingQuota").innerHTML -= jumlah;
+                    document.getElementById("remainingQuota"+code).innerHTML -= jumlah;
                     //disable it
                     document.getElementById("btnadd" + code).disabled = true;
                     //change back after 2 seconds

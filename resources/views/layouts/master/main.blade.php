@@ -178,9 +178,12 @@
 <!-- END: Page JS-->
 
 <script src={{ asset("vendor/libs/toastr/toastr.js") }}></script>
-@if ($message = Session::get('message') || $errors->any())
+@if (Session::get('message') || $errors->any())
     <script>
-    toastr.info('{{ $message }}')
+    toastr.info("{{ Session::get('message') }}")
+    @foreach ($errors->all() as $error)
+        toastr.error("{{ $error }}")
+    @endforeach
     </script>
 @endif
 @yield('script')

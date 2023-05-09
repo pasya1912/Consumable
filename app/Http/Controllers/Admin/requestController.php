@@ -92,13 +92,15 @@ class requestController extends Controller
         //CHECK IF CONTENT TYPE JSON
         if ($request->header('Content-Type') == 'application/json') {
             $keys = array_keys($request->data);
-            $arr = [];
+            $arr = ['status'=>'revised'];
             foreach ($keys as $key) {
                 $arr = array_merge($arr, [$key => $request->data[$key]]);
             }
+            $request->validate([
+                'id' => 'required|numeric',
+            ]);
 
-
-            $update = DB::table('request_item')->where('id', $id)->update($arr);
+            $update = DB::table('request_item')->where('id', $request->id)->update($arr);
             if ($update) {
                 return response()->json(['status' => true, 'message' => 'Berhasil update ']);
             } else {
