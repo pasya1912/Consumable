@@ -53,7 +53,7 @@
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <li><a class="dropdown-item" href="{{ route('admin.userList') }}?sort_by=id">ID</a></li>
-                        <li><a class="dropdown-item" href="{{ route('admin.userList') }}?sort_by=name">Departement</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin.userList') }}?sort_by=nama">Departement</a></li>
                         <li><a class="dropdown-item" href="{{ route('admin.userList') }}?sort_by=username">Username</a></li>
                         <li><a class="dropdown-item" href="{{ route('admin.userList') }}?sort_by=email">Email</a></li>
                     </ul>
@@ -98,7 +98,7 @@
                     @foreach ($userList['data'] as $key => $item)
                         <tr>
                             <td style="text-align: center">{{ $item['id'] }}</td>
-                            <td style="text-align: center">{{ $item['name'] }}</td>
+                            <td style="text-align: center">{{ $item['nama'] }}</td>
                             <td style="text-align: center">{{ $item['username'] }}</td>
                             <td style="text-align: center">
                                 <form style="display:inline-flex"
