@@ -42,6 +42,7 @@ class requestController extends Controller
             ->where('request.user',$request->user()->username)
             //where tanggal bulan ini
             ->whereMonth('request.tanggal',date('m'))
+            ->whereYear('request.tanggal',date('Y'))
             ->whereNotIn('request.status',['rejected','canceled'])
             ->groupBy('request_item.code_item')
             ->get()->toArray();
@@ -200,6 +201,7 @@ class requestController extends Controller
             ->join('request','request_item.id_request','=','request.id')
             ->where('request.user',Auth::user()->username)
             ->whereMonth('request.tanggal',date('m'))
+            ->whereYear('request.tanggal',date('Y'))
             ->where('request_item.code_item',$code)
             ->whereNotIn('request.status',['rejected','canceled'])
             ->groupBy('request_item.code_item')

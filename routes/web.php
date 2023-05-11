@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\exportController;
 use App\Http\Controllers\publicController;
 
 use App\Http\Controllers\User\dashboardController as userDashboardController;
@@ -45,6 +46,9 @@ Route::get('/image/{url}', [publicController::class, 'getImage'])->where('url', 
 
 Route::middleware(['auth'])->group(function () {
 
+    Route::get('/request/{id}/export', [adminRequestController::class,'export'])->name('admin.requestExport');
+    
+    Route::get('/request/{id}/export/generate', [exportController::class,'generate_detail'])->name('admin.requestExportGenerate');
 
     Route::middleware(['user'])->group(function () {
         Route::get('/', [userDashboardController::class, 'index'])->name('user.dashboard');
@@ -60,7 +64,6 @@ Route::middleware(['auth'])->group(function () {
     });
     Route::middleware(['admin'])->group(function () {
         Route::prefix('admin')->group(function () {
-            Route::get('/request/{id}/export', [adminRequestController::class,'export'])->name('admin.requestExport');
             Route::post('/request/export', [adminRequestController::class,'exportList'])->name('admin.requestListExport');
             Route::get('/', [adminDashboardController::class, 'index'])->name('admin.dashboard');
 

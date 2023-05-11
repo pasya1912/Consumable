@@ -178,11 +178,6 @@
                 <hr />
             @endsection
             @section('script')
-                @if ($message = Session::get('message'))
-                    <script>
-                        alert('{{ $message }}')
-                    </script>
-                @endif
                 <script>
                     //get search value from url
                     var url = new URL(window.location.href);

@@ -70,6 +70,7 @@ class budgetController extends Controller
         ->where('request.user',$user)
         ->where('request_item.code_item',$code)
         //where tanggal bulan ini
+        ->whereYear('request.tanggal',date('Y'))
         ->whereMonth('request.tanggal',date('m'))
             ->whereNotIn('request.status',['rejected','canceled'])
         ->groupBy('request_item.code_item')

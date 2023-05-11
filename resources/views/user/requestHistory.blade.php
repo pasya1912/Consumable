@@ -100,9 +100,6 @@
     <hr />
 
     @if ($message = Session::get('message'))
-        <script>
-            alert('{{ $message }}')
-        </script>
     @endif
     <script>
         //get search value from url

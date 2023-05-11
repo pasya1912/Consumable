@@ -11,22 +11,33 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card" style="padding: 2rem;">
-
-                <h3 class="text">Status:
-                    @if($reqDetail->status == 'approved')
-                        <span class="badge rounded-pill bg-label-success">{{ $reqDetail->status }}</span>
-                    @elseif($reqDetail->status == 'rejected')
-                        <span class="badge rounded-pill bg-label-danger">{{ $reqDetail->status }}</span>
-                    @elseif($reqDetail->status == 'revised')
-
-                        <span class="badge rounded-pill bg-label-light text-primary">{{ $reqDetail->status }}</span>
-                    @elseif($reqDetail->status == 'canceled')
-                        <span class="badge rounded-pill bg-label-danger">{{ $reqDetail->status }}</span>
-                    @else
-                        <span class="badge rounded-pill bg-light text-dark">{{ $reqDetail->status }}</span>
-                    @endif
-                </h3>
-                <div class="table-responsive">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3 class="text">Status:
+                            @if ($reqDetail->status == 'approved')
+                                <span class="badge rounded-pill bg-label-success">{{ $reqDetail->status }}</span>
+                            @elseif($reqDetail->status == 'rejected')
+                                <span class="badge rounded-pill bg-label-danger">{{ $reqDetail->status }}</span>
+                            @elseif($reqDetail->status == 'revised')
+                                <span class="badge rounded-pill bg-label-light text-primary">{{ $reqDetail->status }}</span>
+                            @elseif($reqDetail->status == 'canceled')
+                                <span class="badge rounded-pill bg-label-danger">{{ $reqDetail->status }}</span>
+                            @else
+                                <span class="badge rounded-pill bg-light text-dark">{{ $reqDetail->status }}</span>
+                            @endif
+                        </h3>
+                    </div>
+                    <div class="col-md-6 export mr-2">
+                        <div class="w-100  d-flex align-items-end gap-2 justify-content-end">
+                            
+                            <a href="{{ route('admin.requestExportGenerate', ['id' => $reqDetail->id]) }}"
+                                class="btn btn-warning ">Generate</a>
+                        <a href="{{ route('admin.requestExport', ['id' => $reqDetail->id]) }}"
+                            class="btn btn-warning ">Export</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row table-responsive">
                     <table class="table">
                         <tr>
                             <th style="text-align: center">Code</th>
@@ -44,7 +55,7 @@
                                         {{ $item->jumlah }}
                                     </td>
                                     <td style="text-align: center">
-                                        <span class="badge bg-label-light">{{ $item->admin_note }}</span>
+                                        <span class="">{{ $item->admin_note }}</span>
                                     </td>
 
                                 </tr>
@@ -74,8 +85,5 @@
         </div>
     </div>
     @if ($message = Session::get('message'))
-        <script>
-            alert('{{ $message }}')
-        </script>
     @endif
 @endsection

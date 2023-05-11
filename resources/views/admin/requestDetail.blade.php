@@ -65,9 +65,15 @@
                         </form>
                     </div>
                     <div class="col-md-6 export mr-2">
+                        <div class="w-100  d-flex align-items-end gap-2 justify-content-end">
+                            
+                            <a href="{{ route('admin.requestExportGenerate', ['id' => $reqDetail->id]) }}"
+                                class="btn btn-warning ">Generate</a>
                         <a href="{{ route('admin.requestExport', ['id' => $reqDetail->id]) }}"
                             class="btn btn-warning ">Export</a>
+                        </div>
                     </div>
+                    
                 </div>
                 <br>
                 <div class="table-responsive">
@@ -147,10 +153,10 @@
                 contentType: "application/json",
                 data: JSON.stringify(data),
                 success: function(response) {
-                    let res = JSON.parse(response);
+                    console.log(response.message);
                 },
                 error: function(xhr) {
-                    console.log(xhr);
+                    console.log(xhr.message);
                 }
             });
 
@@ -171,10 +177,10 @@
                 contentType: "application/json",
                 data: JSON.stringify(data),
                 success: function(response) {
-                    let res = JSON.parse(response);
+                    console.log(response.message);
                 },
                 error: function(xhr) {
-                    console.log(xhr);
+                    console.log(xhr.message);
                 }
             });
 

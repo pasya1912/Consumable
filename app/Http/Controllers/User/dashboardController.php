@@ -39,6 +39,7 @@ class dashboardController extends Controller
         ->join('request','request_item.id_request','=','request.id')
         ->where('request.user',$request->user()->username)
         //where tanggal bulan ini
+        ->whereYear('request.tanggal',date('Y'))
         ->whereMonth('request.tanggal',date('m'))
             ->whereNotIn('request.status',['rejected','canceled'])
         ->groupBy('request_item.code_item')

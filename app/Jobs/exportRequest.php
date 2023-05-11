@@ -33,11 +33,12 @@ class exportRequest implements ShouldQueue
     {
 
         $reqDetail = DB::table('request')
-            ->select('users.nama as department', 'request.user as username', 'request.tanggal', 'request.id', 'request.id_jam as shift', DB::raw('concat(jadwal.awal,":",jadwal.akhir) as jam_pengambilan'))
+            ->select('users.nama as department', 'request.status','request.user as username', 'request.tanggal', 'request.id', 'request.id_jam as shift', DB::raw('concat(jadwal.awal,":",jadwal.akhir) as jam_pengambilan'))
             ->leftJoin('users', 'request.user', '=', 'users.username')
             ->leftJoin('jadwal', 'request.id_jam', '=', 'jadwal.id')
             ->where('request.id', $this->id)
             ->first();
+
 
         //get request_item data
 
@@ -49,11 +50,23 @@ class exportRequest implements ShouldQueue
             ->where('id_request', $this->id)
             ->orderBy('request_item.code_item', 'ASC')->get();
 
+            $datetanggal = strtotime($reqDetail->tanggal);
+            $month = date('m',$datetanggal);
+            $year = date('Y',$datetanggal);
+        $code_items = [];
+            foreach($reqItem as $req){
+            $code_items[] = $req->code_item;
+                
+            }
+
         $used = DB::table('request_item')->selectRaw('request_item.code_item,sum(request_item.jumlah) as qty')
             ->join('request', 'request_item.id_request', '=', 'request.id')
             ->where('request.user', $reqDetail->username)
-            ->where('request_item.id_request', $this->id)
-            ->whereMonth('request.tanggal', date('m'))
+            ->whereIn('request_item.code_item',$code_items)
+            ->where('request.id','<=',$this->id)
+            ->whereMonth('request.tanggal',$month)
+            ->whereYear('request.tanggal',$year)
+            ->whereNot('request.status','canceled')
             //where tanggal bulan ini
             ->groupBy('request_item.code_item')
             ->orderBy('request_item.code_item', 'ASC')
@@ -69,10 +82,14 @@ class exportRequest implements ShouldQueue
             $reqItem = [];
         }
         //append
+
         $reqDetail->items = $reqItem;
-        $arr = ['id_request' => $this->id, 'user' => $reqDetail->department, 'tanggal' => $reqDetail->tanggal, 'shift' => $reqDetail->shift, 'jam_pengambilan' => $reqDetail->jam_pengambilan, 'data' => json_encode($reqDetail->items->toArray())];
+        $arrsearch = [
+            'id_request' => $this->id
+        ];
+        $arr = ['user' => $reqDetail->department, 'tanggal' => $reqDetail->tanggal, 'shift' => $reqDetail->shift, 'jam_pengambilan' => $reqDetail->jam_pengambilan, 'data' => json_encode($reqDetail->items->toArray())];
         try{
-        DB::table('export')->insert($arr);
+        DB::table('export')->updateOrInsert($arrsearch,$arr);
             var_dump('Success');
         }
 

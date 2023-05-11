@@ -105,8 +105,5 @@ function hapusItem(index)
 
 }
 </script>
-@if ($message = Session::get('message'))
-    <script>alert('{{ $message }}')</script>
-@endif
 @endsection
 
