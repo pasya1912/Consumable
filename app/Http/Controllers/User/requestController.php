@@ -72,9 +72,8 @@ class requestController extends Controller
 
         //from table jadwal get all
         $jadwal = DB::table('jadwal')->get()->toArray();
-        $arr = ["jadwal"=>$jadwal,...$arr];
-
-
+        $arrnew = ["jadwal"=>$jadwal];
+        $arr = array_merge($arrnew,$arr);
         return view('user.request',compact('arr'));
     }
     function getItem($id)
