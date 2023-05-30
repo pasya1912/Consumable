@@ -62,6 +62,7 @@ function checkPersen($quota, $remaining)
                             </div>
                             <p class="card-text">{{ $item->note }}</p>
                             <p class="card-text mt-4 mb-2">
+                            @if($item->remaining_quota > 0)
                             <div class="row">
                                 <div class="col-md-8">
                                     <input type="number" class="form-control mb-2" id="inputadd{{ $item->code_item }}"
@@ -74,6 +75,7 @@ function checkPersen($quota, $remaining)
                                         class="btn btn-outline-primary">Add</a>
                                 </div>
                             </div>
+                            @endif
                             </p>
 
                             <br>
