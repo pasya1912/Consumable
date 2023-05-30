@@ -9,10 +9,10 @@ use Maatwebsite\Excel\Concerns\WithValidation;
 use Maatwebsite\Excel\Concerns\WithUpserts;
 use Illuminate\Support\Collection;
 //import start row
-use Maatwebsite\Excel\Concerns\withStartRow;
+use Maatwebsite\Excel\Concerns\WithStartRow;
 
 
-class BudgetImport implements ToCollection, WithHeadingRow, WithValidation, WithUpserts, withStartRow
+class BudgetImport implements ToCollection, WithHeadingRow, WithValidation, WithUpserts, WithStartRow
 {
     public function collection(Collection $rows)
     {

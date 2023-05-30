@@ -11,10 +11,10 @@ use Illuminate\Support\Collection;
 //use hash
 use Illuminate\Support\Facades\Hash;
 //import start row
-use Maatwebsite\Excel\Concerns\withStartRow;
+use Maatwebsite\Excel\Concerns\WithStartRow;
 
 
-class UserImport implements ToCollection, WithHeadingRow, WithValidation, WithUpserts, withStartRow
+class UserImport implements ToCollection, WithHeadingRow, WithValidation, WithUpserts, WithStartRow
 {
     public function collection(Collection $rows)
     {
