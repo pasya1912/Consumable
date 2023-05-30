@@ -206,15 +206,14 @@ class requestController extends Controller
             ->groupBy('request_item.code_item')
             ->first();
 
-            $res = $req;
+
             //if null set qty to 0
-            if($res == null)
+            if($req == null)
             {
-                $res = new \stdClass();
-                $res->code_item = $code;
-                $res->qty = 0;
+                $req = new \stdClass();
+                $req->code_item = $code;
+                $req->qty = 0;
             }
-            return $res;
 
         // append items to request only remaining_quota which is quota - qty
         $items->remaining_quota = $items->quota - $req->qty;

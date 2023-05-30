@@ -43,16 +43,16 @@ function checkPersen($quota, $remaining)
         <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
             @foreach ($items['data'] as $item)
                 <div class="col">
-                    <div class="card">
+                    <div class="card position-relative">
                         <img class="card-img-top"
                             src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template-free/demo/assets/img/elements/2.jpg"
                             alt="Card image cap" />
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6">
+                        <div class="card-body position-relative">
+                            <div class="row position-relative ">
+                                <div class="col-md-12">
                                     <h5 class="card-title">{{ $item->name_item }}</h5>
                                 </div>
-                                <div class="col-md-6 text-end">
+                                <div class="col-md-12 text-end">
                                     <p class="card-text">
                                         <span class="badge bg-label-success">Sisa budget &nbsp<span
                                                 class="{{ checkPersen($item->quota, $item->remaining_quota) }}"
