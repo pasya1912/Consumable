@@ -2,6 +2,9 @@
 <?php
 function checkPersen($quota, $remaining)
 {
+    if( $quota <= 0){
+        return 'text text-info';
+    }
     if (($remaining / $quota) * 100.0 > 50.0) {
         return 'text text-success';
     } elseif (($remaining / $quota) * 100.0 > 10.0) {
