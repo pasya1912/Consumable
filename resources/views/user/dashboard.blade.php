@@ -23,8 +23,16 @@ function checkPersen($quota, $remaining)
                 <h2><strong>List Stock PPIC</strong></h2>
             </div>
         </div>
+
     </div>
-    <div class="demo-inline-spacing mb-5 text-end">
+    <div class="demo-inline-spacing mb-5 d-flex justify-content-between">
+        <form class="navbar-nav-left d-flex" action="{{ route('user.dashboard') }}" method="GET">
+            <div class="input-group">
+                <span class="input-group-text"><i class="tf-icons bx bx-search"></i></span>
+                <input id="inputSearch" type="text" name="search" class="form-control"
+                    placeholder="Search..." value="" />
+            </div>
+        </form>
         <a href="{{ route('user.request') }}" class="btn btn-danger">
             Cart
         </a>
