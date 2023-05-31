@@ -45,7 +45,7 @@ function checkPersen($quota, $remaining)
                 <div class="col">
                     <div class="card position-relative">
                         <img class="card-img-top"
-                            src="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template-free/demo/assets/img/elements/2.jpg"
+                            src="{{asset('img/products/material.png')}}"
                             alt="Card image cap" />
                         <div class="card-body position-relative">
                             <div class="row position-relative ">
