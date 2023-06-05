@@ -14,9 +14,8 @@ class budgetController extends Controller
     {
 
         //ability to sort
-        $sort = $request->query('sort_by') == null ? 'no' : $request->query('sort_by');
         $find = $request->query('search') == null ? '' : $request->query('search');
-        $budgets = $this->getBudget(2, $sort,$find)->appends(request()->query())->toArray();
+        $budgets = $this->getBudget(2,$find)->appends(request()->query())->toArray();
         $listUser = [];
         $listCode = [];
         foreach ($budgets['data'] as $key => $value) {
@@ -34,11 +33,14 @@ class budgetController extends Controller
                 }
             }
         }
-
+        //sort by remaining quota most to least
+        usort($budgets['data'], function($a, $b) {
+            return $b['remaining_quota'] <=> $a['remaining_quota'];
+        });
         //get remaining quota by sum request_item.jumlah where request_item.code_item = budget.code_item for
         return view('admin.budget',compact('budgets'));
     }
-    function getBudget($paginate,$sort,$find )
+    function getBudget($paginate,$find )
     {
         $columns = ['budget.no','item_master.name_item','budget.code_item','budget.category','budget.user','budget.quota'];
         //find like and sort paginate
@@ -48,8 +50,7 @@ class budgetController extends Controller
             }})
             ->leftJoin('item_master','budget.code_item','=','item_master.code_item')
             ->select('budget.*','item_master.name_item')
-
-            ->orderBy($sort,'asc')
+            ->orderBy('budget.quota','desc')
             ->paginate(10);
 
 

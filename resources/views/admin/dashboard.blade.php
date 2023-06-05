@@ -76,18 +76,56 @@
                 </div>
                 <br>
 
+                <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <form action="{{ route('admin.uploadImageAction') }}" method="POST"
+                                enctype="multipart/form-data">
+                                @method('POST')
+                                @csrf
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="updloadImageLabel">Image</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-12 mb-3 d-flex justify-content-center">
+                                            <img id="image_preview"class=" text-center" src="" alt="" >
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <h5 class="modal-title" id="updloadImageLabel">Ubah Gambar</h5>
+
+                                        <div class="col mb-3">
+                                            <input type="hidden" id="code_item" name="code_item" class="form-control">
+                                            <input type="file" id="image" name="image" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-label-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Upload</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <br>
 
 
                 <div class="table-responsive">
                     <table style="width:100%" id='table' cellpadding=10 cellspasing=15>
                         <thead>
-                            <tr align="center">
+                            <tr style="text-align:center;">
                                 <th style="width:10%">Code Barang</th>
                                 <th style="width:20%">Nama Barang</th>
                                 <th style="width:20%">Area</th>
                                 <th style="width:20%">Lemari</th>
                                 <th style="width:10%">Rak</th>
                                 <th style="width:20%">Satuan</th>
+                                <th style="width:20%">Gambar</th>
                             </tr>
                         <tbody>
                             @foreach ($items['data'] as $key => $item)
@@ -98,6 +136,11 @@
                                     <td style="text-align: center">{{ $item['lemari'] }}</td>
                                     <td style="text-align: center">{{ $item['no2'] }}</td>
                                     <td style="text-align: center">{{ $item['satuan'] }}</td>
+                                    <td style="text-align: center"> <button
+                                            onclick="doImage('{{ $item['code_item'] }}','{!! $item['image'] ?? '' !!}')"
+                                            class="btn btn-info" data-bs-toggle="modal" data-bs-target="#imageModal"><i
+                                                class="bx bx-image-alt me-sm-1"></i> <span
+                                                class="d-none d-sm-inline-block">Import</span></button></td>
                                 </tr>
                         </tbody>
                         @endforeach
@@ -125,5 +168,16 @@
                         var search = url.searchParams.get("search");
                         //set search value to input
                         document.getElementById("inputSearch").value = search;
+                    </script>
+                @endsection
+                @section('top-script')
+                    <script>
+                        function doImage(code_item, image) {
+                            console.log(code_item);
+                            document.getElementById("code_item").value = code_item;
+                            if(image != null || image != ''){
+                            document.getElementById("image_preview").src = "{{route('getImage', '')}}/" + image;
+                            }
+                        }
                     </script>
                 @endsection

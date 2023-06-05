@@ -39,13 +39,13 @@ function checkPersen($quota, $remaining)
     </div>
 
 
-    @if ($items['data'])
+    @if (isset($items['data']))
         <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
             @foreach ($items['data'] as $item)
                 <div class="col">
                     <div class="card position-relative">
                         <img class="card-img-top"
-                            src="{{asset('img/products/material.png')}}"
+                            src="{{($item->image) ? route('getImage','').'/'. $item->image : asset('img/products/material.png')}}"
                             alt="Card image cap" />
                         <div class="card-body position-relative">
                             <div class="row position-relative ">

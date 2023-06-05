@@ -20,7 +20,7 @@ class dashboardController extends Controller
 
         try{
         $find = $request->query('search') == null ? '' : $request->query('search');
-        $items = DB::table('item_master')->select('item_master.code_item','item_master.name_item','item_master.note','item_master.satuan','item_master.satuan_oca','item_master.convert','budget.quota')
+        $items = DB::table('item_master')->select('item_master.code_item','item_master.name_item','item_master.note','item_master.satuan','item_master.satuan_oca','item_master.convert','budget.quota','item_master.image')
         ->leftJoin('budget','item_master.code_item','=','budget.code_item')
         ->where(function ($subQuery) use ($find){
             $subQuery = $subQuery->orWhere('item_master.code_item', 'LIKE', "%".$find."%");
@@ -54,6 +54,10 @@ class dashboardController extends Controller
                 }
             }
         }
+        //sort by remaining quota most to least
+        usort($items['data'], function($a, $b) {
+            return $b->remaining_quota <=> $a->remaining_quota;
+        });
     }catch(\Exception $e){
         $items = [];
     }

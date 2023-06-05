@@ -47,7 +47,7 @@ Route::get('/image/{url}', [publicController::class, 'getImage'])->where('url', 
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/request/{id}/export', [adminRequestController::class,'export'])->name('admin.requestExport');
-    
+
     Route::get('/request/{id}/export/generate', [exportController::class,'generate_detail'])->name('admin.requestExportGenerate');
 
     Route::middleware(['user'])->group(function () {
@@ -62,10 +62,12 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/request/history/{id}/delete', [userRequestHistoryController::class, 'cancel'])->name('user.requestCancel');
 
     });
+
     Route::middleware(['admin'])->group(function () {
         Route::prefix('admin')->group(function () {
             Route::post('/request/export', [adminRequestController::class,'exportList'])->name('admin.requestListExport');
             Route::get('/', [adminDashboardController::class, 'index'])->name('admin.dashboard');
+            Route::post('/image', [adminDashboardController::class, 'uploadImage'])->name('admin.uploadImageAction');
 
             Route::get('/budget', [adminBudgetController::class, 'index'])->name('admin.budget');
             Route::get('/request', [adminRequestController::class, 'history'])->name('admin.requestHistory');

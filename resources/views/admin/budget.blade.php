@@ -47,20 +47,7 @@
                 <!-- /Search -->
                 <br>
                 <!-- Dropdown -->
-                <div class="btn-group me-3">
-                    <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton"
-                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Sort By
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <li><a class="dropdown-item" href="{{ route('admin.budget') }}?sort_by=code_item">Code Barang</a>
-                        </li>
-                        <li><a class="dropdown-item" href="{{ route('admin.budget') }}?sort_by=name_item">Nama Barang</a>
-                        </li>
-                        <li><a class="dropdown-item" href="{{ route('admin.budget') }}?sort_by=category">Kategori Barang</a>
-                        </li>
-                    </ul>
-                </div>
+
 
                 <!-- Modal -->
                 <div class="modal fade" id="basicModal" tabindex="-1" aria-hidden="true">

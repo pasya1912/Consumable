@@ -62,6 +62,8 @@
   <link rel="stylesheet" href='{{ asset("vendor/libs/animate-css/animate.css") }}' />
 
   <script src={{ asset("js/config.js") }}></script>
+  @yield('top-script')
+
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script>
