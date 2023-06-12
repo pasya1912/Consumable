@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class itemRequest extends Model
+class Export extends Model
 {
     use HasFactory;
     //table = request_item
-    protected $table = 'request_item';
-    //no timestamps
+    protected $table = 'export';
+    //timestamps
     public $timestamps = false;
     //belongs to request
     public function request()

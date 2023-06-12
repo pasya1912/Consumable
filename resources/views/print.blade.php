@@ -167,6 +167,7 @@
                         <th style="width:50%">Area</th>
                         <th>Dock</th>
                         <th>No</th>
+                    </tr>
                 </thead>
                 <tbody>
                     @foreach($reqDetail->data as $key =>$item)

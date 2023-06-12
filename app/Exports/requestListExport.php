@@ -71,13 +71,4 @@ class requestListExport implements WithHeadings, WithStyles, FromCollection,With
             'F' => 50,
         ];
     }
-    public static function afterSheet(AfterSheet $event)
-    {
-        // Register the event listener to apply styles to the sheet
-        $event->sheet->getStyle('1')->applyFromArray([
-            'font' => [
-                'bold' => true,
-            ],
-        ]);
-    }
 }

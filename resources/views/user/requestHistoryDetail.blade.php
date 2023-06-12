@@ -29,10 +29,10 @@
                     </div>
                     <div class="col-md-6 export mr-2">
                         <div class="w-100  d-flex align-items-end gap-2 justify-content-end">
-                            
-                            <a href="{{ route('admin.requestExportGenerate', ['id' => $reqDetail->id]) }}"
+
+                            <a href="{{ route('admin.requestPrintGenerate', ['id' => $reqDetail->id]) }}"
                                 class="btn btn-warning ">Generate</a>
-                        <a href="{{ route('admin.requestExport', ['id' => $reqDetail->id]) }}"
+                        <a href="{{ route('admin.requestPrint', ['id' => $reqDetail->id]) }}"
                             class="btn btn-warning ">Export</a>
                         </div>
                     </div>

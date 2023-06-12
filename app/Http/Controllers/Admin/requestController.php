@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 
+use App\Exports\requestDetailExport;
 use App\Exports\requestListExport;
+use App\Models\Export;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Jobs\exportRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Requests;
 //import db
 use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -97,7 +100,7 @@ class requestController extends Controller
                     {
                         return response()->json(['status' => false, 'message' => 'Udah revisi ']);
                     }
-                }   
+                }
                 return response()->json(['status' => true, 'message' => 'Berhasil update ']);
             } else {
                 return response()->json(['status' => false, 'message' => 'Gagal update ']);
@@ -131,10 +134,30 @@ class requestController extends Controller
     }
     function export($id, Request $request)
     {
+        $exportDetail = Export::where('id_request', $id)->first();
+        $exportDetail->nama= $exportDetail->request->nama;
+        $exportDetail->status = $exportDetail->request->status;
+        $exportDetail->data = json_decode($exportDetail->data);
+
+        $req = [];
+        $req = [...$exportDetail->toArray()];
+
+        if ($exportDetail->status == "canceled") {
+            return redirect()->back()->with('message', 'Request yang dibatalkan tidak dapat diexport');
+        }
+        if (!$exportDetail) {
+            return redirect()->back()->with('message', 'Data tidak ada silahkan generate');
+        }
+        return Excel::download(new requestDetailExport($req), 'filename.xlsx');
 
 
-        $exportDetail = DB::table('export')->where('id_request', $id)->first();
-        $reqDetail = DB::table('request')->where('id', $id)->first();
+    }
+    function print($id, Request $request)
+    {
+
+
+        $exportDetail = DB::table('export')->select('*')->where('id_request', $id)->first();
+        $reqDetail = DB::table('request')->select('*')->where('id', $id)->first();
 
         if ($reqDetail->status == "canceled") {
             return redirect()->back()->with('message', 'Request yang dibatalkan tidak dapat diexport');
@@ -142,7 +165,7 @@ class requestController extends Controller
 
         //load view print with domPdf with size A4
         if (!$exportDetail) {
-            return redirect()->back()->with('message', 'Export tidak ada silahkan generate');
+            return redirect()->back()->with('message', 'Data tidak ada silahkan generate');
         }
         $exportDetail->data = json_decode($exportDetail->data);
 

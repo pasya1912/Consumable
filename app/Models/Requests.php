@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\itemRequest;
+use App\Models\Export;
 
 class Requests extends Model
 {
@@ -15,4 +17,16 @@ class Requests extends Model
     //casts code_item = array
     //hide id
     protected $hidden = ['id'];
+
+    //has many request_item
+    public function request_item()
+    {
+        return $this->hasMany(itemRequest::class, 'id_request', 'id');
+    }
+    //has One export
+    public function export()
+    {
+        return $this->hasOne(Export::class, 'id_request', 'id');
+    }
+
 }

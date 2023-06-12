@@ -46,9 +46,11 @@ Route::get('/image/{url}', [publicController::class, 'getImage'])->where('url', 
 
 Route::middleware(['auth'])->group(function () {
 
+    Route::get('/request/{id}/print', [adminRequestController::class,'print'])->name('admin.requestPrint');
     Route::get('/request/{id}/export', [adminRequestController::class,'export'])->name('admin.requestExport');
 
-    Route::get('/request/{id}/export/generate', [exportController::class,'generate_detail'])->name('admin.requestExportGenerate');
+
+    Route::get('/request/{id}/export/generate', [exportController::class,'generate_detail'])->name('admin.requestPrintGenerate');
 
     Route::middleware(['user'])->group(function () {
         Route::get('/', [userDashboardController::class, 'index'])->name('user.dashboard');
