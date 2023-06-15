@@ -37,7 +37,7 @@
                     <table style="width:100%" id='table'>
                         <thead>
                             <tr>
-                                <th style="width:10%;" class="text-center">ID</th>
+                                <th style="width:10%" class="text-center">ID</th>
                                 <th style="width:20%" class="text-center">PENGAMBIL</th>
                                 <th style="width:20%" class="text-center">TANGGAL</th>
                                 <th style="width:20%" class="text-center">JADWAL PENGAMBILAN</th>

@@ -12,6 +12,7 @@ use App\Http\Controllers\User\requestController as userRequestController;
 use App\Http\Controllers\User\requestHistoryController as userRequestHistoryController;
 
 use App\Http\Controllers\Admin\dashboardController as adminDashboardController;
+use App\Http\Controllers\Admin\itemController as adminitemController;
 use App\Http\Controllers\Admin\budgetController as adminBudgetController;
 use App\Http\Controllers\Admin\requestController as adminRequestController;
 use App\Http\Controllers\Admin\importController as adminImportController;
@@ -69,6 +70,7 @@ Route::middleware(['auth'])->group(function () {
         Route::prefix('admin')->group(function () {
             Route::post('/request/export', [adminRequestController::class,'exportList'])->name('admin.requestListExport');
             Route::get('/', [adminDashboardController::class, 'index'])->name('admin.dashboard');
+            Route::get('/item', [adminitemController::class, 'index'])->name('admin.item');
             Route::post('/image', [adminDashboardController::class, 'uploadImage'])->name('admin.uploadImageAction');
 
             Route::get('/budget', [adminBudgetController::class, 'index'])->name('admin.budget');

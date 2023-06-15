@@ -65,29 +65,38 @@
                 <div>Dashboard</div>
             </a>
         </li>
+        <li class="menu-item">
+            <a class="menu-link menu-toggle" href="javascript:void(0)"><i class="menu-icon bx bxs-data"></i>
+            <div>
+              Master
+            </div></a>
+            <ul class="menu-sub">
+        <li class="menu-item <?= Request::routeIs('admin.item') ? 'active' : '' ?>">
+            <a href="<?= Request::routeIs('admin.item') ? '#' : route('admin.item') ?>" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-box"></i>
+                <div>Item</div>
+            </a>
+        </li>
         <li class="menu-item <?= Request::routeIs('admin.budget') ? 'active' : '' ?>">
             <a href="<?= Request::routeIs('admin.budget') ? '#' : route('admin.budget') ?>" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <i class="menu-icon tf-icons bx bx-data"></i>
                 <div>Budget</div>
             </a>
         </li>
-
-
-
+            </ul>
+        </li>
 
         <li class="menu-item <?= Request::routeIs('admin.requestHistory') ? 'active' : '' ?>">
             <a href="<?= Request::routeIs('admin.requestHistory') ? '#' : route('admin.requestHistory') ?>"
                 class="menu-link">
-                <i class="menu-icon tf-icons bx bx-objects-vertical-bottom"></i>
+                <i class="menu-icon tf-icons bx bx-history"></i>
                 <div>Request History</div>
             </a>
-
-
         </li>
         <li class="menu-item <?= Request::routeIs('admin.userList') ? 'active' : '' ?>">
             <a href="<?= Request::routeIs('admin.userList') ? '#' : route('admin.userList') ?>"
                 class="menu-link">
-                <i class="menu-icon tf-icons bx bxs-contact"></i>
+                <i class="menu-icon tf-icons bx bxs-user-account"></i>
                 <div>User List</div>
             </a>
 
