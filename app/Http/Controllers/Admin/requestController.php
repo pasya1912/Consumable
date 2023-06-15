@@ -140,7 +140,7 @@ class requestController extends Controller
         $exportDetail->data = json_decode($exportDetail->data);
 
         $req = [];
-        $req = [...$exportDetail->toArray()];
+        $req = array_merge($req,$exportDetail->toArray());
 
         if ($exportDetail->status == "canceled") {
             return redirect()->back()->with('message', 'Request yang dibatalkan tidak dapat diexport');

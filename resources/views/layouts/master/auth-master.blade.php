@@ -36,13 +36,14 @@
     <link rel="stylesheet" href={{ asset("vendor/css/rtl/theme-default56b8.css?id=cc3d4ef91c8c858754d8ed20c78a3a3c") }} class="template-customizer-theme-css" />
     <link rel="stylesheet" href={{ asset("css/democb2e.css?id=24b55ca26d6f2bafc5a21ff5a4bcdfb3") }} />
 
-
     <link rel="stylesheet" href={{ asset("vendor/libs/perfect-scrollbar/perfect-scrollbarb440.css?id=d9fa6469688548dca3b7e6bd32cb0dc6") }} />
     <link rel="stylesheet" href={{ asset("vendor/libs/typeahead-js/typeahead3881.css?id=8fc311b79b2aeabf94b343b6337656cf") }} />
 
     <!-- Page Styles -->
     <script src={{ asset("vendor/js/helpers.js") }}></script>
     <script src={{ asset("vendor/js/template-customizer.js") }}></script>
+    <!-- Include Styles -->
+  @include('layouts/sections/styles')
     <!-- Vendor Styles -->
     <link rel="stylesheet" href={{ asset("vendor/libs/flatpickr/flatpickr.css") }} />
     <link rel="stylesheet" href={{ asset("vendor/libs/toastr/toastr.css") }} />

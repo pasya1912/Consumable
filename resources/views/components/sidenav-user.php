@@ -75,12 +75,13 @@
 
 
             <ul class="menu-sub">
-                <li class="menu-item <?=Request::routeIs('user.requestHistory') ? 'active':''?>">
-                    <a href="<?= Request::routeIs('user.requestHistory') ? '#':route('user.requestHistory') ?>"
-                        class="menu-link">
-                        <div>History</div>
-                    </a>
-                </li>
+                <li class="menu-item <?= Request::routeIs('user.requestHistory') ? 'active' : '' ?>">
+                <a href="<?= Request::routeIs('user.requestHistory') ? '#' : route('user.requestHistory') ?>"
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-history"></i>
+                <div>History</div>
+            </a>
+            </li>
             </ul>
         </li>
     </ul>

@@ -88,7 +88,7 @@
                 </div>
                 <hr />
                 <table style="width:100%" id='table' cellpadding=10 cellspasing=15>
-                    <tr>
+                    <tr style="text-align:center">
                         <th style="width:10%">ID</th>
                         <th style="width:20%">Departement</th>
                         <th style="width:20%">Username/User</th>
