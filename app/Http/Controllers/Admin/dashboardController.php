@@ -72,7 +72,7 @@ class dashboardController extends Controller
                 ->with('message', 'Image Upload successful');
         } catch (\Exception $e) {
             return back()
-                ->with('message', 'Something wenFt wrong');
+                ->with('message', 'Something wen\'t wrong');
         }
 
 
