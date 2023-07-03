@@ -31,6 +31,7 @@ class dashboardController extends Controller
             $subQuery = $subQuery->orWhere('budget.quota', 'LIKE', "%".$find."%");
         })
         ->where('budget.user',$request->user()->username)
+        ->orderBy('budget.quota','desc')
         ->paginate(12)->appends(request()->query())->toArray();
 
 
@@ -55,9 +56,7 @@ class dashboardController extends Controller
             }
         }
         //sort by remaining quota most to least
-        usort($items['data'], function($a, $b) {
-            return $b->remaining_quota <=> $a->remaining_quota;
-        });
+
     }catch(\Exception $e){
         $items = [];
     }
