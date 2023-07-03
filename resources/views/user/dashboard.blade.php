@@ -45,7 +45,7 @@ function checkPersen($quota, $remaining)
                 <div class="col">
                     <div class="card h-100">
                         <img class="card-img-top" style="width: 20,5rem; height: 20rem;"
-                            src="{{($item->image) ? route('getImage','').'/'. $item->image : asset('img/products/material.png')}}"
+                            src="{{($item->image) ? route('getImage','').'/'. $item->image :  route('getImage','').'/'.$item->code_item.'.jpg'}}" onerror="this.src='{{asset('img/products/material.png')}}'"
                             alt="Card image cap"/>
                         <div class="card-body position-relative">
                             <div class="row position-relative ">
