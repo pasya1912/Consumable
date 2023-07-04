@@ -21,7 +21,7 @@
 
     </tr>
     <tr>
-        <th rowspan="2">No</th>
+        <th rowspan="2">Code Item</th>
         <th rowspan="2">Nama Item / Barang</th>
         <th rowspan="2">Qty</th>
         <th rowspan="2">Satuan</th>
@@ -37,11 +37,11 @@
     <tbody>
     @foreach($exportDetail['data'] as $key =>$item)
     <tr>
-    	<td>{{$key+1}}</td>
+    	<td>{{$item->code_item}}</td>
 		<td>{{$item->name_item}}</td>
         <td>{{$item->jumlah}}</td>
         <td>{{$item->satuan_oca}}</td>
-        <td>{{$item->remaining_quota}}</td>
+        <td>{{$item->remaining_quota+$item->jumlah}}</td>
         <td>{{$item->area}}</td>
         <td>{{$item->lemari}}</td>
         <td>{{$item->no2}}</td>

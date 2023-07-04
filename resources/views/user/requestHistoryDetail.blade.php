@@ -33,7 +33,7 @@
                             <a href="{{ route('admin.requestPrintGenerate', ['id' => $reqDetail->id]) }}"
                                 class="btn btn-warning ">Generate</a>
                         <a href="{{ route('admin.requestPrint', ['id' => $reqDetail->id]) }}"
-                            class="btn btn-warning ">Export</a>
+                            class="btn btn-warning ">Print</a>
                         </div>
                     </div>
                 </div>

@@ -17,4 +17,8 @@ class Export extends Model
     {
         return $this->belongsTo(Requests::class, 'id_request', 'id');
     }
+    public function pengambilan()
+    {
+        return $this->belongsTo(Jadwal::class, 'jam_pengambilan', 'id');
+    }
 }

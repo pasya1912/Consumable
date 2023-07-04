@@ -56,7 +56,7 @@ class exportRequest implements ShouldQueue
         $code_items = [];
             foreach($reqItem as $req){
             $code_items[] = $req->code_item;
-                
+
             }
 
         $used = DB::table('request_item')->selectRaw('request_item.code_item,sum(request_item.jumlah) as qty')
@@ -64,14 +64,14 @@ class exportRequest implements ShouldQueue
             ->where('request.user', $reqDetail->username)
             ->whereIn('request_item.code_item',$code_items)
             ->where('request.id','<=',$this->id)
+            ->whereNot('request_item.id_request',$this->id)
             ->whereMonth('request.tanggal',$month)
             ->whereYear('request.tanggal',$year)
             ->whereNot('request.status','canceled')
-            //where tanggal bulan ini
             ->groupBy('request_item.code_item')
             ->orderBy('request_item.code_item', 'ASC')
             ->get()->toArray();
-
+        dd($used);
         foreach ($reqItem as $key => $item) {
 
             $reqItem[$key]->remaining_quota = $item->quota - $used[$key]->qty;

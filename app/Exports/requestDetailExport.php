@@ -44,13 +44,8 @@ class requestDetailExport implements FromView, WithStyles
         $start = 8;
         $count = count($this->export['data']);
         //set alignment left
-        $sheet->getStyle('A'.($start-2).':H'.$start-($count-1))->getBorders()->getAllBorders()->setBorderStyle(Border::BORDER_THIN);
-        $sheet->getStyle('A'.$start.':Z' . $start-($count-1))->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
+        $sheet->getStyle('A'.($start-2).':H'.$start-($count-1))->getBorders()->getAllBorders()->setBorderStyle(Border::BORDER_THIN);        $sheet->getStyle('A'.$start.':Z' . $start-($count-1))->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
         $sheet->getStyle('A'.$start.':Z' . $count)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
-        // Apply bold font to the first row
-        //merge cell
-
-        //merge C with D
         $sheet->mergeCells('C1:D1');
         $sheet->mergeCells('C2:D2');
         $sheet->mergeCells('C3:D3');
