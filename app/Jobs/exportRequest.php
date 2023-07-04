@@ -71,7 +71,6 @@ class exportRequest implements ShouldQueue
             ->groupBy('request_item.code_item')
             ->orderBy('request_item.code_item', 'ASC')
             ->get()->toArray();
-        dd($used);
         foreach ($reqItem as $key => $item) {
 
             $reqItem[$key]->remaining_quota = $item->quota - $used[$key]->qty;
