@@ -121,7 +121,10 @@ class requestController extends Controller
 
                 if (DB::table('request')->where('id', $id)->update(['status' => $status])) {
 
-
+                    //delete export
+                    if ($status == 'rejected' || $status == 'canceled') {
+                        DB::table('export')->where('id_request', $id)->delete();
+                    }
                     return redirect()->route('admin.requestDetail', ['id' => $id])->with('message', 'Request berhasil diupdate');
                 } else {
                     return redirect()->route('admin.requestDetail', ['id' => $id])->with('message', 'Request gagal diupdate');
