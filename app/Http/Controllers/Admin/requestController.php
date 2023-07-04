@@ -190,18 +190,18 @@ class requestController extends Controller
         //if folder export not exist mkdir
         $start = 16;
         foreach($exportDetail->data as $key =>$data){
-            $sheet->setCellValue('C'.$start+$key, $data->name_item." ( $data->code_item ) ");
-            $sheet->setCellValue('R'.$start+$key, $data->jumlah);
-            $sheet->setCellValue('U'.$start+$key, $data->satuan_oca);
-            $sheet->setCellValue('Y'.$start+$key, ($data->remaining_quota+$data->jumlah));
+            $sheet->setCellValue('C'.$start+$key, $data->code_item);
+            $sheet->setCellValue('F'.$start+$key, $data->name_item);
+            $sheet->setCellValue('U'.$start+$key, $data->jumlah);
+            $sheet->setCellValue('X'.$start+$key, $data->satuan_oca);
+            $sheet->setCellValue('AB'.$start+$key, ($data->remaining_quota+$data->jumlah));
             //AB16 = area
-            $sheet->setCellValue('AB'.$start+$key, $data->area);
+            $sheet->setCellValue('AE'.$start+$key, $data->area);
             //AF16 = lemari
-            $sheet->setCellValue('AF'.$start+$key, $data->lemari);
+            $sheet->setCellValue('AI'.$start+$key, $data->lemari);
             //AH = no2
-            $sheet->setCellValue('AH'.$start+$key, $data->no2);
+            $sheet->setCellValue('AK'.$start+$key, $data->no2);
             //AK = admin_note
-            $sheet->setCellValue('AK'.$start+$key, $data->admin_note);
             $sheet->setCellValue('AE50','Developed by IS (ITD)');
             $sheet->setCellValue('C50','');
             $sheet->setCellValue('A50','');
