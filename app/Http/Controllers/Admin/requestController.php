@@ -90,9 +90,13 @@ class requestController extends Controller
                 return response()->json(['status' => false, 'message' => 'Gagal update status ']);
             }
 
+            if ($reqi->status == 'rejected'|| $reqi->status == 'canceled') {
+                return redirect()->route('admin.requestDetail', ['id' => $reqi->id])->with('message', 'Sudah tidak dapat diupdate');
+            }
 
             $update = DB::table('request_item')->where('id', $request->id)->update($arr);
             if ($update) {
+                DB::table('export')->where('id_request', $reqi->id)->delete();
                 if (isset($arr['jumlah'])) {
                     if (!DB::table('request')->where('id', $reqi->id)->update(['status' => 'revised'])) {
                         return response()->json(['status' => false, 'message' => 'Udah revisi ']);
@@ -121,10 +125,8 @@ class requestController extends Controller
 
                 if (DB::table('request')->where('id', $id)->update(['status' => $status])) {
 
-                    //delete export
-                    if ($status == 'rejected' || $status == 'canceled') {
-                        DB::table('export')->where('id_request', $id)->delete();
-                    }
+                    DB::table('export')->where('id_request', $id)->delete();
+
                     return redirect()->route('admin.requestDetail', ['id' => $id])->with('message', 'Request berhasil diupdate');
                 } else {
                     return redirect()->route('admin.requestDetail', ['id' => $id])->with('message', 'Request gagal diupdate');

@@ -64,23 +64,19 @@ class exportRequest implements ShouldQueue
             ->where('request.user', $reqDetail->username)
             ->whereIn('request_item.code_item',$code_items)
             ->where('request.id','<=',$this->id)
-            ->whereNot('request_item.id_request',$this->id)
             ->whereMonth('request.tanggal',$month)
             ->whereYear('request.tanggal',$year)
-            ->whereNot('request.status','canceled')
+            ->whereNotIn('request.status', ['rejected', 'canceled'])
             ->groupBy('request_item.code_item')
             ->orderBy('request_item.code_item', 'ASC')
             ->get()->toArray();
-        foreach ($reqItem as $key => $item) {
-
-            $reqItem[$key]->remaining_quota = $item->quota - $used[$key]->qty;
-        }
-
-        //if reqItem notfound then return []
+                    //if reqItem notfound then return []
         if (!$reqItem) {
             $reqItem = [];
         }
-        //append
+        foreach ($reqItem as $key => $item) {
+            $reqItem[$key]->remaining_quota = $item->quota - ($used[$key]->qty ?? 0);
+        }
 
         $reqDetail->items = $reqItem;
         $arrsearch = [
