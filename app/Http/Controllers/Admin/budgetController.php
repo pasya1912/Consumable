@@ -18,9 +18,6 @@ class budgetController extends Controller
         $budgets = $this->getBudget(2,$find)->appends(request()->query())->toArray();
         $listUser = [];
         $listCode = [];
-        foreach ($budgets['data'] as $key => $value) {
-            $budgets['data'][$key]['remaining_quota'] = $value['quota'];
-        }
         //get total request item
 
         //append to budgets array
