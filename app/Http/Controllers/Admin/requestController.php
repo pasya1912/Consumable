@@ -205,8 +205,6 @@ class requestController extends Controller
             $sheet->setCellValue('AK'.$start+$key, $data->no2);
             //AK = admin_note
             $sheet->setCellValue('AE50','Developed by IS (ITD)');
-            $sheet->setCellValue('C50','');
-            $sheet->setCellValue('A50','');
         }
 
 

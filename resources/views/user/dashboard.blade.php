@@ -115,7 +115,14 @@ function checkPersen($quota, $remaining)
                 alert("Jumlah tidak boleh kosong");
                 return;
             }
+            var remainingQuota = document.getElementById("inputadd" + code).max;
+
             var jumlah = document.getElementById("inputadd" + code).value;
+            if(remainingQuota < jumlah)
+            {
+                alert("Quota Tidak cukup");
+                return;
+            }
             var xhr = new XMLHttpRequest();
             xhr.open("POST", "{{ route('user.requestAddItem') }}", true);
             //csrf token

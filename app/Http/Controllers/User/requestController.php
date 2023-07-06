@@ -205,12 +205,12 @@ class requestController extends Controller
         // append items to request only remaining_quota which is quota - qty
         $items->remaining_quota = $items->quota - $req->qty;
         //check if remaining quota is less than jumlah
-        if ($items->remaining_quota < $jml) {
+        if ($items->remaining_quota >= $jml) {
             //return error status http
-            return false;
+            return true;
         } else {
             //return success status http
-            return true;
+            return false;
         }
 
     }
