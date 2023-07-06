@@ -97,9 +97,12 @@ class requestController extends Controller
         $id = $request->code;
         $jumlah = $request->jumlah;
         $jumlah = (float) $jumlah;
+
         //check if item session exist
         if ($request->session()->has('cart_items')) {
-
+            if (count($request->session()->get('cart_items')) > 21) {
+                return response('Cart is full', 400);
+            }
             //check if value exist in    session
             if (!in_array($id, $request->session()->get('cart_items'))) {
                 //push value to session
