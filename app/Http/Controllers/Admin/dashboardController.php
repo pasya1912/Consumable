@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Requests;
 use Illuminate\Http\Request;
 use App\Models\Item;
+use Illuminate\Support\Facades\DB;
 use Intervention\Image\ImageManagerStatic as Image;
 //storage
 use Illuminate\Support\Facades\Storage;
@@ -14,27 +16,30 @@ class dashboardController extends Controller
     function index(Request $request)
     {
         //get current username
-        $username = $request->user()->username;
-        $find = $request->query('search') == null ? '' : $request->query('search');
-        //paginate 2 include query
-        $items = Item::select('*')
-            ->where(function ($subQuery) use ($find) {
-                $subQuery = $subQuery->orWhere('code_item', 'LIKE', "%" . $find . "%");
-                $subQuery = $subQuery->orWhere('name_item', 'LIKE', "%" . $find . "%");
-                $subQuery = $subQuery->orWhere('area', 'LIKE', "%" . $find . "%");
-                $subQuery = $subQuery->orWhere('lemari', 'LIKE', "%" . $find . "%");
-                $subQuery = $subQuery->orWhere('no2', 'LIKE', "%" . $find . "%");
-                $subQuery = $subQuery->orWhere('satuan', 'LIKE', "%" . $find . "%");
-                $subQuery = $subQuery->orWhere('satuan_oca', 'LIKE', "%" . $find . "%");
-                $subQuery = $subQuery->orWhere('convert', 'LIKE', "%" . $find . "%");
-                $subQuery = $subQuery->orWhere('note', 'LIKE', "%" . $find . "%");
+        //get first day, second day third day of the week
+        $dates = [];
+        $dates[] = date('Y-m-d', strtotime('monday this week'));
+        $dates[] = date('Y-m-d', strtotime('tuesday this week'));
+        $dates[] = date('Y-m-d', strtotime('wednesday this week'));
+        $dates[] = date('Y-m-d', strtotime('thursday this week'));
+        $dates[] = date('Y-m-d', strtotime('friday this week'));
+        $dates[] = date('Y-m-d', strtotime('saturday this week'));
+        $dates[] = date('Y-m-d', strtotime('sunday this week'));
+        $chartData = [];
+        foreach($dates as $key => $date){
+            //get count approved, rejected and waiting from Requests model in single query assign to data array
+            $chartData['all'][$key] = DB::table('request')->whereDate('tanggal',$date)->whereNot('status','canceled')->count();
+            $chartData['approved'][$key] = DB::table('request')->whereIn('status',['approved','revised'])->whereDate('tanggal',$date)->count();
+            $chartData['rejected'][$key]= DB::table('request')->where('status','rejected')->whereDate('tanggal',$date)->count();
+            $chartData['wait'][$key] = DB::table('request')->where('status','wait')->whereDate('tanggal',$date)->count();
+        }
 
-            })
-            ->orderBy('no', 'DESC')
-            ->paginate(10)
-            ->appends(request()->query())
-            ->toArray();
-        return view('admin.dashboard', compact('items'));
+
+        $requests = Requests::where('status', 'wait')->orderBy('id', 'ASC')->get();
+
+
+
+        return view('admin.dashboard', compact('chartData', 'requests'));
     }
 
     function uploadImage(Request $request)

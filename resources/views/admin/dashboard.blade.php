@@ -18,166 +18,109 @@
         <div class="col-lg-12">
             <div class="card" style="padding: 2rem;">
                 <div class="row">
-                    <div class="col-md-10"></div>
-                    <div class="row">
-                        <div class="col">
-                            <a href="{{ asset('template/template_item.xlsx') }}" class="btn btn-success btn-lg">Download
-                                Template</a>
-                        </div>
-
-                        <div class="col text-end">
-                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#basicModal"><i
-                                    class="bx bx-import me-sm-2"></i> <span
-                                    class="d-none d-sm-inline-block">Import</span></button>
-                        </div>
-                    </div>
+                <canvas id="dashboardChart" width="400" height="100"></canvas>
                 </div>
-                <br>
-
-                <!-- Search -->
-                <div class="col-md-4">
-                    <form class="navbar-nav-left d-flex" action="{{ route('admin.dashboard') }}" method="GET">
-                        <div class="input-group">
-                            <span class="input-group-text"><i class="tf-icons bx bx-search"></i></span>
-                            <input id="inputSearch" type="text" name="search" class="form-control"
-                                placeholder="Search..." value="" />
-                        </div>
-                    </form>
-                </div>
-                <!-- /Search -->
-
-                <!-- Modal -->
-                <div class="modal fade" id="basicModal" tabindex="-1" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <form action="{{ route('admin.importItems') }}" method="POST" enctype="multipart/form-data">
-                                @method('POST')
-                                @csrf
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel1">Upload Item</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="row">
-                                        <div class="col mb-3">
-                                            <input type="file" id="file" name="file" class="form-control">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-label-secondary"
-                                        data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Import</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <br>
-
-                <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <form action="{{ route('admin.uploadImageAction') }}" method="POST"
-                                enctype="multipart/form-data">
-                                @method('POST')
-                                @csrf
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="updloadImageLabel">Image</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="row">
-                                        <div class="col-12 mb-3 d-flex justify-content-center">
-                                            <img id="image_preview"class=" text-center" src="" alt="" >
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <h5 class="modal-title" id="updloadImageLabel">Ubah Gambar</h5>
-
-                                        <div class="col mb-3">
-                                            <input type="hidden" id="code_item" name="code_item" class="form-control">
-                                            <input type="file" id="image" name="image" class="form-control">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-label-secondary"
-                                        data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Upload</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <br>
-
-
-                <div class="table-responsive">
-                    <table style="width:100%" id='table' cellpadding=10 cellspasing=15>
-                        <thead>
-                            <tr style="text-align:center">
-                                <th style="width:10%">Code Barang</th>
-                                <th style="width:20%">Nama Barang</th>
-                                <th style="width:20%">Area</th>
-                                <th style="width:20%">Lemari</th>
-                                <th style="width:10%">Rak</th>
-                                <th style="width:20%">Satuan</th>
-                                <th style="width:20%">Gambar</th>
-                            </tr>
-                        <tbody>
-                            @foreach ($items['data'] as $key => $item)
-                                <tr>
-                                    <td style="text-align: center">{{ $item['code_item'] }}</td>
-                                    <td style="text-align: center">{{ $item['name_item'] }}</td>
-                                    <td style="text-align: center">{{ $item['area'] }}</td>
-                                    <td style="text-align: center">{{ $item['lemari'] }}</td>
-                                    <td style="text-align: center">{{ $item['no2'] }}</td>
-                                    <td style="text-align: center">{{ $item['satuan'] }}</td>
-                                    <td style="text-align: center"> <button
-                                            onclick="doImage('{{ $item['code_item'] }}','{!! $item['image'] ?? '' !!}')"
-                                            class="btn btn-info" data-bs-toggle="modal" data-bs-target="#imageModal"><i
-                                                class="bx bx-image-alt me-sm-1"></i> <span
-                                                class="d-none d-sm-inline-block">Import</span></button></td>
+                <div class="row mt-5">
+                    <h3><strong>Waiting List Request</strong></h3>
+                    <div class="table-responsive">
+                        <table style="width:100%" id='table' cellpadding=10 cellspasing=15>
+                            <thead>
+                                <tr style="text-align:center">
+                                    <th style="width:5%">ID Request</th>
+                                    <th style="width:15%">Department</th>
+                                    <th style="width:20%">Pengambil </th>
+                                    <th style="width:30%">Tanggal Pengambilan</th>
+                                    <th style="width:20%">Barang</th>
+                                    <th style="width:10%">Detail</th>
                                 </tr>
-                        </tbody>
-                        @endforeach
-                    </table>
-                    <br>
-                    <div class="pagination">
-                        @foreach ($items['links'] as $key => $item)
-                            @if ($item['url'] != null)
-                                @if (!$item['active'])
-                                    <a href="{{ $item['url'] }}"><?php echo $item['label']; ?></a>
+                            <tbody>
+                                @if(count($requests))
+                                @foreach($requests as $req)
+                                    <tr>
+                                        <td style="text-align: center">{{$req->id}}</td>
+                                        <td style="text-align: center">{{$req->user}}</td>
+                                        <td style="text-align: center">{{$req->nama}}</td>
+                                        <td style="text-align: center">{{date('d-m-Y',strtotime($req->tanggal))}} {{$req->jam->awal}} - {{$req->jam->akhir}}</td>
+                                        <td style="text-align: center">{{$req->request_item()->count()}} Item Berbeda</td>
+                                        <td style="text-align: center"><a href="{{route('admin.requestDetail', ['id' => $req->id])}}" class="btn btn-primary">Detail</a></td>
+
+                                    </tr>
+                                @endforeach
                                 @else
-                                    <a class="active" href="{{ $item['url'] }}"><?php echo $item['label']; ?></a>
+                                    <tr>
+                                        <td colspan="5" style="text-align: center">No Data</td>
+                                    </tr>
                                 @endif
-                            @endif
-                        @endforeach
+                            </tbody>
+
+                        </table>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+@section('script')
+    <script>
+        //get search value from url
 
+        var ctx = document.getElementById("dashboardChart").getContext("2d");
 
-                    <hr />
-                @endsection
-                @section('script')
-                    <script>
-                        //get search value from url
-                        var url = new URL(window.location.href);
-                        var search = url.searchParams.get("search");
-                        //set search value to input
-                        document.getElementById("inputSearch").value = search;
-                    </script>
-                @endsection
-                @section('top-script')
-                    <script>
-                        function doImage(code_item, image) {
-                            console.log(code_item);
-                            document.getElementById("code_item").value = code_item;
-                            if(image != null || image != ''){
-                            document.getElementById("image_preview").src = "{{route('getImage', '')}}/" + image;
-                            }
+        var data = {
+            labels: ["Senin", "Selasa", "Rabu","Kamis", "Jumat", "Sabtu", "Minggu"],
+            datasets: [
+                {
+                    label: "All",
+                    backgroundColor: "skyblue",
+                    data: {{json_encode($chartData['all'])}}
+                },{
+                    label: "Waiting",
+                    backgroundColor: "gray",
+                    data: {{json_encode($chartData['wait'])}}
+                },
+                {
+                    label: "Approved/Revised",
+                    backgroundColor: "green",
+                    data: {{json_encode($chartData['approved'])}}
+                },
+                {
+                    label: "Rejected",
+                    backgroundColor: "red",
+                    data: {{json_encode($chartData['rejected'])}}
+                }
+
+            ]
+        };
+
+        var myBarChart = new Chart(ctx, {
+            type: 'bar',
+            data: data,
+            options: {
+                barValueSpacing: 20,
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            min: 0,
                         }
-                    </script>
-                @endsection
+                    }]
+                }
+            }
+        });
+
+    </script>
+@endsection
+@section('top-script')
+    <script>
+        function doImage(code_item, image) {
+            console.log(code_item);
+            document.getElementById("code_item").value = code_item;
+            if (image != null || image != '') {
+                document.getElementById("image_preview").src = "{{ route('getImage', '') }}/" + image;
+            }
+        }
+
+    </script>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+@endsection

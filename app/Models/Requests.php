@@ -17,6 +17,7 @@ class Requests extends Model
     //casts code_item = array
     //hide id
     protected $hidden = ['id'];
+    protected $fillable = ['status'];
 
     //has many request_item
     public function request_item()
@@ -27,6 +28,10 @@ class Requests extends Model
     public function export()
     {
         return $this->hasOne(Export::class, 'id_request', 'id');
+    }
+    public function jam()
+    {
+        return $this->hasOne(Jadwal::class, 'id', 'id_jam');
     }
 
 }
