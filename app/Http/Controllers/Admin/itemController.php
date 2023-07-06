@@ -34,7 +34,7 @@ class itemController extends Controller
             ->paginate(10)
             ->appends(request()->query())
             ->toArray();
-        return view('admin.dashboard', compact('items'));
+        return view('admin.item', compact('items'));
     }
 
     function uploadImage(Request $request)

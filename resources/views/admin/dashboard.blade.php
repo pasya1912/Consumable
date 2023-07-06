@@ -34,7 +34,7 @@
                                     <th style="width:10%">Detail</th>
                                 </tr>
                             <tbody>
-                                @if(count($requests))
+                                @if($requests->count() > 0)
                                 @foreach($requests as $req)
                                     <tr>
                                         <td style="text-align: center">{{$req->id}}</td>
