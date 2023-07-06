@@ -75,13 +75,19 @@
                     data: {{json_encode($chartData['all'])}}
                 },{
                     label: "Waiting",
-                    backgroundColor: "gray",
+                    backgroundColor: "yellow",
                     data: {{json_encode($chartData['wait'])}}
                 },
                 {
-                    label: "Approved/Revised",
+                    label: "Approved",
                     backgroundColor: "green",
                     data: {{json_encode($chartData['approved'])}}
+                }
+                ,
+                {
+                    label: "Revised",
+                    backgroundColor: "grey",
+                    data: {{json_encode($chartData['revised'])}}
                 },
                 {
                     label: "Rejected",

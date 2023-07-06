@@ -29,7 +29,8 @@ class dashboardController extends Controller
         foreach($dates as $key => $date){
             //get count approved, rejected and waiting from Requests model in single query assign to data array
             $chartData['all'][$key] = DB::table('request')->whereDate('tanggal',$date)->whereNot('status','canceled')->count();
-            $chartData['approved'][$key] = DB::table('request')->whereIn('status',['approved','revised'])->whereDate('tanggal',$date)->count();
+            $chartData['approved'][$key] = DB::table('request')->where('status','approved')->whereDate('tanggal',$date)->count();
+            $chartData['revised'][$key] = DB::table('request')->where('status','revised')->whereDate('tanggal',$date)->count();
             $chartData['rejected'][$key]= DB::table('request')->where('status','rejected')->whereDate('tanggal',$date)->count();
             $chartData['wait'][$key] = DB::table('request')->where('status','wait')->whereDate('tanggal',$date)->count();
         }
