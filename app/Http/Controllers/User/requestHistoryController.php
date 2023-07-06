@@ -83,9 +83,7 @@ class requestHistoryController extends Controller
             if($req->status != 'wait'){
                 throw new \Exception('Request tidak dapat dibatalkan');
             }
-            $req->delete();
-            //delete item request
-            ItemRequest::where('id_request',$id)->delete();
+            $req->update(['status'=>'canceled']);
 
             return redirect()->route('user.requestHistory')->with('message','Request berhasil dibatalkan');
         }
