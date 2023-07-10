@@ -118,6 +118,10 @@ function checkPersen($quota, $remaining)
             var remainingQuota = document.getElementById("inputadd" + code).max;
 
             var jumlah = document.getElementById("inputadd" + code).value;
+            console.log(remainingQuota);
+            //convert text to int
+            jumlah = parseInt(jumlah);
+            remainingQuota = parseInt(remainingQuota);
             if(remainingQuota < jumlah)
             {
                 alert("Quota Tidak cukup");
