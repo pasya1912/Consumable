@@ -1,6 +1,11 @@
 <table>
     <thead>
     <tr>
+        <th>ID:</th>
+        <td>{{$exportDetail['id']}}</td>
+
+    </tr>
+    <tr>
         <th>Department:</th>
         <td>{{$exportDetail['user']}}</td>
 

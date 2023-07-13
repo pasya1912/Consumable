@@ -181,6 +181,7 @@ class requestController extends Controller
         $sheet = $spreadsheet->getActiveSheet();
         //set I9 value to $reqDetail->nama
         $sheet->setCellValue('I9', $exportDetail->user);
+        $sheet->setCellValue('T6',$exportDetail->id);
         //set I11 to $exportDetail->nama
         $sheet->setCellValue('I11', $exportDetail->nama);
         //set AA9 to $exportDetail->tanggal format d-m-Y

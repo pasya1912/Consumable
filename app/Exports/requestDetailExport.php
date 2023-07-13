@@ -29,7 +29,8 @@ class requestDetailExport implements FromView, WithStyles
     public function styles(Worksheet $sheet)
     {
         //set border to all cell
-
+        //set text align left on B2
+        $sheet->getStyle('B1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
         //count $exportDetail['data']
         //auto size column A to H
         $sheet->getColumnDimension('A')->setAutoSize(true);
@@ -41,7 +42,7 @@ class requestDetailExport implements FromView, WithStyles
         $sheet->getColumnDimension('G')->setAutoSize(true);
         $sheet->getColumnDimension('H')->setAutoSize(true);
 
-        $start = 8;
+        $start = 9;
         $count = count($this->export['data']);
         //set alignment left
         $sheet->getStyle('A'.($start-2).':H'.($start-1))->getBorders()->getAllBorders()->setBorderStyle(Border::BORDER_THIN);
@@ -51,16 +52,18 @@ class requestDetailExport implements FromView, WithStyles
         $sheet->mergeCells('C2:D2');
         $sheet->mergeCells('C3:D3');
         $sheet->mergeCells('C4:D4');
+        $sheet->mergeCells('C5:D5');
 
         $sheet->getStyle('A1')->getFont()->setBold(true);
         $sheet->getStyle('A2')->getFont()->setBold(true);
         $sheet->getStyle('A3')->getFont()->setBold(true);
         $sheet->getStyle('A4')->getFont()->setBold(true);
+        $sheet->getStyle('A5')->getFont()->setBold(true);
         //bold row 5
-        $sheet->getStyle('A6:Z7')->getFont()->setBold(true);
+        $sheet->getStyle('A7:Z8')->getFont()->setBold(true);
         //set alignment center on row 5
-        $sheet->getStyle('A6:Z6')->getAlignment()->setHorizontal('center');
-        $sheet->getStyle('A6:Z6')->getAlignment()->setVertical('center');
+        $sheet->getStyle('A7:Z7')->getAlignment()->setHorizontal('center');
+        $sheet->getStyle('A7:Z7')->getAlignment()->setVertical('center');
 
     }
 }
