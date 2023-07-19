@@ -165,6 +165,7 @@ class requestController extends Controller
         }
         $exportDetail->nama = $exportDetail->request->nama;
         $exportDetail->status = $exportDetail->request->status;
+        $exportDetail->id_request = $exportDetail->request->id;
         $exportDetail->data = json_decode($exportDetail->data);
 
         $req = [];
@@ -181,7 +182,7 @@ class requestController extends Controller
         $sheet = $spreadsheet->getActiveSheet();
         //set I9 value to $reqDetail->nama
         $sheet->setCellValue('I9', $exportDetail->user);
-        $sheet->setCellValue('T6',$exportDetail->id);
+        $sheet->setCellValue('T6',$exportDetail->request->id);
         //set I11 to $exportDetail->nama
         $sheet->setCellValue('I11', $exportDetail->nama);
         //set AA9 to $exportDetail->tanggal format d-m-Y

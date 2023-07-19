@@ -2,7 +2,7 @@
     <thead>
     <tr>
         <th>ID:</th>
-        <td>{{$exportDetail['id']}}</td>
+        <td>{{$exportDetail['id_request']}}</td>
 
     </tr>
     <tr>
